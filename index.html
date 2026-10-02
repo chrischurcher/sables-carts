@@ -137,17 +137,28 @@ a { color: inherit; }
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 19%); mask-image: linear-gradient(180deg, transparent 0, #000 19%);
 }
 
-/* A cart rolls in once along a brass line when "How it works" comes into view, then stays parked. */
-.road { position: relative; height: 128px; margin-top: 1.2rem; overflow: hidden; }
+/* The one moving thing on the page (Chris, 2 Oct 2026: "I love the golf cart zooming across the page").
+   When "How it works" comes into view a cart, with Sable aboard, rolls in once along a brass road, past
+   the three steps, and parks at a door: the page's promise, drawn. Then it stays parked. */
+.road { position: relative; height: 136px; margin-top: 1.2rem; overflow: hidden; }
 .road::after { content: ""; position: absolute; left: 0; right: 0; bottom: 20px; height: 1.5px; background: var(--brass); opacity: .75; }
-.road .cart { position: absolute; right: 2%; bottom: 10px; width: min(52%, 230px); z-index: 1; }
+.road .door { position: absolute; right: 0; bottom: 20px; width: 44px; height: 88px; }
+.road .cart { position: absolute; right: 52px; bottom: 10px; width: min(52%, 230px); z-index: 1; }
+/* Three stops on the road, one over each step. They only show where the steps stand side by side. */
+.road .stop { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   .road .cart { transform: translateX(-115vw); }
-  .road.is-rolling .cart { animation: roll-in 1.5s cubic-bezier(.16, .84, .3, 1) both; }
-  .road.is-rolling .cart .wheel { animation: spin 1.5s cubic-bezier(.16, .84, .3, 1) both; }
+  .road.is-rolling .cart { animation: roll-in 1.7s cubic-bezier(.16, .84, .3, 1) both; }
+  .road.is-rolling .cart .wheel { animation: spin 1.7s cubic-bezier(.16, .84, .3, 1) both; }
+  .road .stop { opacity: .35; }
+  .road.is-rolling .stop { animation: light-up .5s ease-out both; }
+  .road.is-rolling .stop:nth-child(1) { animation-delay: .35s; }
+  .road.is-rolling .stop:nth-child(2) { animation-delay: .65s; }
+  .road.is-rolling .stop:nth-child(3) { animation-delay: .95s; }
 }
 @keyframes roll-in { from { transform: translateX(-115vw); } to { transform: none; } }
 @keyframes spin { from { transform: rotate(-900deg); } to { transform: none; } }
+@keyframes light-up { from { opacity: .35; transform: scale(.6); } to { opacity: 1; transform: none; } }
 
 .stage-brass { padding-bottom: 1.6rem; }
 .dates { margin-top: -58px; position: relative; z-index: 2; }
@@ -178,11 +189,40 @@ input, select {
 }
 .length { margin-top: .9rem; font-weight: 700; }
 .length span { font-weight: 500; }
+/* While Booqable's calendar is on its way: the words, and a small cart going along a line. */
+.wait { margin-top: .9rem; min-height: 54px; display: grid; align-content: center; gap: .45rem; font-weight: 700; }
+.wait i { position: relative; display: block; height: 14px; border-bottom: 1.5px solid var(--ink); overflow: hidden; }
+.wait i::before { content: ""; position: absolute; left: 0; bottom: 0; width: 26px; height: 9px; border-radius: 5px 7px 2px 2px; background: var(--ink); }
+@media (prefers-reduced-motion: no-preference) { .wait i::before { animation: trundle 1.5s linear infinite; } }
+@keyframes trundle { from { transform: translateX(-30px); } to { transform: translateX(min(27rem, 92vw)); } }
+/* The chosen dates, written the way a person says them. Booqable's own date button lies over these rows,
+   see-through, so pressing them opens its calendar. */
+.when-box { position: relative; }
+.when { display: none; margin: .9rem 0 0; border: 1.5px solid var(--ink); border-radius: 12px; background: #FFFDF6; padding: .55rem .9rem; }
+.when dl { margin: 0; }
+.when dl div { display: flex; justify-content: space-between; gap: 1rem; padding: .3rem 0; }
+.when dl div + div { border-top: 1px solid var(--paper-rule); }
+.when dt { font-weight: 500; }
+.when dd { margin: 0; font-weight: 800; text-align: right; }
+.when .change { display: block; margin-top: .15rem; padding-top: .35rem; border-top: 1px solid var(--paper-rule); font-size: .92rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.has-words .when { display: block; }
+.has-words #booq-dates { position: absolute; inset: 0; margin: 0; opacity: 0; }
+.has-words #booq-dates * { height: 100% !important; min-height: 0 !important; margin: 0 !important; }
+.when-box:focus-within .when { outline: 3px solid var(--ink); outline-offset: 3px; }
 
 /* =============================================================================== carts */
 .shop { padding-block: 2.6rem 1rem; }
 .shop h2, .sect h2 { font-size: clamp(1.8rem, 6.6vw, 2.5rem); }
 .cards { display: grid; gap: 1.1rem; margin-top: 1.2rem; }
+/* Said above the carts when nothing can be reserved on the chosen dates. */
+.notice { margin-top: 1.1rem; padding: .9rem 1rem; border: 1px solid var(--brass); border-radius: 14px; background: var(--coal); font-weight: 500; }
+.notice b { color: var(--brass-light); }
+.notice a { color: var(--brass-light); font-weight: 700; text-underline-offset: 3px; }
+/* The cart someone scanned the sticker of comes first and says so. */
+.scanned { position: absolute; left: .7rem; top: .7rem; z-index: 1; padding: .3rem .7rem; border-radius: 999px; background: var(--plate); color: var(--black); font-size: .85rem; font-weight: 800; box-shadow: 0 0 0 1px var(--brass-edge); }
+/* Stands in a card until Booqable has drawn its price and button there. */
+.booq-wait { margin-top: 1rem; min-height: 54px; display: grid; align-content: center; color: var(--mute); }
+.booqable-product-button:not(:empty) + .booq-wait { display: none; }
 .cart-card { border: 1px solid var(--rule); border-radius: 18px; overflow: hidden; background: var(--coal); }
 .cart-card.is-chosen { border-color: var(--brass); box-shadow: 0 0 0 1px var(--brass), 0 0 34px rgba(201, 162, 75, .16); }
 .media { position: relative; aspect-ratio: 4 / 3; display: grid; place-items: center; background: radial-gradient(120% 95% at 50% 105%, #2B2110 0%, #050403 68%); border-bottom: 1px solid var(--rule); }
@@ -248,7 +288,7 @@ input, select {
 .faq details { border-bottom: 1px solid var(--rule); padding: .95rem 0; }
 .faq summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; font-family: var(--display); line-height: 1.2; color: var(--brass); }
+.faq summary::after { content: "+"; font-family: var(--display); font-size: 1.5rem; line-height: 1; color: var(--brass); }
 .faq details[open] summary::after { content: "\2013"; }
 .faq p { margin-top: .5rem; max-width: 62ch; color: var(--mute); }
 
@@ -258,6 +298,13 @@ input, select {
 .boss figure { margin: 0; width: 176px; height: 176px; padding: 7px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 1px var(--brass-edge), 0 14px 26px rgba(58, 40, 6, .4); }
 .boss figure img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .boss p { margin-top: .7rem; max-width: 46ch; font-size: 1.1rem; }
+.boss .ask { display: grid; gap: .6rem; justify-items: start; }
+.boss .ask .btn { width: auto; background: var(--black); color: var(--brass-light); border-color: var(--black); box-shadow: 0 5px 0 rgba(0, 0, 0, .35); }
+.boss .ask .btn:hover { box-shadow: 0 3px 0 rgba(0, 0, 0, .35); }
+.boss .ask .btn:active { box-shadow: 0 0 0 rgba(0, 0, 0, .35); }
+.boss .ask small { font-size: .95rem; }
+.said { margin-top: .9rem; font-weight: 700; }
+.said a { text-underline-offset: 3px; }
 
 .foot { border-top: 1px solid var(--rule); padding-block: 2.2rem 6.5rem; color: var(--mute); }
 .foot .wrap { display: grid; gap: .6rem; }
@@ -287,7 +334,7 @@ dialog .btn { margin-top: 1.2rem; }
 /* =============================================================================== Booqable's pieces, dressed to match
    Booqable puts its booking pieces into the page as ordinary elements, so they take these styles.
    Proved on a real Booqable golf-cart site on 1 Oct 2026; re-check once our own account is joined. */
-.booqable-product-button, .booqable-product-button * { font-family: var(--body) !important; }
+.booqable-product-button, .booqable-product-button *:not(i) { font-family: var(--body) !important; }
 .booqable-product-button .bq-duration { color: var(--mute) !important; font-size: .95rem !important; }
 .booqable-product-button .bq-price { color: var(--brass-light) !important; font-size: 1.75rem !important; font-weight: 800 !important; }
 .booqable-product-button a { color: var(--free) !important; font-weight: 700 !important; }
@@ -307,7 +354,26 @@ dialog .btn { margin-top: 1.2rem; }
   text-align: left !important; cursor: pointer; box-shadow: none !important;
 }
 .booqable-datepicker .bq-date-picker-button-text { font-family: var(--body) !important; font-size: 1.0625rem !important; font-weight: 700 !important; color: var(--ink) !important; text-align: left !important; }
-.booqable-datepicker .bq-date-picker-button-expanded-title { font-weight: 500 !important; }
+.booqable-datepicker .bq-date-picker-button-expanded-title { display: none !important; } /* "; View prices and availability", which ran on after the label on a wide screen */
+/* Choosing dates is the first thing to do on the page, so until dates are chosen its button is the brass
+   plate, the same as every other button here. With dates in, it turns into a quiet field. */
+.booqable-datepicker .bq-date-picker-button-wrapper:not(.bq-date-picker-button-wrapper-with-data) {
+  background: var(--plate) !important; border: 1px solid var(--brass-edge) !important; border-radius: 14px !important; text-align: center !important;
+  box-shadow: 0 5px 0 var(--brass-edge), inset 0 1px 0 rgba(255, 255, 255, .65), inset 0 -1px 0 rgba(94, 71, 24, .35) !important;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.booqable-datepicker .bq-date-picker-button-wrapper:not(.bq-date-picker-button-wrapper-with-data):hover { transform: translateY(2px); box-shadow: 0 3px 0 var(--brass-edge), inset 0 1px 0 rgba(255, 255, 255, .65) !important; }
+.booqable-datepicker .bq-date-picker-button-wrapper:not(.bq-date-picker-button-wrapper-with-data):active { transform: translateY(5px); box-shadow: 0 0 0 var(--brass-edge) !important; }
+.booqable-datepicker .bq-date-picker-button-wrapper:not(.bq-date-picker-button-wrapper-with-data) .bq-date-picker-button-text { font-weight: 800 !important; color: var(--black) !important; text-align: center !important; }
+.booqable-datepicker:not(:empty) + .wait { display: none; }
+/* Booqable's calendar window and its list of times, in the page's lettering and with the page's button. */
+.rental-options-modal, .rental-options-modal *:not(i) { font-family: var(--body) !important; }
+.rental-options-modal .rental-options-modal-header-title { font-family: var(--display) !important; font-weight: 400 !important; font-size: 1.5rem !important; color: var(--ink) !important; }
+.rental-options-modal-button:not(.is-secondary):not([disabled]) { background: var(--plate) !important; border: 1px solid var(--brass-edge) !important; border-radius: 14px !important; box-shadow: 0 4px 0 var(--brass-edge) !important; }
+.rental-options-modal-button:not(.is-secondary):not([disabled]), .rental-options-modal-button:not(.is-secondary):not([disabled]) * { color: var(--black) !important; font-weight: 800 !important; }
+.rental-options-modal-button { border-radius: 14px !important; }
+.time-option { border-radius: 12px !important; }
+.time-option:hover, .time-option:focus-visible { border-color: var(--brass-deep) !important; background: #FFF9E6 !important; }
 /* Booqable's floating pieces (the date picker and its list of times) are added at the end of the page,
    where they pick up the page's cream lettering: "From" and "Until" above the times were cream on white
    and could not be read (seen on a phone-size run, 2 Oct 2026). */
@@ -340,6 +406,27 @@ dialog .btn { margin-top: 1.2rem; }
 .is-mine .booqable-product-button .bq-status.bq-available::after { content: "In your reservation"; }
 /* One cart of each, so the cart panel has no "how many" buttons either. */
 #booqable-sidebar .bq-quantity-toggle, .booqable-sidebar .bq-quantity-toggle, #booqable-sidebar .bq-quantity, .booqable-sidebar .bq-quantity { display: none !important; }
+/* The cart panel. Booqable sets white lettering on the brand colour; white on brass is too faint to read,
+   so the head and the button carry black, like every brass button on the page. "View cart" would lead to
+   a plain Booqable page with nothing new on it, so the panel has one way on: Checkout. */
+/* Not the <i> pieces: those are Booqable's icons, drawn with an icon font, and turn into empty boxes
+   if their lettering is changed (seen 2 Oct 2026). */
+#booqable-sidebar, #booqable-sidebar *:not(i) { font-family: var(--body) !important; }
+#booqable-sidebar .bq-sidebar-head, #booqable-sidebar .bq-sidebar-head *, #booqable-sidebar .bq-sidebar-head *::before { color: var(--black) !important; }
+#booqable-sidebar .bq-title { font-family: var(--display) !important; font-size: 1.35rem !important; font-weight: 400 !important; text-transform: none !important; letter-spacing: 0 !important; }
+#booqable-sidebar .button-group a.bq-button { display: none !important; }
+#booqable-sidebar .button-group button.bq-button { background: var(--plate) !important; border: 1px solid var(--brass-edge) !important; border-radius: 14px !important; box-shadow: 0 5px 0 var(--brass-edge) !important; min-height: 54px !important; font-size: 1.0625rem !important; font-weight: 800 !important; text-transform: none !important; letter-spacing: 0 !important; }
+#booqable-sidebar .button-group button.bq-button, #booqable-sidebar .button-group button.bq-button * { color: var(--black) !important; }
+/* The dates in the panel's head, in words (the page keeps the two CSS variables up to date). */
+.has-words #booqable-sidebar .bq-selected-dates p { font-size: 0 !important; }
+.has-words #booqable-sidebar .bq-selected-dates p::after { font-size: .9rem; font-weight: 700; white-space: nowrap; color: var(--black) !important; background: none !important; }
+.has-words #booqable-sidebar .bq-selected-dates [class*="Details-"] > div:first-of-type p::after { content: var(--from-brief); }
+.has-words #booqable-sidebar .bq-selected-dates [class*="Details-"] > div:last-of-type p::after { content: var(--to-brief); }
+/* The floating cart button only earns its corner once there is a cart in it. */
+body:not(.has-cart) #booqable-launcher { display: none !important; }
+/* If Booqable could not be reached the page goes back to booking by WhatsApp, and anything of Booqable's
+   that turns up late stays out of sight. */
+.no-engine #booqable-launcher, .no-engine #booqable-sidebar, .no-engine .booqable-component { display: none !important; }
 /* Booqable's floating cart button: a black cart on brass like our own buttons, and without its small
    copy of the dates (they are written out in words at the top of the page). */
 #booqable-launcher-icon i, #booqable-launcher-icon i::before { color: var(--black) !important; }
@@ -347,12 +434,14 @@ dialog .btn { margin-top: 1.2rem; }
 /* What is left in that bar is one line ("1 item $420.00"), set on cream in the page's lettering and
    centred in the bar's height (60px less its 8px top and bottom). */
 #booqable-launcher-summary { background: var(--paper) !important; }
-#booqable-launcher-summary, #booqable-launcher-summary * { color: var(--ink) !important; font-family: var(--body) !important; }
+#booqable-launcher-summary, #booqable-launcher-summary *:not(i) { color: var(--ink) !important; font-family: var(--body) !important; }
 #booqable-launcher-summary .bq-summary { line-height: 44px !important; font-size: .95rem !important; font-weight: 700 !important; white-space: nowrap; }
 #booqable-launcher-summary .bq-total { margin-left: .8rem; }
 /* When Booqable runs the booking, the cards stand three across on a wide screen and it shows the price. */
 .is-engine .info .price { display: none; }
 .is-engine .act { padding-top: .2rem; }
+/* Before dates are chosen Booqable shows "from $70.00": the page makes that "from $70 a day". */
+.is-from .booqable-product-button .bq-price::after { content: " a day"; font-size: .95rem; font-weight: 500; color: var(--mute); }
 .is-engine .length { font-weight: 500; }
 .is-engine .length b { font-weight: 800; }
 
@@ -360,6 +449,7 @@ dialog .btn { margin-top: 1.2rem; }
 @media (min-width: 34rem) {
   .fields { grid-template-columns: 1fr 1fr; }
   .boss { grid-template-columns: auto 1fr; gap: 2rem; }
+  .boss .ask { grid-column: 1 / -1; }
 }
 @media (min-width: 60rem) {
   .stage { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); }
@@ -370,8 +460,24 @@ dialog .btn { margin-top: 1.2rem; }
   .shot { flex: 1; min-height: 23rem; margin-top: -.6rem; position: relative; }
   .shot img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; max-height: none; object-position: 50% 67%;
     -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 20%); mask-image: linear-gradient(180deg, transparent 0, #000 20%); }
-  .road { height: 150px; }
-  .road .cart { width: 250px; }
+  .road { height: 158px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+  .road .cart { width: 250px; right: 64px; }
+  .road .door { width: 52px; height: 104px; }
+  .road .stop { display: block; align-self: end; margin: 0 0 14px 4px; width: 13px; height: 13px; border-radius: 50%; background: var(--black); box-shadow: 0 0 0 3px var(--brass), 0 0 0 4px var(--brass-edge); position: relative; z-index: 1; }
+  /* The three steps stand side by side under their stops on the road. */
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; margin-top: 1.1rem; }
+  .steps li { grid-template-columns: 1fr; gap: .35rem; align-content: start; }
+  .steps li::before { grid-row: auto; }
+  /* Prices and questions: the heading stands to the left and the matter to the right, so neither is
+     stretched across the whole screen. */
+  .cols { display: grid; grid-template-columns: 17rem minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "head body" "note body"; column-gap: 3rem; align-items: start; }
+  .cols > h2 { grid-area: head; }
+  .cols > .note { grid-area: note; margin-top: .9rem; }
+  .cols > .rates, .cols > .faq { grid-area: body; margin-top: .3rem; }
+  .cols > .rates { max-width: 38rem; }
+  .cols > .faq { max-width: 46rem; }
+  .boss { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .boss .ask { grid-column: auto; justify-items: end; text-align: right; }
   .stage-brass { display: grid; align-items: center; padding-block: 2.5rem; }
   .dates { margin-top: 0; }
   .seal { display: block; width: 116px; height: 116px; margin: 0 auto 1.6rem; }
@@ -393,6 +499,11 @@ dialog .btn { margin-top: 1.2rem; }
   /* Three across, all the same height, with the price and button lined up along the bottom. */
   .is-engine .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
   .is-engine .cart-card { display: flex; flex-direction: column; }
+  /* Where the browser can, the three cards share their rows, so the prices start on one line across all
+     three even when one cart has no button under it. */
+  @supports (grid-template-rows: subgrid) {
+    .is-engine .cart-card { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: subgrid; grid-row: span 3; row-gap: 0; }
+  }
   .is-engine .media { align-self: auto; border-right: 0; border-bottom: 1px solid var(--rule); }
   .is-engine .info { flex: 1; }
   .is-engine .act { display: block; border-top: 0; padding: .2rem 1rem 1.15rem; }
@@ -472,7 +583,16 @@ dialog .btn { margin-top: 1.2rem; }
             <input type="date" id="to" name="to" required>
           </div>
         </div>
-        <div class="booqable-datepicker hide" id="booq-dates"></div>
+        <div class="when-box">
+          <div class="when" id="chosen-dates">
+            <dl>
+              <div><dt>Delivered</dt><dd id="when-from"></dd></div>
+              <div><dt>Picked up</dt><dd id="when-to"></dd></div>
+            </dl>
+            <p class="change">Change dates</p>
+          </div>
+          <div class="booqable-datepicker hide" id="booq-dates"></div><p class="wait hide" id="booq-wait">Opening the calendar<i></i></p>
+        </div>
         <p class="length" id="length" aria-live="polite"></p>
       </form>
     </section>
@@ -484,6 +604,7 @@ dialog .btn { margin-top: 1.2rem; }
     <div class="shop-grid">
       <div>
         <h2 id="carts-title">Carts for your dates</h2>
+        <p class="notice hide" id="none-free" role="status"></p>
         <div class="cards" id="cards"></div>
       </div>
 
@@ -505,8 +626,8 @@ dialog .btn { margin-top: 1.2rem; }
             <div>
               <label for="when">Best time for delivery</label>
               <select id="when">
-                <option>Morning, 9 to 12</option>
-                <option>Afternoon, 12 to 5</option>
+                <option>Late morning, 11 to 1</option>
+                <option>Afternoon, 1 to 5</option>
                 <option>Evening, 5 to 8</option>
               </select>
             </div>
@@ -521,7 +642,11 @@ dialog .btn { margin-top: 1.2rem; }
 
   <section class="wrap sect" aria-labelledby="how-title">
     <h2 id="how-title">How it works</h2>
-    <div class="road" id="road" aria-hidden="true"><div class="cart" id="road-cart"></div></div>
+    <div class="road" id="road" aria-hidden="true">
+      <span class="stop"></span><span class="stop"></span><span class="stop"></span>
+      <div class="cart" id="road-cart"></div>
+      <svg class="door" viewBox="0 0 44 88"><path d="M4 88 V26 Q4 4 22 4 Q40 4 40 26 V88" fill="#13100B" stroke="#D9B866" stroke-width="2.5"/><path d="M10 88 V28 Q10 11 22 11 Q34 11 34 28 V88" fill="none" stroke="#D9B866" stroke-width="1.5" opacity=".7"/><circle cx="29" cy="55" r="2.4" fill="#D9B866"/></svg>
+    </div>
     <ol class="steps">
       <li><h3>Pick your dates and your cart</h3><p>You see what's free and what it costs straight away.</p></li>
       <li id="step-two"><h3>We confirm on WhatsApp</h3><p>Booking ahead from home? We hold your dates with 20%, arranged on WhatsApp.</p></li>
@@ -530,7 +655,7 @@ dialog .btn { margin-top: 1.2rem; }
   </section>
 
   <div class="split">
-    <section class="wrap sect" aria-labelledby="rates-title">
+    <section class="wrap sect cols" aria-labelledby="rates-title">
       <h2 id="rates-title">Prices</h2>
       <table class="rates">
         <thead><tr><th scope="col">Cart</th><th scope="col">Day</th><th scope="col">Week</th><th scope="col">Month</th></tr></thead>
@@ -541,15 +666,16 @@ dialog .btn { margin-top: 1.2rem; }
   </div>
 
   <div class="split">
-    <section class="wrap sect" aria-labelledby="faq-title">
+    <section class="wrap sect cols" aria-labelledby="faq-title">
       <h2 id="faq-title">Good to know</h2>
       <div class="faq">
-        <details><summary>Is delivery really free?</summary><p>Yes. Delivery and pick-up are free anywhere inside the Puerto Aventuras gates, at a time that suits you.</p></details>
+        <details><summary>Is delivery really free?</summary><p>Yes. Delivery and pick-up are free anywhere inside the Puerto Aventuras gates.</p></details>
+        <details><summary>When do you deliver?</summary><p id="faq-hours"></p></details>
         <details><summary>How does the deposit work?</summary><p id="faq-deposit"></p></details>
         <details><summary>Who can drive?</summary><p>The person renting must be 18 or over. Anyone driving must be 16 or over. No driving after drinking.</p></details>
         <details><summary>Where can I take it?</summary><p>Anywhere inside the gates. Not on Highway 307 and not on the beach. The speed limit inside is 30 km/h, and lights go on at night.</p></details>
         <details><summary>Does it need charging?</summary><p>It's electric. Plug it in overnight and it's ready in the morning. Keep the charger locked to the cart or indoors.</p></details>
-        <details><summary>What if something goes wrong?</summary><p>Message us on WhatsApp. We fix it or swap the cart.</p></details>
+        <details><summary>What if something goes wrong?</summary><p>Message Chris on WhatsApp. He fixes it or swaps the cart.</p></details>
         <details><summary>Can I cancel?</summary><p>Free up to 48 hours before delivery. Inside 48 hours we keep one day's rental.</p></details>
         <details><summary>Staying a month or longer?</summary><p>The monthly price applies automatically, and it's the best rate we have. Pick your dates above and you'll see it.</p></details>
       </div>
@@ -562,6 +688,11 @@ dialog .btn { margin-top: 1.2rem; }
       <div>
         <h2 id="boss-title">Sable runs the place</h2>
         <p>Sable is the owner, the supervisor and the overseer. Chris only checks the carts, charges them and brings them to your door.</p>
+        <p class="said hide" id="said"></p>
+      </div>
+      <div class="ask">
+        <a class="btn" id="talk-boss" href="#" target="_blank" rel="noopener">Message Chris on WhatsApp</a>
+        <small>Questions, long stays, a cart for tonight.</small>
       </div>
     </section>
   </div>
@@ -572,6 +703,7 @@ dialog .btn { margin-top: 1.2rem; }
     <span class="name foil">Sable's Carts</span>
     <span>Golf cart rental, Puerto Aventuras, Quintana Roo</span>
     <span><a id="talk-foot" href="#" target="_blank" rel="noopener">WhatsApp us</a></span>
+    <span class="hide" id="foot-reviews"></span>
     <span><button class="linkish" type="button" data-open-terms>Rental terms</button></span>
   </div>
 </footer>
@@ -597,9 +729,17 @@ dialog .btn { margin-top: 1.2rem; }
   // Money rule (Chris, 1 Oct 2026): cash on delivery, no card payments anywhere. payNowShare is the
   // share asked for, on WhatsApp, to hold dates booked in advance.
   const CONFIG = {
-    whatsapp: "525538955620",
-    depositUSD: 200,
+    whatsapp: "525538955620", // Chris's Mexican mobile, as WhatsApp wants it in a link: country code 52, then the ten digits
+    // The deposit Booqable charges is the one that counts, and the page reads it from Booqable whenever
+    // Booqable is running. This number is what the page says when it is not (2 Oct 2026: Booqable says $400).
+    depositUSD: 400,
     payNowShare: 0.20,
+    deliveryHours: "11 am and 8 pm", // the hours set in Booqable (Settings > Rental period); said in "Good to know"
+    // Reviews. Leave "link" empty and the page says nothing about reviews. With a link (the Google
+    // profile's own "see reviews" address) the band with Sable gets a line and the foot a "Leave a review"
+    // link ("write" is the address that opens the review box). "rating" and "count" are typed in by hand
+    // from the profile, and only shown when both are filled.
+    reviews: { link: "", write: "", rating: 0, count: 0, where: "Google" },
     sablePhoto: "assets/sable-side-on.jpg", // Sable's portrait in the "Sable runs the place" band. Chris is never in a picture.
     // "photo" is the picture on the card (leave it empty and a drawing stands in). "specs" is the short
     // line of what the cart has: the Club Car lines come from the dealer's quotes of 28 Sep 2026, the
@@ -616,11 +756,19 @@ dialog .btn { margin-top: 1.2rem; }
         look: "club2", day: 45, week: 270, month: 750, photo: "assets/club-car-two-seater.jpg",
         specs: ["Seats 2", "Electric", "New batteries", "Roof and windshield"], booked: [] }
     ],
-    // The Booqable account (made 1 Oct 2026). While "live" is false the page takes booking requests by
-    // WhatsApp and reads booked dates from the "booked" lists above. Adding ?engine=booqable to the
-    // address tries the Booqable version without switching it on for everyone.
+    // The Booqable account (made 1 Oct 2026). With "live" true Booqable runs the dates, the availability and
+    // the checkout (switched on 2 Oct 2026, on Chris's word: "Get it all integrated"). With "live" false the
+    // page takes booking requests by WhatsApp and reads booked dates from the "booked" lists above.
+    // Two test links: ?engine=whatsapp shows the WhatsApp version, ?engine=booqable forces the Booqable one.
+    // If Booqable cannot be reached within "patience" milliseconds the page falls back to the WhatsApp
+    // version by itself, so a cart can always be booked.
     booqable: {
-      live: false,
+      live: true,
+      patience: 12000,
+      // The first day a cart can be delivered: the day the two Club Cars are in (the same date as their
+      // "available from" in Booqable). Dates before it get "We start renting on ..." instead of three
+      // carts that all say no. Clear it ("") once that day has passed.
+      opensOn: "2026-10-26",
       company: "sable-s-carts",
       scriptSrc: "https://5482ad30-90dd-482f-9e68-844ebb7435ad.assets.booqable.com/v2/booqable.js",
       productIds: { denago: "the-denago", club4: "club-car-four-seater", club2: "club-car-two-seater" },
@@ -671,7 +819,7 @@ dialog .btn { margin-top: 1.2rem; }
   // ============================================================================= drawings
   // Brass line drawings that stand in until the real photos arrive. Set "photo" on a cart and
   // the drawing is replaced. The Denago is drawn black, the Club Cars cream.
-  function cartSvg(look) {
+  function cartSvg(look, rider = false) {
     const k = {
       denago: { body: "#000", seat: "#8A6A2B", four: true, r: 25, y: 143 },
       club4: { body: "#F6EFDD", seat: "#15120D", four: true, r: 22, y: 146 },
@@ -684,6 +832,13 @@ dialog .btn { margin-top: 1.2rem; }
     const rearSeat = k.four
       ? `<rect x="66" y="90" width="42" height="15" rx="6" fill="${k.seat}"/><rect x="30" y="134" width="20" height="7" rx="3" fill="${k.body}"/>`
       : "";
+    // Sable rides in the cart that rolls along the road: her head from the mark, on the front seat.
+    const sable = rider ? `<g transform="translate(106 33) scale(.168)" stroke="none">
+          <use href="#sc-head" fill="#000" stroke="${line}" stroke-width="15" stroke-linejoin="round"/>
+          <use href="#sc-muzzle" fill="${line}"/><use href="#sc-brow" fill="${line}"/><use href="#sc-eye" fill="${line}"/>
+          <use href="#sc-collar" fill="${line}"/>
+          <use href="#sc-earline" fill="none" stroke="${line}" stroke-width="9" stroke-linecap="round"/>
+        </g>` : "";
     return `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Drawing of a golf cart">
       <ellipse cx="162" cy="172" rx="124" ry="6" fill="#C9A24B" opacity=".16"/>
       <g stroke="${line}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
@@ -696,6 +851,7 @@ dialog .btn { margin-top: 1.2rem; }
         <rect x="118" y="90" width="46" height="15" rx="6" fill="${k.seat}"/>
         <rect x="108" y="56" width="15" height="44" rx="6" fill="${k.seat}" transform="rotate(-7 115 100)"/>
         ${rearSeat}
+        ${sable}
         <path d="M214 104 L199 82" fill="none"/>
         <ellipse cx="196" cy="80" rx="10" ry="4.5" fill="none" transform="rotate(-36 196 80)"/>
         <rect x="282" y="122" width="9" height="10" rx="3" fill="#F6E7B0"/>
@@ -705,10 +861,11 @@ dialog .btn { margin-top: 1.2rem; }
   }
 
   // ============================================================================= state
-  const state = { from: "", to: "", cartId: "", note: "" };
+  const state = { from: "", to: "", cartId: "", note: "", scanned: "" }; // "scanned" is the cart named in the link, as the QR stickers do
   const cartById = (id) => CONFIG.carts.find((c) => c.id === id);
   const days = () => Math.max(1, Math.round((toMs(state.to) - toMs(state.from)) / DAY));
-  const liveEngine = CONFIG.booqable.live || new URLSearchParams(location.search).get("engine") === "booqable";
+  const engineAsked = new URLSearchParams(location.search).get("engine");
+  let liveEngine = engineAsked === "booqable" || (CONFIG.booqable.live && engineAsked !== "whatsapp"); // goes false if Booqable cannot be reached
 
   // ============================================================================= drawing the page
   function showLength() {
@@ -720,10 +877,13 @@ dialog .btn { margin-top: 1.2rem; }
 
   function showCards() {
     const n = days();
-    $("#cards").innerHTML = CONFIG.carts.map((c) => {
+    // With Booqable running, the cart someone scanned the sticker of comes first.
+    const order = liveEngine && state.scanned ? [...CONFIG.carts].sort((a, b) => (b.id === state.scanned) - (a.id === state.scanned)) : CONFIG.carts;
+    $("#cards").innerHTML = order.map((c) => {
       const q = quote(c, n);
       const hit = clash(c, state.from, state.to);
-      const chosen = state.cartId === c.id;
+      const scanned = liveEngine && state.scanned === c.id;
+      const chosen = state.cartId === c.id || scanned;
       const media = c.photo
         ? `<img src="${esc(c.photo)}" alt="${esc(c.name)}" width="1200" height="900" loading="lazy">`
         : cartSvg(c.look) + `<span class="soon">Photo on its way</span>`;
@@ -733,13 +893,13 @@ dialog .btn { margin-top: 1.2rem; }
         : `<p class="state is-free">Free on your dates</p>`;
       const saving = !hit && q.saving > 0 ? `<p class="saving">${q.rate}. You save ${money(q.saving)}.</p>` : "";
       const action = liveEngine
-        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div>
+        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div><p class="booq-wait">Checking the calendar</p>
            <p class="out-note">Try other dates, or <a href="${esc(askLink(`Hi Sable's Carts, is ${c.the} free on my dates?`))}" target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>`
         : hit
           ? `<button class="btn" type="button" disabled>Booked on your dates</button>`
           : `<button class="btn${chosen ? " is-quiet" : ""}" type="button" data-choose="${c.id}" aria-pressed="${chosen}">${chosen ? "Chosen" : "Choose " + esc(c.the)}</button>`;
       return `<article class="cart-card${chosen ? " is-chosen" : ""}" data-cart="${c.id}">
-        <div class="media">${media}</div>
+        <div class="media">${scanned ? `<span class="scanned">The one you scanned</span>` : ""}${media}</div>
         <div class="info">
           <div class="row">
             <div><h3>${(c.parts || [c.name]).map((part) => `<span class="nb">${esc(part)}</span>`).join(" ")}</h3><p class="blurb">${esc(c.blurb)}</p></div>
@@ -775,6 +935,7 @@ dialog .btn { margin-top: 1.2rem; }
   function showMoneyWords() {
     $("#rates-note").textContent = `Prices are in US dollars. You pay in cash on delivery, and pesos are welcome at the day's rate. The refundable deposit is ${money(CONFIG.depositUSD)}, whichever cart you choose.`;
     $("#faq-deposit").textContent = `${money(CONFIG.depositUSD)} in cash when the cart arrives. It is handed straight back when we pick the cart up in the same shape, with its key and charger.`;
+    $("#faq-hours").textContent = `Every day between ${CONFIG.deliveryHours}. You choose the time when you book, for delivery and for pick-up.`;
     $("#terms-list").innerHTML = [
       "The person renting is 18 or over and is responsible for the cart and everyone who drives it. Drivers are 16 or over, and nobody drives after drinking.",
       "The cart stays inside the Puerto Aventuras gates. Never on Highway 307, never on the beach.",
@@ -812,6 +973,7 @@ dialog .btn { margin-top: 1.2rem; }
   const inMyCart = () => ((((window.Booqable || {}).cartData || {}).items) || []).map((i) => String(i.item_name || "").trim().toLowerCase());
 
   function dressEngine() {
+    if (!liveEngine) return;
     const cards = [...document.querySelectorAll("#cards .cart-card")];
     const seen = cards.map((card) => { const s = card.querySelector(".bq-status"); return !s ? "" : s.classList.contains("bq-available") ? "free" : "out"; });
     const known = seen.length > 0 && seen.every(Boolean); // Booqable has answered for every cart
@@ -826,40 +988,111 @@ dialog .btn { margin-top: 1.2rem; }
       card.classList.toggle("is-out", seen[i] === "out");
       card.classList.toggle("is-mine", mine[i]);
       card.classList.toggle("is-held", hold && seen[i] === "free" && !mine[i]);
-      // The words are changed inside Booqable's own text node, so it can still change them itself later.
+      // Words are changed inside Booqable's own text nodes, so it can still change them itself later.
       const words = card.querySelector(".bq-button span");
       const text = words && words.firstChild;
       if (text && text.nodeType === 3 && text.nodeValue.trim() === "Add to cart") text.nodeValue = `Reserve ${cartById(card.dataset.cart).the}`;
+      // "from $70.00" before dates are chosen reads "from $70 a day", and whole dollars lose their ".00".
+      const span = card.querySelector(".bq-duration"), amount = (card.querySelector(".bq-price") || {}).firstChild;
+      card.classList.toggle("is-from", Boolean(span) && span.textContent.trim() === "from");
+      if (amount && amount.nodeType === 3 && /\.00$/.test(amount.nodeValue.trim())) amount.nodeValue = amount.nodeValue.trim().slice(0, -3);
     });
-    // The dates in words, so 05-10-2026 can never be read as May. Shown only when the length worked out
+    document.body.classList.toggle("has-cart", names.length > 0);
+    const label = ($("#booq-dates .bq-date-picker-button-text") || {}).firstChild;
+    if (label && label.nodeType === 3 && label.nodeValue.trim() === "Select a rental period") label.nodeValue = "Choose your dates and times";
+
+    // The dates in words, so 05-10-2026 can never be read as May. Used only when the length worked out
     // from them agrees with the length Booqable itself shows: if its date order is ever changed in its
-    // settings and "dayFirst" above is not, the two disagree and the line simply stays away.
+    // settings and "dayFirst" above is not, the two disagree and Booqable's own date button stays as it is.
     const d = engineDates();
     const told = ((document.querySelector("#cards .bq-duration") || {}).textContent || "").trim().match(/^(\d+)\s+days?$/);
     const n = d ? Math.max(1, Math.ceil((d.to.at - d.from.at) / DAY)) : 0;
-    const line = $("#length");
-    if (d && told && Number(told[1]) === n) {
-      const html = `<b>${n} ${n === 1 ? "day" : "days"}.</b> ${nice(d.from.iso)}, ${d.from.time} to ${nice(d.to.iso)}, ${d.to.time}.`;
-      if (line.innerHTML !== html) line.innerHTML = html;
-      line.classList.remove("hide");
-    } else line.classList.add("hide");
+    const good = Boolean(d && told && Number(told[1]) === n);
+    const root = document.documentElement, line = $("#length");
+    root.classList.toggle("has-words", good);
+    line.classList.toggle("hide", !good);
+    if (good) {
+      const from = `${nice(d.from.iso)} at ${d.from.time}`, to = `${nice(d.to.iso)} at ${d.to.time}`;
+      if ($("#when-from").textContent !== from) $("#when-from").textContent = from;
+      if ($("#when-to").textContent !== to) $("#when-to").textContent = to;
+      // The cart panel is narrow, so its head carries the short form: "Nov 2, 12 pm".
+      root.style.setProperty("--from-brief", JSON.stringify(`${nice(d.from.iso).replace(/^\w+, /, "")}, ${d.from.time}`));
+      root.style.setProperty("--to-brief", JSON.stringify(`${nice(d.to.iso).replace(/^\w+, /, "")}, ${d.to.time}`));
+      // Booqable counts a started day as a whole day (measured 2 Oct 2026: a week and one hour is 8 days),
+      // so a pick-up time later than the delivery time costs a day. Say so, and how to save it.
+      const extra = n > 1 && (d.to.at - d.from.at) % DAY > 0;
+      const words = `${n} ${n === 1 ? "day" : "days"}.${extra ? ` Pick-up by ${d.from.time} makes it ${n - 1}.` : ""}`;
+      if (line.dataset.words !== words) { line.dataset.words = words; line.innerHTML = `<b>${n} ${n === 1 ? "day" : "days"}.</b>${extra ? ` Pick-up by ${d.from.time} makes it ${n - 1}.` : ""}`; }
+    }
+
+    // Nothing to reserve on these dates: say it once, above the carts, with the way to reach a person.
+    const offered = cards.filter((card, i) => seen[i] === "free" && !mine[i] && !hold).length;
+    const none = known && offered === 0 && !mine.some(Boolean);
+    const note = $("#none-free");
+    note.classList.toggle("hide", !none);
+    if (none) {
+      const kind = d && CONFIG.booqable.opensOn && d.from.iso < CONFIG.booqable.opensOn ? "early" : "full";
+      if (note.dataset.kind !== kind) {
+        note.dataset.kind = kind;
+        const ask = `<a href="${esc(askLink("Hi Chris, I'm after a cart on dates the page shows as taken."))}" target="_blank" rel="noopener">ask Chris on WhatsApp</a>`;
+        note.innerHTML = kind === "early"
+          ? `<b>We start renting on ${nice(CONFIG.booqable.opensOn)}.</b> Choose dates from then, or ${ask}.`
+          : `<b>No cart is free on those dates.</b> Try other dates, or ${ask}.`;
+      }
+    }
   }
+
+  const engine = { watchers: [], poll: 0, giveUp: 0, stepTwo: "" };
 
   function watchEngine() {
     let queued = false;
     const tidy = () => { if (queued) return; queued = true; setTimeout(() => { queued = false; dressEngine(); }, 60); };
-    new MutationObserver(tidy).observe($("#cards"), { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["class"] });
-    new MutationObserver(tidy).observe($("#booq-dates"), { childList: true, subtree: true, characterData: true });
+    const watch = (el, how) => { const w = new MutationObserver(tidy); w.observe(el, how); engine.watchers.push(w); };
+    watch($("#cards"), { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["class"] });
+    watch($("#booq-dates"), { childList: true, subtree: true, characterData: true });
     // Booqable says nothing to the page when its cart changes, so the page looks twice a second. Two things
     // are read from it: what is in the cart (for the cart kept back), and the deposit. Booqable writes the
     // customer's booking, so the deposit it charges is the one the page quotes.
     let had = "";
-    setInterval(() => {
+    engine.poll = setInterval(() => {
       const has = inMyCart().join("|");
       if (has !== had) { had = has; tidy(); }
       const deposit = Number(((window.Booqable || {}).cartData || {}).deposit);
       if (deposit > 0 && deposit !== CONFIG.depositUSD) { CONFIG.depositUSD = deposit; showMoneyWords(); }
     }, 500);
+  }
+
+  // Hands the dates, the availability and the checkout to Booqable.
+  function startEngine() {
+    document.body.classList.add("is-engine");
+    $("#date-fields").classList.add("hide"); $("#length").classList.add("hide"); $("#booking").classList.add("hide");
+    $("#booq-dates").classList.remove("hide"); $("#booq-wait").classList.remove("hide");
+    // Booqable reserves at once, so step two of "How it works" is no longer a wait for a WhatsApp reply.
+    engine.stepTwo = $("#step-two").innerHTML;
+    $("#step-two").innerHTML = "<h3>Reserve it online</h3><p>It takes two minutes. Your dates are held straight away and the confirmation lands in your email.</p>";
+    window.booqableOptions = { company: CONFIG.booqable.company };
+    const s = document.createElement("script");
+    s.src = CONFIG.booqable.scriptSrc; s.async = true;
+    s.onerror = stopEngine;
+    document.body.appendChild(s);
+    engine.giveUp = setTimeout(() => { if (!document.querySelector(".booqable-product-button .bq-button")) stopEngine(); }, CONFIG.booqable.patience);
+  }
+
+  // Booqable could not be reached (its script was blocked, its servers are down, the account is switched
+  // off): the page goes back to taking requests by WhatsApp, so a cart can always be booked.
+  function stopEngine() {
+    if (!liveEngine) return;
+    liveEngine = false;
+    clearTimeout(engine.giveUp); clearInterval(engine.poll);
+    engine.watchers.forEach((w) => w.disconnect());
+    document.body.classList.remove("is-engine", "has-cart"); document.body.classList.add("no-engine");
+    document.documentElement.classList.remove("has-words");
+    $("#date-fields").classList.remove("hide"); $("#length").classList.remove("hide"); $("#booking").classList.remove("hide");
+    $("#booq-dates").classList.add("hide"); $("#booq-wait").classList.add("hide"); $("#none-free").classList.add("hide");
+    $("#step-two").innerHTML = engine.stepTwo;
+    const scanned = cartById(state.scanned);
+    if (scanned && !clash(scanned, state.from, state.to)) state.cartId = scanned.id;
+    showAll();
   }
 
   // ============================================================================= what people do
@@ -925,6 +1158,7 @@ dialog .btn { margin-top: 1.2rem; }
     }
     if (isDate(asked.get("to")) && toMs(asked.get("to")) > toMs(state.from)) state.to = asked.get("to");
     const wanted = cartById(asked.get("cart"));
+    if (wanted) state.scanned = wanted.id;
     if (wanted && !liveEngine && !clash(wanted, state.from, state.to)) state.cartId = wanted.id;
     const from = $("#from"), to = $("#to");
     from.min = today; from.value = state.from;
@@ -932,7 +1166,7 @@ dialog .btn { margin-top: 1.2rem; }
     from.addEventListener("change", () => datesChanged("from"));
     to.addEventListener("change", () => datesChanged("to"));
 
-    $("#road-cart").innerHTML = cartSvg("denago");
+    $("#road-cart").innerHTML = cartSvg("denago", true);
     if ("IntersectionObserver" in window) { // the cart rolls in the first time "How it works" is seen
       const road = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) { $("#road").classList.add("is-rolling"); road.disconnect(); }
@@ -940,8 +1174,17 @@ dialog .btn { margin-top: 1.2rem; }
       road.observe($("#road"));
     } else $("#road").classList.add("is-rolling");
     if (CONFIG.sablePhoto) $("#boss-picture").innerHTML = `<figure><img src="${esc(CONFIG.sablePhoto)}" alt="Sable the Doberman, side on, in the passenger seat of a golf cart" width="680" height="680" loading="lazy"></figure>`;
-    const wa = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent("Hi Sable's Carts, I have a question about renting a cart.")}`;
-    $("#talk").href = wa; $("#talk-foot").href = wa;
+    // Every way to reach Chris opens WhatsApp with the first line already written.
+    const wa = askLink("Hi Chris, I have a question about renting a cart.");
+    $("#talk").href = wa; $("#talk-foot").href = wa; $("#talk-boss").href = wa;
+    const said = CONFIG.reviews;
+    if (said.link) {
+      const stars = said.rating && said.count ? `${Number(said.rating).toFixed(1)} out of 5 from ${said.count} ${esc(said.where)} reviews. ` : "";
+      $("#said").innerHTML = `${stars}<a href="${esc(said.link)}" target="_blank" rel="noopener">Read what renters say</a>`;
+      $("#said").classList.remove("hide");
+      $("#foot-reviews").innerHTML = `<a href="${esc(said.write || said.link)}" target="_blank" rel="noopener">Leave a review</a>`;
+      $("#foot-reviews").classList.remove("hide");
+    }
 
     $("#rates-body").innerHTML = CONFIG.carts.map((c) =>
       `<tr><th scope="row">${esc(c.name)}</th><td>${money(c.day)}</td><td>${money(c.week)}</td><td>${money(c.month)}</td></tr>`).join("");
@@ -964,17 +1207,7 @@ dialog .btn { margin-top: 1.2rem; }
       }, { threshold: 0.15 }).observe($("#booking"));
     }
 
-    if (liveEngine) { // hand dates, availability and checkout to Booqable
-      document.body.classList.add("is-engine");
-      $("#date-fields").classList.add("hide"); $("#length").classList.add("hide");
-      $("#booq-dates").classList.remove("hide"); $("#booking").classList.add("hide");
-      // Booqable reserves at once, so step two of "How it works" is no longer a wait for a WhatsApp reply.
-      $("#step-two").innerHTML = "<h3>Reserve it online</h3><p>It takes two minutes. Your dates are held straight away and the confirmation lands in your email.</p>";
-      window.booqableOptions = { company: CONFIG.booqable.company };
-      const s = document.createElement("script");
-      s.src = CONFIG.booqable.scriptSrc; s.async = true;
-      document.body.appendChild(s);
-    }
+    if (liveEngine) startEngine();
     showAll();
     if (liveEngine) watchEngine(); // after the cards exist, so there is something to watch
   }
