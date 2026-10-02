@@ -308,9 +308,47 @@ dialog .btn { margin-top: 1.2rem; }
 }
 .booqable-datepicker .bq-date-picker-button-text { font-family: var(--body) !important; font-size: 1.0625rem !important; font-weight: 700 !important; color: var(--ink) !important; text-align: left !important; }
 .booqable-datepicker .bq-date-picker-button-expanded-title { font-weight: 500 !important; }
+/* Booqable's floating pieces (the date picker and its list of times) are added at the end of the page,
+   where they pick up the page's cream lettering: "From" and "Until" above the times were cream on white
+   and could not be read (seen on a phone-size run, 2 Oct 2026). */
+.rental-options-modal, .shop-period-picker, .time-picker, .time-picker-title { color: var(--ink) !important; }
+.time-picker-title { font-weight: 700 !important; }
+/* "1 available" and "Unavailable" said in the page's own words, with the same dot as the rest of the page.
+   Booqable's words stay in the page for screen readers; only their size is taken away. */
+.booqable-product-button .bq-status.bq-available, .booqable-product-button .bq-status.bq-unavailable {
+  display: inline-flex !important; align-items: baseline !important; gap: 0 !important; margin: 0 !important; padding: 0 !important;
+  background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  font-size: 0 !important; font-weight: 700 !important; line-height: 1.5 !important;
+}
+.booqable-product-button .bq-status.bq-available *, .booqable-product-button .bq-status.bq-unavailable * { font-size: 0 !important; }
+/* Booqable paints its brand colour over ::before and ::after of anything "branded" with !important, so
+   these two say theirs with !important too (seen 2 Oct 2026: white words on a brass block). */
+.booqable-product-button .bq-status.bq-available::before, .booqable-product-button .bq-status.bq-unavailable::before { content: ""; width: .65rem; height: .65rem; margin-right: .5rem; border-radius: 50%; color: inherit !important; background: currentColor !important; flex: none; }
+.booqable-product-button .bq-status.bq-available::after, .booqable-product-button .bq-status.bq-unavailable::after { font-size: 1.0625rem; color: inherit !important; background: none !important; }
+.booqable-product-button .bq-status.bq-available { color: var(--free) !important; }
+.booqable-product-button .bq-status.bq-available::after { content: "Free on your dates"; }
+.booqable-product-button .bq-status.bq-unavailable, .is-held .booqable-product-button .bq-status.bq-available { color: var(--busy) !important; }
+.booqable-product-button .bq-status.bq-unavailable::after, .is-held .booqable-product-button .bq-status.bq-available::after { content: "Not available on those dates"; }
+/* A cart that is not free on the chosen dates has no button to press: it gets a line pointing to WhatsApp.
+   "is-held" is the cart kept back for Chris when the other two are out (see keepOneBack in the settings). */
+.out-note { display: none; margin-top: .9rem; color: var(--mute); }
+.out-note a { color: var(--brass-light); font-weight: 700; text-underline-offset: 3px; }
+.is-out .bq-control, .is-held .bq-control, .is-mine .bq-control { display: none !important; }
+.is-held bq-product-availability-calendar { display: none !important; } /* its calendar would show the kept-back cart as free */
+.is-out .out-note, .is-held .out-note { display: block; }
+/* "is-mine" is a cart already in this visitor's Booqable cart: it says so, and has no second button. */
+.is-mine .booqable-product-button .bq-status.bq-available::after { content: "In your reservation"; }
+/* One cart of each, so the cart panel has no "how many" buttons either. */
+#booqable-sidebar .bq-quantity-toggle, .booqable-sidebar .bq-quantity-toggle, #booqable-sidebar .bq-quantity, .booqable-sidebar .bq-quantity { display: none !important; }
+/* Booqable's floating cart button: a black cart on brass like our own buttons, and without its small
+   copy of the dates (they are written out in words at the top of the page). */
+#booqable-launcher-icon i, #booqable-launcher-icon i::before { color: var(--black) !important; }
+#booqable-launcher-summary .bq-dates, #booqable-launcher-summary hr { display: none !important; }
 /* When Booqable runs the booking, the cards stand three across on a wide screen and it shows the price. */
 .is-engine .info .price { display: none; }
 .is-engine .act { padding-top: .2rem; }
+.is-engine .length { font-weight: 500; }
+.is-engine .length b { font-weight: 800; }
 
 /* =============================================================================== wider screens */
 @media (min-width: 34rem) {
@@ -346,9 +384,11 @@ dialog .btn { margin-top: 1.2rem; }
   .act .btn { margin-top: 0; width: auto; min-width: 15.5rem; }
   .act .booq { margin-top: 0; }
   .is-engine .shop-grid { display: block; }
-  .is-engine .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
-  .is-engine .cart-card { display: block; }
-  .is-engine .media { border-right: 0; border-bottom: 1px solid var(--rule); }
+  /* Three across, all the same height, with the price and button lined up along the bottom. */
+  .is-engine .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+  .is-engine .cart-card { display: flex; flex-direction: column; }
+  .is-engine .media { align-self: auto; border-right: 0; border-bottom: 1px solid var(--rule); }
+  .is-engine .info { flex: 1; }
   .is-engine .act { display: block; border-top: 0; padding: .2rem 1rem 1.15rem; }
   .booking { position: sticky; top: 1rem; margin-top: 4.1rem; }
   .bar { display: none; }
@@ -478,7 +518,7 @@ dialog .btn { margin-top: 1.2rem; }
     <div class="road" id="road" aria-hidden="true"><div class="cart" id="road-cart"></div></div>
     <ol class="steps">
       <li><h3>Pick your dates and your cart</h3><p>You see what's free and what it costs straight away.</p></li>
-      <li><h3>We confirm on WhatsApp</h3><p>Booking ahead from home? We hold your dates with 20%, arranged on WhatsApp.</p></li>
+      <li id="step-two"><h3>We confirm on WhatsApp</h3><p>Booking ahead from home? We hold your dates with 20%, arranged on WhatsApp.</p></li>
       <li><h3>We bring it to your door</h3><p>Pay in cash when it arrives, plus the refundable deposit. We pick it up when you're done.</p></li>
     </ol>
   </section>
@@ -577,7 +617,14 @@ dialog .btn { margin-top: 1.2rem; }
       live: false,
       company: "sable-s-carts",
       scriptSrc: "https://5482ad30-90dd-482f-9e68-844ebb7435ad.assets.booqable.com/v2/booqable.js",
-      productIds: { denago: "the-denago", club4: "club-car-four-seater", club2: "club-car-two-seater" }
+      productIds: { denago: "the-denago", club4: "club-car-four-seater", club2: "club-car-two-seater" },
+      // Chris, 1 Oct 2026: "ideally i need to always have one of the carts myself". Booqable has no rule
+      // for "whichever is left", so the page keeps it: when every cart but one is out on the chosen dates,
+      // the last one is not offered either, and the card points to WhatsApp instead.
+      keepOneBack: true,
+      // How Booqable writes a date (Settings > General in its back office): true for 05-10-2026 meaning
+      // 5 October, false for 10-05-2026. Used only to write the dates out in words under the date button.
+      dayFirst: true
     }
   };
 
@@ -589,6 +636,7 @@ dialog .btn { margin-top: 1.2rem; }
   const toIso = (ms) => new Date(ms).toISOString().slice(0, 10);
   const nice = (iso) => new Intl.DateTimeFormat("en-US", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" }).format(new Date(toMs(iso)));
   const money = (n) => "$" + Math.round(n).toLocaleString("en-US");
+  const askLink = (words) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(words)}`;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   // ============================================================================= prices
@@ -658,6 +706,7 @@ dialog .btn { margin-top: 1.2rem; }
 
   // ============================================================================= drawing the page
   function showLength() {
+    if (liveEngine) return; // Booqable holds the dates then, and dressEngine writes this line from them
     const n = days();
     const sample = quote(CONFIG.carts[0], n).rate;
     $("#length").innerHTML = `${n} ${n === 1 ? "day" : "days"}. <span>${nice(state.from)} to ${nice(state.to)}${sample ? ". " + sample + " applies" : ""}.</span>`;
@@ -678,11 +727,12 @@ dialog .btn { margin-top: 1.2rem; }
         : `<p class="state is-free">Free on your dates</p>`;
       const saving = !hit && q.saving > 0 ? `<p class="saving">${q.rate}. You save ${money(q.saving)}.</p>` : "";
       const action = liveEngine
-        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div>`
+        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div>
+           <p class="out-note">Try other dates, or <a href="${esc(askLink(`Hi Sable's Carts, is ${c.the} free on my dates?`))}" target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>`
         : hit
           ? `<button class="btn" type="button" disabled>Booked on your dates</button>`
           : `<button class="btn${chosen ? " is-quiet" : ""}" type="button" data-choose="${c.id}" aria-pressed="${chosen}">${chosen ? "Chosen" : "Choose " + esc(c.the)}</button>`;
-      return `<article class="cart-card${chosen ? " is-chosen" : ""}">
+      return `<article class="cart-card${chosen ? " is-chosen" : ""}" data-cart="${c.id}">
         <div class="media">${media}</div>
         <div class="info">
           <div class="row">
@@ -714,6 +764,97 @@ dialog .btn { margin-top: 1.2rem; }
   }
 
   function showAll() { showLength(); showCards(); showBooking(); }
+
+  // Every sentence that names the deposit, so they can never disagree with each other.
+  function showMoneyWords() {
+    $("#rates-note").textContent = `Prices are in US dollars. You pay in cash on delivery, and pesos are welcome at the day's rate. The refundable deposit is ${money(CONFIG.depositUSD)}, whichever cart you choose.`;
+    $("#faq-deposit").textContent = `${money(CONFIG.depositUSD)} in cash when the cart arrives. It is handed straight back when we pick the cart up in the same shape, with its key and charger.`;
+    $("#terms-list").innerHTML = [
+      "The person renting is 18 or over and is responsible for the cart and everyone who drives it. Drivers are 16 or over, and nobody drives after drinking.",
+      "The cart stays inside the Puerto Aventuras gates. Never on Highway 307, never on the beach.",
+      "Keep to 30 km/h, lights on at night, everyone seated, no more people than seats.",
+      "Plug it in overnight. Keep the charger locked to the cart or indoors, and take the key when you park.",
+      `The ${money(CONFIG.depositUSD)} deposit comes back at pick-up. We only keep what it costs to put right damage, a lost key or charger, or a late return.`,
+      "Free cancellation up to 48 hours before delivery. Inside 48 hours we keep one day's rental."
+    ].map((t) => `<li>${esc(t)}</li>`).join("");
+  }
+
+  // ============================================================================= Booqable's pieces, watched
+  // Booqable draws its own date button, prices and buttons inside the page, and redraws them whenever the
+  // dates change. After every redraw the page tidies up around them: it writes the dates out in words,
+  // takes the button off a cart that is not free, keeps one cart back for Chris, and says "Reserve".
+  const clock = (h, m) => `${((h + 11) % 12) + 1}${m ? ":" + String(m).padStart(2, "0") : ""} ${h < 12 ? "am" : "pm"}`;
+
+  // Reads the two dates and times off Booqable's date button. Null until both are chosen.
+  function engineDates() {
+    const box = $("#booq-dates .bq-date-picker-button-wrapper");
+    const found = box ? [...box.innerText.matchAll(/(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})\D+?(\d{1,2}):(\d{2})\s*([ap]m)?/gi)] : [];
+    if (found.length !== 2) return null;
+    const read = (m) => {
+      const [d, mo] = CONFIG.booqable.dayFirst ? [Number(m[1]), Number(m[2])] : [Number(m[2]), Number(m[1])];
+      const y = Number(m[3]), min = Number(m[5]);
+      let h = Number(m[4]);
+      if (m[6]) h = (h % 12) + (/p/i.test(m[6]) ? 12 : 0);
+      if (mo < 1 || mo > 12 || d < 1 || d > 31 || h > 23) return null;
+      return { iso: `${y}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}`, at: Date.UTC(y, mo - 1, d, h, min), time: clock(h, min) };
+    };
+    const from = read(found[0]), to = read(found[1]);
+    return from && to && to.at > from.at ? { from, to } : null;
+  }
+
+  // The names of the carts this visitor already has in their Booqable cart, in small letters.
+  const inMyCart = () => ((((window.Booqable || {}).cartData || {}).items) || []).map((i) => String(i.item_name || "").trim().toLowerCase());
+
+  function dressEngine() {
+    const cards = [...document.querySelectorAll("#cards .cart-card")];
+    const seen = cards.map((card) => { const s = card.querySelector(".bq-status"); return !s ? "" : s.classList.contains("bq-available") ? "free" : "out"; });
+    const known = seen.length > 0 && seen.every(Boolean); // Booqable has answered for every cart
+    const names = inMyCart();
+    const mine = cards.map((card, i) => seen[i] !== "out" && names.includes(cartById(card.dataset.cart).name.toLowerCase()));
+    // Carts that are gone for these dates: booked or not here yet, plus the ones in this visitor's own cart
+    // (a family could otherwise put all three in one booking). A name Booqable gives that matches no card
+    // still counts as one gone.
+    const gone = seen.filter((s) => s === "out").length + names.length;
+    const hold = CONFIG.booqable.keepOneBack && known && gone >= cards.length - 1;
+    cards.forEach((card, i) => {
+      card.classList.toggle("is-out", seen[i] === "out");
+      card.classList.toggle("is-mine", mine[i]);
+      card.classList.toggle("is-held", hold && seen[i] === "free" && !mine[i]);
+      // The words are changed inside Booqable's own text node, so it can still change them itself later.
+      const words = card.querySelector(".bq-button span");
+      const text = words && words.firstChild;
+      if (text && text.nodeType === 3 && text.nodeValue.trim() === "Add to cart") text.nodeValue = `Reserve ${cartById(card.dataset.cart).the}`;
+    });
+    // The dates in words, so 05-10-2026 can never be read as May. Shown only when the length worked out
+    // from them agrees with the length Booqable itself shows: if its date order is ever changed in its
+    // settings and "dayFirst" above is not, the two disagree and the line simply stays away.
+    const d = engineDates();
+    const told = ((document.querySelector("#cards .bq-duration") || {}).textContent || "").trim().match(/^(\d+)\s+days?$/);
+    const n = d ? Math.max(1, Math.ceil((d.to.at - d.from.at) / DAY)) : 0;
+    const line = $("#length");
+    if (d && told && Number(told[1]) === n) {
+      const html = `<b>${n} ${n === 1 ? "day" : "days"}.</b> ${nice(d.from.iso)}, ${d.from.time} to ${nice(d.to.iso)}, ${d.to.time}.`;
+      if (line.innerHTML !== html) line.innerHTML = html;
+      line.classList.remove("hide");
+    } else line.classList.add("hide");
+  }
+
+  function watchEngine() {
+    let queued = false;
+    const tidy = () => { if (queued) return; queued = true; setTimeout(() => { queued = false; dressEngine(); }, 60); };
+    new MutationObserver(tidy).observe($("#cards"), { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["class"] });
+    new MutationObserver(tidy).observe($("#booq-dates"), { childList: true, subtree: true, characterData: true });
+    // Booqable says nothing to the page when its cart changes, so the page looks twice a second. Two things
+    // are read from it: what is in the cart (for the cart kept back), and the deposit. Booqable writes the
+    // customer's booking, so the deposit it charges is the one the page quotes.
+    let had = "";
+    setInterval(() => {
+      const has = inMyCart().join("|");
+      if (has !== had) { had = has; tidy(); }
+      const deposit = Number(((window.Booqable || {}).cartData || {}).deposit);
+      if (deposit > 0 && deposit !== CONFIG.depositUSD) { CONFIG.depositUSD = deposit; showMoneyWords(); }
+    }, 500);
+  }
 
   // ============================================================================= what people do
   function datesChanged(which) {
@@ -798,16 +939,7 @@ dialog .btn { margin-top: 1.2rem; }
 
     $("#rates-body").innerHTML = CONFIG.carts.map((c) =>
       `<tr><th scope="row">${esc(c.name)}</th><td>${money(c.day)}</td><td>${money(c.week)}</td><td>${money(c.month)}</td></tr>`).join("");
-    $("#rates-note").textContent = `Prices are in US dollars. You pay in cash on delivery, and pesos are welcome at the day's rate. The refundable deposit is ${money(CONFIG.depositUSD)}, whichever cart you choose.`;
-    $("#faq-deposit").textContent = `${money(CONFIG.depositUSD)} in cash when the cart arrives. It is handed straight back when we pick the cart up in the same shape, with its key and charger.`;
-    $("#terms-list").innerHTML = [
-      "The person renting is 18 or over and is responsible for the cart and everyone who drives it. Drivers are 16 or over, and nobody drives after drinking.",
-      "The cart stays inside the Puerto Aventuras gates. Never on Highway 307, never on the beach.",
-      "Keep to 30 km/h, lights on at night, everyone seated, no more people than seats.",
-      "Plug it in overnight. Keep the charger locked to the cart or indoors, and take the key when you park.",
-      `The ${money(CONFIG.depositUSD)} deposit comes back at pick-up. We only keep what it costs to put right damage, a lost key or charger, or a late return.`,
-      "Free cancellation up to 48 hours before delivery. Inside 48 hours we keep one day's rental."
-    ].map((t) => `<li>${esc(t)}</li>`).join("");
+    showMoneyWords();
 
     $("#cards").addEventListener("click", (e) => {
       const b = e.target.closest("[data-choose]");
@@ -830,12 +962,15 @@ dialog .btn { margin-top: 1.2rem; }
       document.body.classList.add("is-engine");
       $("#date-fields").classList.add("hide"); $("#length").classList.add("hide");
       $("#booq-dates").classList.remove("hide"); $("#booking").classList.add("hide");
+      // Booqable reserves at once, so step two of "How it works" is no longer a wait for a WhatsApp reply.
+      $("#step-two").innerHTML = "<h3>Reserve it online</h3><p>It takes two minutes. Your dates are held straight away and the confirmation lands in your email.</p>";
       window.booqableOptions = { company: CONFIG.booqable.company };
       const s = document.createElement("script");
       s.src = CONFIG.booqable.scriptSrc; s.async = true;
       document.body.appendChild(s);
     }
     showAll();
+    if (liveEngine) watchEngine(); // after the cards exist, so there is something to watch
   }
 
   start();
