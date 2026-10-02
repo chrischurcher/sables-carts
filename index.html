@@ -294,6 +294,23 @@ dialog .btn { margin-top: 1.2rem; }
 .booqable-product-button input { border: 1.5px solid var(--brass) !important; border-radius: 12px !important; min-height: 52px !important; background: var(--coal) !important; color: var(--cream) !important; font-size: 1.0625rem !important; }
 .booqable-product-button .bq-button { background: var(--foil) !important; color: var(--black) !important; border: 1px solid var(--brass-edge) !important; border-radius: 14px !important; box-shadow: 0 5px 0 var(--brass-edge) !important; font-weight: 800 !important; font-size: 1.0625rem !important; min-height: 54px !important; }
 .booqable-product-button .bq-button * { color: var(--black) !important; }
+/* Seen on our own account, 1 Oct 2026: the pieces below are what Booqable really puts on the page. */
+.booqable-product-button .bq-actions { display: grid !important; gap: .7rem !important; }
+.booqable-product-button .bq-price-details { display: flex !important; align-items: baseline !important; gap: .5rem !important; }
+.booqable-product-button .bq-control { display: block !important; }
+.booqable-product-button .bq-control > div:not(:last-child) { display: none !important; } /* one cart of each, so no "how many" box */
+.booqable-product-button .bq-button { width: 100% !important; cursor: pointer; }
+.booqable-product-button bq-product-availability-calendar, .booqable-product-button bq-product-availability-calendar * { color: var(--free) !important; font-weight: 700 !important; }
+.booqable-datepicker .bq-date-picker-button-wrapper {
+  font: inherit !important; width: 100% !important; min-height: 54px !important; margin-top: .9rem !important; padding: .8rem 1rem !important;
+  border: 1.5px solid var(--ink) !important; border-radius: 12px !important; background: #FFFDF6 !important; color: var(--ink) !important;
+  text-align: left !important; cursor: pointer; box-shadow: none !important;
+}
+.booqable-datepicker .bq-date-picker-button-text { font-family: var(--body) !important; font-size: 1.0625rem !important; font-weight: 700 !important; color: var(--ink) !important; text-align: left !important; }
+.booqable-datepicker .bq-date-picker-button-expanded-title { font-weight: 500 !important; }
+/* When Booqable runs the booking, the cards stand three across on a wide screen and it shows the price. */
+.is-engine .info .price { display: none; }
+.is-engine .act { padding-top: .2rem; }
 
 /* =============================================================================== wider screens */
 @media (min-width: 34rem) {
@@ -328,6 +345,11 @@ dialog .btn { margin-top: 1.2rem; }
   .act .state { margin-top: 0; }
   .act .btn { margin-top: 0; width: auto; min-width: 15.5rem; }
   .act .booq { margin-top: 0; }
+  .is-engine .shop-grid { display: block; }
+  .is-engine .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .is-engine .cart-card { display: block; }
+  .is-engine .media { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .is-engine .act { display: block; border-top: 0; padding: .2rem 1rem 1.15rem; }
   .booking { position: sticky; top: 1rem; margin-top: 4.1rem; }
   .bar { display: none; }
   .foot { padding-bottom: 2.2rem; }
@@ -669,7 +691,7 @@ dialog .btn { margin-top: 1.2rem; }
           </div>
           ${specs}
         </div>
-        <div class="act"><div>${status}${saving}</div>${action}</div>
+        <div class="act">${liveEngine ? "" : `<div>${status}${saving}</div>`}${action}</div>
       </article>`;
     }).join("");
   }
@@ -805,6 +827,7 @@ dialog .btn { margin-top: 1.2rem; }
     }
 
     if (liveEngine) { // hand dates, availability and checkout to Booqable
+      document.body.classList.add("is-engine");
       $("#date-fields").classList.add("hide"); $("#length").classList.add("hide");
       $("#booq-dates").classList.remove("hide"); $("#booking").classList.add("hide");
       window.booqableOptions = { company: CONFIG.booqable.company };
