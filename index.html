@@ -776,8 +776,10 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
       // for "whichever is left", so the page keeps it: when every cart but one is out on the chosen dates,
       // the last one is not offered either, and the card points to WhatsApp instead.
       keepOneBack: true,
-      // How Booqable writes a date (Settings > General in its back office): true for 05-10-2026 meaning
-      // 5 October, false for 10-05-2026. Used only to write the dates out in words under the date button.
+      // How Booqable writes a date (Settings > General > Regional settings in its back office). Since
+      // 2 Oct 2026 it is set to year-month-day (2026-11-02), which the page reads without help. Only if it
+      // is ever set back to a day-and-month order does this matter: true for 05-10-2026 meaning 5 October,
+      // false for 10-05-2026. Used only to write the dates out in words in the date box.
       dayFirst: true
     }
   };
@@ -955,11 +957,14 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
   // Reads the two dates and times off Booqable's date button. Null until both are chosen.
   function engineDates() {
     const box = $("#booq-dates .bq-date-picker-button-wrapper");
-    const found = box ? [...box.innerText.matchAll(/(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})\D+?(\d{1,2}):(\d{2})\s*([ap]m)?/gi)] : [];
+    const found = box ? [...box.innerText.matchAll(/(\d{1,4})[-/.](\d{1,2})[-/.](\d{1,4})\D+?(\d{1,2}):(\d{2})\s*([ap]m)?/gi)] : [];
     if (found.length !== 2) return null;
     const read = (m) => {
-      const [d, mo] = CONFIG.booqable.dayFirst ? [Number(m[1]), Number(m[2])] : [Number(m[2]), Number(m[1])];
-      const y = Number(m[3]), min = Number(m[5]);
+      // Booqable can write a date three ways. Year first (2026-11-02, its setting since 2 Oct 2026) reads
+      // one way only; the other two are told apart by "dayFirst" in the settings.
+      const yearFirst = m[1].length === 4;
+      const y = Number(yearFirst ? m[1] : m[3]), min = Number(m[5]);
+      const [d, mo] = yearFirst ? [Number(m[3]), Number(m[2])] : CONFIG.booqable.dayFirst ? [Number(m[1]), Number(m[2])] : [Number(m[2]), Number(m[1])];
       let h = Number(m[4]);
       if (m[6]) h = (h % 12) + (/p/i.test(m[6]) ? 12 : 0);
       if (mo < 1 || mo > 12 || d < 1 || d > 31 || h > 23) return null;
