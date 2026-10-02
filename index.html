@@ -548,9 +548,15 @@ dialog .btn { margin-top: 1.2rem; }
         look: "club2", day: 45, week: 270, month: 750, photo: "assets/club-car-two-seater.jpg",
         specs: ["Seats 2", "Electric", "New batteries", "Roof and windshield"], booked: [] }
     ],
-    // Filled in once the Booqable account exists. While "company" is empty the page takes
-    // booking requests by WhatsApp and reads booked dates from the "booked" lists above.
-    booqable: { company: "", scriptSrc: "", productIds: { denago: "", club4: "", club2: "" } }
+    // The Booqable account (made 1 Oct 2026). While "live" is false the page takes booking requests by
+    // WhatsApp and reads booked dates from the "booked" lists above. Adding ?engine=booqable to the
+    // address tries the Booqable version without switching it on for everyone.
+    booqable: {
+      live: false,
+      company: "sable-s-carts",
+      scriptSrc: "https://5482ad30-90dd-482f-9e68-844ebb7435ad.assets.booqable.com/v2/booqable.js",
+      productIds: { denago: "the-denago", club4: "club-car-four-seater", club2: "club-car-two-seater" }
+    }
   };
 
   // ============================================================================= small helpers
@@ -626,7 +632,7 @@ dialog .btn { margin-top: 1.2rem; }
   const state = { from: "", to: "", cartId: "", note: "" };
   const cartById = (id) => CONFIG.carts.find((c) => c.id === id);
   const days = () => Math.max(1, Math.round((toMs(state.to) - toMs(state.from)) / DAY));
-  const liveEngine = Boolean(CONFIG.booqable.company);
+  const liveEngine = CONFIG.booqable.live || new URLSearchParams(location.search).get("engine") === "booqable";
 
   // ============================================================================= drawing the page
   function showLength() {
