@@ -344,6 +344,12 @@ dialog .btn { margin-top: 1.2rem; }
    copy of the dates (they are written out in words at the top of the page). */
 #booqable-launcher-icon i, #booqable-launcher-icon i::before { color: var(--black) !important; }
 #booqable-launcher-summary .bq-dates, #booqable-launcher-summary hr { display: none !important; }
+/* What is left in that bar is one line ("1 item $420.00"), set on cream in the page's lettering and
+   centred in the bar's height (60px less its 8px top and bottom). */
+#booqable-launcher-summary { background: var(--paper) !important; }
+#booqable-launcher-summary, #booqable-launcher-summary * { color: var(--ink) !important; font-family: var(--body) !important; }
+#booqable-launcher-summary .bq-summary { line-height: 44px !important; font-size: .95rem !important; font-weight: 700 !important; white-space: nowrap; }
+#booqable-launcher-summary .bq-total { margin-left: .8rem; }
 /* When Booqable runs the booking, the cards stand three across on a wide screen and it shows the price. */
 .is-engine .info .price { display: none; }
 .is-engine .act { padding-top: .2rem; }
