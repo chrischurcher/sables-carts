@@ -320,7 +320,9 @@ dialog .btn { margin-top: 1.2rem; }
   /* On a wide screen a card is the photo beside its words, with the choice on a strip underneath, so
      the photo keeps its true 4:3 shape and the whole cart is always in view. */
   .cart-card { display: grid; grid-template-columns: 46% minmax(0, 1fr); }
-  .media { align-self: stretch; border-bottom: 0; border-right: 1px solid var(--rule); }
+  /* width: 100% pins the photo to its column. Without it a tall card made the photo grow sideways to keep
+     its shape and it slid over the words (seen with the Denago's longer list, 1 Oct 2026). */
+  .media { align-self: stretch; width: 100%; border-bottom: 0; border-right: 1px solid var(--rule); }
   .info { padding-bottom: 1rem; }
   .act { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; padding: .85rem 1rem 1.1rem; border-top: 1px solid var(--rule); }
   .act .state { margin-top: 0; }
@@ -532,10 +534,12 @@ dialog .btn { margin-top: 1.2rem; }
     payNowShare: 0.20,
     sablePhoto: "assets/sable-side-on.jpg", // Sable's portrait in the "Sable runs the place" band. Chris is never in a picture.
     // "photo" is the picture on the card (leave it empty and a drawing stands in). "specs" is the short
-    // line of what the cart has: the Club Car lines come from the dealer's quotes of 28 Sep 2026.
+    // line of what the cart has: the Club Car lines come from the dealer's quotes of 28 Sep 2026, the
+    // Denago's from its invoice of 30 Sep 2026 plus the sound bar and underfloor lights Chris named.
     carts: [
-      { id: "denago", name: "The Denago", the: "the Denago", blurb: "The black one. Our newest and nicest.",
-        look: "denago", day: 70, week: 420, month: 1200, photo: "", specs: [], booked: [] },
+      { id: "denago", name: "The Denago", the: "the Denago", blurb: "Denago Nomad XL, 2026. The black one. Our newest and nicest.",
+        look: "denago", day: 70, week: 420, month: 1200, photo: "assets/denago-nomad-xl.jpg",
+        specs: ["Seats 4", "Lifted", "Lithium battery", "Sound bar", "Multicolor underglow", "Digital screen"], booked: [] },
       // "parts" are the pieces of the name that must each stay on one line, so "four-seater" never splits.
       { id: "club4", name: "Club Car four-seater", parts: ["Club Car", "four-seater"], the: "the four-seater", blurb: "Club Car Tempo, 2022. Room for the family and the beach bags.",
         look: "club4", day: 55, week: 330, month: 950, photo: "assets/club-car-four-seater.jpg",
