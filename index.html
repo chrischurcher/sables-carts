@@ -635,7 +635,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
           </div>
           <p class="problem hide" id="problem" role="alert"></p>
           <button class="btn" type="button" id="send">Send booking request on WhatsApp</button>
-          <p class="fine">We confirm on WhatsApp. You pay in cash when the cart arrives. Sending means you accept the <button class="linkish" type="button" data-open-terms>rental terms</button>.</p>
+          <p class="fine">We confirm on WhatsApp. Your 20% non-refundable booking deposit counts towards rent. Pay the balance at delivery in cash or with our approved card terminal. Read the full agreement before booking and sign it before handover. Sending a request does not apply a signature. Read the <button class="linkish" type="button" data-open-terms>rental terms</button>.</p>
         </div>
       </section>
     </div>
@@ -650,8 +650,8 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     </div>
     <ol class="steps">
       <li><h3>Pick your dates and your cart</h3><p>You see what's free and what it costs straight away.</p></li>
-      <li id="step-two"><h3>We confirm on WhatsApp</h3><p>Booking ahead from home? We hold your dates with 20%, arranged on WhatsApp.</p></li>
-      <li><h3>We bring it to your door</h3><p>Pay in cash when it arrives, plus the refundable deposit. We pick it up when you're done.</p></li>
+      <li id="step-two"><h3>We confirm on WhatsApp</h3><p>Your 20% booking deposit counts towards rent and is non-refundable if you cancel, except where a refund is required by law. If we cannot supply the rental, we refund the unprovided service. Your booking confirmation is separate from your payment receipt. Read the full agreement and sign it manually before handover.</p></li>
+      <li><h3>We bring it to your door</h3><p>Pay the remaining rental balance at delivery in cash or with our approved card terminal. The separate US$400 card hold per cart is arranged near handover. We collect the cart when you are done.</p></li>
     </ol>
   </section>
 
@@ -672,12 +672,12 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
       <div class="faq">
         <details><summary>Is delivery really free?</summary><p>Yes. Delivery and pick-up are free anywhere inside the Puerto Aventuras gates.</p></details>
         <details><summary>When do you deliver?</summary><p id="faq-hours"></p></details>
-        <details><summary>How does the deposit work?</summary><p id="faq-deposit"></p></details>
-        <details><summary>Who can drive?</summary><p>The person renting must be 18 or over. Anyone driving must be 16 or over. No driving after drinking.</p></details>
+        <details><summary>How does the security hold work?</summary><p id="faq-deposit"></p></details>
+        <details><summary>Who can drive?</summary><p>Only named, approved drivers meeting the age, licence and insurance requirements disclosed before booking. No driving after drinking.</p></details>
         <details><summary>Where can I take it?</summary><p>Anywhere inside the gates. Not on Highway 307 and not on the beach. The speed limit inside is 30 km/h, and lights go on at night.</p></details>
         <details><summary>Does it need charging?</summary><p>It's electric. Plug it in overnight and it's ready in the morning. Keep the charger locked to the cart or indoors.</p></details>
         <details><summary>What if something goes wrong?</summary><p>Message Chris on WhatsApp. He fixes it or swaps the cart.</p></details>
-        <details><summary>Can I cancel?</summary><p>Free up to 48 hours before delivery. Inside 48 hours we keep one day's rental.</p></details>
+        <details><summary>Can I cancel?</summary><p>If you cancel, your 20% booking deposit is non-refundable except where a refund is required by law or we breach our obligations. If we cannot supply the rental, we refund the unprovided service.</p></details>
         <details><summary>Staying a month or longer?</summary><p>The monthly price applies automatically, and it's the best rate we have. Pick your dates above and you'll see it.</p></details>
       </div>
     </section>
@@ -727,13 +727,14 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
   // ============================================================================= settings
   // Everything Chris may want to change lives here: prices, deposit, WhatsApp number, photos.
-  // Money rule (Chris, 1 Oct 2026): cash on delivery, no card payments anywhere. payNowShare is the
-  // share asked for, on WhatsApp, to hold dates booked in advance.
+  // Chris approved20% non-refundable booking deposit credited to rent, balance at delivery,
+  // and a separate USD400-per-cart hold on3October2026. No actual payment is implied by a booking.
   const CONFIG = {
     whatsapp: "525538955620", // Chris's Mexican mobile, as WhatsApp wants it in a link: country code 52, then the ten digits
     // The deposit Booqable charges is the one that counts, and the page reads it from Booqable whenever
     // Booqable is running. This number is what the page says when it is not (2 Oct 2026: Booqable says $400).
-    depositUSD: 400,
+    securityPerCartUSD: 400,
+    observedOrderSecurityUSD: null,
     payNowShare: 0.20,
     deliveryHours: "11 am and 8 pm", // the hours set in Booqable (Settings > Rental period); said in "Good to know"
     // Reviews. Leave "link" empty and the page says nothing about reviews. With a link (the Google
@@ -923,12 +924,13 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     $("#bar").classList.toggle("is-up", Boolean(c) && !bookingInView);
     if (!c) return;
     const n = days(), q = quote(c, n);
-    const now = Math.round(q.total * CONFIG.payNowShare);
+    const now = Math.round((q.total * CONFIG.payNowShare + Number.EPSILON) * 100) / 100;
     $("#lines").innerHTML = `
       <div><dt>${esc(c.name)}<small>${nice(state.from)} to ${nice(state.to)}, ${n} ${n === 1 ? "day" : "days"}</small></dt><dd>${money(q.total)}</dd></div>
-      <div class="is-now"><dt>Pay in cash on delivery<small>US dollars or pesos</small></dt><dd>${money(q.total)}</dd></div>
-      <div><dt>Refundable deposit<small>Cash on delivery, handed back at <span class="nb">pick-up</span></small></dt><dd>${money(CONFIG.depositUSD)}</dd></div>`;
-    $("#hold").textContent = `Booking ahead from home? We hold your dates with 20% (${money(now)}), arranged on WhatsApp. The rest is paid on delivery.`;
+      <div class="is-now"><dt>20% non-refundable booking deposit<small>Credited towards the rental price</small></dt><dd>${money(now)}</dd></div>
+      <div><dt>Remaining rental balance<small>Pay at delivery in cash or with our approved card terminal</small></dt><dd>${money(q.total-now)}</dd></div>
+      <div><dt>Separate card hold per cart<small>Arranged near handover; expiry and release explained before authorisation</small></dt><dd>${money(CONFIG.securityPerCartUSD)}</dd></div>`;
+    $("#hold").textContent = `Your 20% non-refundable booking deposit (${money(now)}) counts towards rent; the remaining balance is ${money(q.total-now)}. Required refunds and refunds if we cannot supply the rental remain protected.`;
     $("#bar-text").innerHTML = `<b>${esc(c.name)}</b>${n} ${n === 1 ? "day" : "days"}, ${money(q.total)}`;
   }
 
@@ -936,16 +938,16 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
   // Every sentence that names the deposit, so they can never disagree with each other.
   function showMoneyWords() {
-    $("#rates-note").textContent = `Prices are in US dollars. You pay in cash on delivery, and pesos are welcome at the day's rate. The refundable deposit is ${money(CONFIG.depositUSD)}, whichever cart you choose.`;
-    $("#faq-deposit").textContent = `${money(CONFIG.depositUSD)} in cash when the cart arrives. It is handed straight back when we pick the cart up in the same shape, with its key and charger.`;
+    $("#rates-note").textContent = "All rental prices are in US dollars (USD). Your 20% booking deposit is non-refundable if you cancel, except where law requires a refund, and counts toward rent; pay the remaining balance at delivery in cash or with the approved chip-and-PIN/contactless terminal. The US$400 card security hold per cart is separate. Any peso payment uses the amount and exchange rate agreed before payment.";
+    $("#faq-deposit").textContent = "The card security hold is US$400 per cart, separate from rental payment. For a supported temporary card authorization, we disclose its actual expiry and release process before you authorize it. It is security, not insurance. We request release of unused security after the return check; your bank controls when it disappears from your account. Longer rentals need an agreed permitted process if the hold expires.";
     $("#faq-hours").textContent = `Every day between ${CONFIG.deliveryHours}. You choose the time when you book, for delivery and for pick-up.`;
     $("#terms-list").innerHTML = [
-      "The person renting is 18 or over and is responsible for the cart and everyone who drives it. Drivers are 16 or over, and nobody drives after drinking.",
-      "The cart stays inside the Puerto Aventuras gates. Never on Highway 307, never on the beach.",
-      "Keep to 30 km/h, lights on at night, everyone seated, no more people than seats.",
-      "Plug it in overnight. Keep the charger locked to the cart or indoors, and take the key when you park.",
-      `The ${money(CONFIG.depositUSD)} deposit comes back at pick-up. We only keep what it costs to put right damage, a lost key or charger, or a late return.`,
-      "Free cancellation up to 48 hours before delivery. Inside 48 hours we keep one day's rental."
+      "Read the full agreement before booking and sign it manually before handover. Only named, approved drivers meeting the disclosed age, licence and insurance requirements may drive. Nobody drives after drinking.",
+      "Use only permitted Puerto Aventuras routes shown on your supplied map. Never Highway 307, beach, sand or prohibited areas.",
+      "Follow posted speed limits and the cart's safety instructions. Everyone stays seated within approved capacity; use equipment actually fitted as instructed.",
+      "Follow the cart's charging and care instructions. We record initial condition at delivery and inspect on return. You answer only for supported costs for which you are legally responsible.",
+      "Prices are in US dollars (USD). Pay a 20% booking deposit, credited toward rent and non-refundable if you cancel except where law requires a refund. Pay the remaining balance at delivery in cash or with the approved chip-and-PIN/contactless terminal. The card security hold is US$400 per cart, separate from rent; the supported method, expiry and release are disclosed before authorization.",
+      "If you cancel, the 20% booking deposit is non-refundable except where law requires a refund or we breach our obligations. If we cannot supply the rental, we refund the unprovided service. Your statutory rights remain protected."
     ].map((t) => `<li>${esc(t)}</li>`).join("");
   }
 
@@ -1064,7 +1066,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
       const has = inMyCart().join("|");
       if (has !== had) { had = has; tidy(); }
       const deposit = Number(((window.Booqable || {}).cartData || {}).deposit);
-      if (deposit > 0 && deposit !== CONFIG.depositUSD) { CONFIG.depositUSD = deposit; showMoneyWords(); }
+      if (deposit >= 0 && deposit !== CONFIG.observedOrderSecurityUSD) { CONFIG.observedOrderSecurityUSD = deposit; showMoneyWords(); }
     }, 500);
   }
 
@@ -1075,7 +1077,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     $("#booq-dates").classList.remove("hide"); $("#booq-wait").classList.remove("hide");
     // Booqable reserves at once, so step two of "How it works" is no longer a wait for a WhatsApp reply.
     engine.stepTwo = $("#step-two").innerHTML;
-    $("#step-two").innerHTML = "<h3>Reserve it online</h3><p>It takes two minutes. Your dates are held straight away and the confirmation lands in your email.</p>";
+    $("#step-two").innerHTML = "<h3>Reserve it online</h3><p>Read the full agreement before booking. Your 20% non-refundable booking deposit counts towards rent; required refunds and operator-failure refunds remain protected. Sign manually before handover. Your booking confirmation is separate from your payment receipt.</p>";
     window.booqableOptions = { company: CONFIG.booqable.company };
     const s = document.createElement("script");
     s.src = CONFIG.booqable.scriptSrc; s.async = true;
@@ -1135,7 +1137,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
       `${c.name}`,
       `Delivered: ${nice(state.from)} (${$("#when").value.toLowerCase()})`,
       `Picked up: ${nice(state.to)}`,
-      `${n} ${n === 1 ? "day" : "days"}: ${money(q.total)} in cash on delivery, plus ${money(CONFIG.depositUSD)} refundable deposit`,
+      `${n} ${n === 1 ? "day" : "days"}: ${money(q.total)} rental total in US dollars (USD); 20% non-refundable booking deposit credited to rent; remaining rent at delivery; separate ${money(CONFIG.securityPerCartUSD)} card hold per cart`,
       `Name: ${name}`,
       `Deliver to: ${place}`
     ].join("\n");
