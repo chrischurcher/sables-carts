@@ -424,6 +424,30 @@ input, select {
 
 
 
+/* A short cue after valid dates; no automatic scrolling or continuous motion. */
+.dates-next { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1.1rem; padding: .8rem 1rem; border: 1px solid var(--brass-edge); border-radius: 14px; background: var(--foil); color: var(--black); font-weight: 800; text-decoration: none; min-height: 52px; }
+.dates-next svg { width: 26px; height: 32px; flex: none; animation: point-to-carts .9s ease-in-out 3; }
+.dates-next:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@keyframes point-to-carts { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+@media (prefers-reduced-motion: reduce) { .dates-next svg { animation: none; } }
+.rental-opening { font-weight: 700; }
+.deposit-note { margin: 1rem 0; padding: 1rem; border: 1px solid var(--brass); border-radius: 14px; }
+.deposit-note strong { display: block; margin-bottom: .4rem; color: var(--brass-light); font-size: 1.15rem; }
+.deposit-note p { margin: .35rem 0; }
+.deposit-note a { color: var(--brass-light); text-underline-offset: 3px; }
+.mine-action { display: none; width: 100%; margin-top: .7rem; }
+.is-mine:not(.is-out):not(.is-held) .mine-action { display: flex; }
+.basket-tools { margin: 1rem 0; }
+.basket-tools p { margin: .4rem 0; }
+.basket-buttons { display: flex; flex-wrap: wrap; gap: .75rem; }
+.basket-buttons .btn { min-height: 48px; }
+.basket-tools button:disabled { opacity: .6; cursor: default; }
+body.is-engine #booqable-launcher { display: none !important; }
+.selection-limit-note { display: none; margin-top: .9rem; color: var(--mute); }
+.is-held:not(.is-out):not(.is-opening-block) .selection-limit-note { display: block; }
+.is-held:not(.is-out):not(.is-opening-block) .out-note { display: none; }
+.is-held:not(.is-out):not(.is-opening-block) .booqable-product-button .bq-status.bq-available::after { content: "Choose up to two carts"; }
+
 /* =============================================================================== carts */
 
 .shop { padding-block: 2.6rem 1rem; }
@@ -810,7 +834,7 @@ dialog .btn { margin-top: 1.2rem; }
 
 /* "is-mine" is a cart already in this visitor's Booqable cart: it says so, and has no second button. */
 
-.is-mine .booqable-product-button .bq-status.bq-available::after { content: "In your reservation"; }
+.is-mine .booqable-product-button .bq-status.bq-available::after { content: "In your basket — not booked yet"; }
 
 /* One cart of each, so the cart panel has no "how many" buttons either. */
 
@@ -1192,6 +1216,9 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
         </div>
 
         <p class="length" id="length" aria-live="polite"></p>
+        <p class="fine rental-opening" id="rental-opening"></p>
+        <a class="dates-next hide" id="dates-next" href="#carts-title"><span>Dates selected. Choose your cart below</span><svg viewBox="0 0 28 36" aria-hidden="true" focusable="false"><path d="M14 3v27M4 21l10 10 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="basket-tools hide" id="basket-tools"><p id="basket-count" aria-live="polite">Your basket is empty.</p><div class="basket-buttons"><button class="btn" id="view-basket" type="button" disabled>View basket</button><button class="btn" id="clear-basket" type="button" disabled>Clear basket</button></div><p class="fine" id="basket-feedback" aria-live="polite"></p></div>
 
       </form>
 
@@ -1211,7 +1238,8 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
       <div>
 
-        <h2 id="carts-title">Carts for your dates</h2>
+        <h2 id="carts-title" tabindex="-1">Carts for your dates</h2>
+        <div class="deposit-note" id="booking-deposit-notice"><strong>20% non-refundable booking deposit</strong><p>It counts towards rent. The remaining balance is due at delivery. Required refunds and refunds if we cannot supply the rental remain protected.</p><p lang="es-MX"><b>Anticipo de reserva del 20% no reembolsable.</b> Se abona a la renta. Se conservan las devoluciones exigidas por ley o si no proporcionamos la renta.</p><a href="terms.html">Read the full agreement / Lea el contrato completo</a></div>
 
         <p class="notice hide" id="none-free" role="status"></p>
 
@@ -1798,7 +1826,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
       const action = liveEngine
 
-        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div><p class="booq-wait">Checking the calendar</p>
+        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div><p class="booq-wait">Checking the calendar</p><button class="btn mine-action" type="button" data-view-reservation aria-label="View your basket with ${esc(c.name)}">View your basket</button><p class="selection-limit-note">One cart is kept back. Remove a selected cart to choose this one.</p>
 
            <p class="out-note">Try other dates, or <a href="${esc(askLink(`Hi Sable's Carts, is ${c.the} free on my dates?`))}" target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>`
 
@@ -1964,6 +1992,45 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
 
 
+  let clearingBasket = false;
+  function openBasket() {
+    const launcher = $("#booqable-launcher");
+    if (launcher) launcher.click();
+  }
+  // Use the provider's existing remove controls, one item at a time. No order is cancelled.
+  async function clearBasket() {
+    if (clearingBasket || !inMyCart().length) return;
+    clearingBasket = true;
+    const button = $("#clear-basket"), feedback = $("#basket-feedback");
+    button.disabled = true;
+    feedback.textContent = "Clearing your basket…";
+    openBasket();
+    const waitFor = (test) => new Promise((resolve, reject) => {
+      const started = Date.now();
+      const timer = setInterval(() => {
+        if (test()) { clearInterval(timer); resolve(); }
+        else if (Date.now() - started > 10000) { clearInterval(timer); reject(new Error("Basket update timed out")); }
+      }, 100);
+    });
+    try {
+      for (let step = 0; step < 6 && inMyCart().length; step++) {
+        await waitFor(() => Boolean($("#booqable-sidebar .bq-remove-product")));
+        const before = inMyCart().join("|");
+        $("#booqable-sidebar .bq-remove-product").click();
+        await waitFor(() => inMyCart().join("|") !== before);
+      }
+      if (inMyCart().length) throw new Error("Basket not empty");
+      feedback.textContent = "Basket cleared. No booking was cancelled.";
+      const close = $("#booqable-sidebar .bq-close");
+      if (close) close.click();
+    } catch (error) {
+      feedback.textContent = "Please remove the remaining cart using its × in the open basket.";
+    } finally {
+      clearingBasket = false;
+      dressEngine();
+    }
+  }
+
   function dressEngine() {
 
     if (!liveEngine) return;
@@ -1975,8 +2042,9 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     const known = seen.length > 0 && seen.every(Boolean); // Booqable has answered for every cart
 
     const names = inMyCart();
-
-    const mine = cards.map((card, i) => seen[i] !== "out" && names.includes(cartById(card.dataset.cart).name.toLowerCase()));
+    const d = engineDates();
+    const beforeOpening = Boolean(d && CONFIG.booqable.opensOn && d.from.iso < CONFIG.booqable.opensOn);
+    const mine = cards.map((card, i) => !beforeOpening && seen[i] !== "out" && names.includes(cartById(card.dataset.cart).name.toLowerCase()));
 
     // Carts that are gone for these dates: booked or not here yet, plus the ones in this visitor's own cart
 
@@ -1994,7 +2062,8 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
       card.classList.toggle("is-mine", mine[i]);
 
-      card.classList.toggle("is-held", hold && seen[i] === "free" && !mine[i]);
+      card.classList.toggle("is-held", beforeOpening || (hold && seen[i] === "free" && !mine[i]));
+      card.classList.toggle("is-opening-block", beforeOpening);
 
       // Words are changed inside Booqable's own text nodes, so it can still change them itself later.
 
@@ -2015,6 +2084,12 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     });
 
     document.body.classList.toggle("has-cart", names.length > 0);
+    $("#basket-tools").classList.remove("hide");
+    const count = names.length;
+    const basketLabel = count ? `${count} ${count === 1 ? "cart" : "carts"} in your basket — not booked yet.` : "Your basket is empty.";
+    if ($("#basket-count").textContent !== basketLabel) $("#basket-count").textContent = basketLabel;
+    $("#view-basket").disabled = count === 0;
+    if (!clearingBasket) $("#clear-basket").disabled = count === 0;
 
     const label = ($("#booq-dates .bq-date-picker-button-text") || {}).firstChild;
 
@@ -2028,8 +2103,6 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     // settings and "dayFirst" above is not, the two disagree and Booqable's own date button stays as it is.
 
-    const d = engineDates();
-
     const told = ((document.querySelector("#cards .bq-duration") || {}).textContent || "").trim().match(/^(\d+)\s+days?$/);
 
     const n = d ? Math.max(1, Math.ceil((d.to.at - d.from.at) / DAY)) : 0;
@@ -2039,6 +2112,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     const root = document.documentElement, line = $("#length");
 
     root.classList.toggle("has-words", good);
+    $("#dates-next").classList.toggle("hide", !d || beforeOpening || !known);
 
     line.classList.toggle("hide", !good);
 
@@ -2071,7 +2145,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     const offered = cards.filter((card, i) => seen[i] === "free" && !mine[i] && !hold).length;
 
-    const none = known && offered === 0 && !mine.some(Boolean);
+    const none = known && (beforeOpening || (offered === 0 && !mine.some(Boolean)));
 
     const note = $("#none-free");
 
@@ -2298,7 +2372,9 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
   function start() {
 
     const today = todayInPA();
-
+    state.opens = CONFIG.booqable.opensOn > today ? CONFIG.booqable.opensOn : "";
+    $("#rental-opening").classList.toggle("hide", !state.opens);
+    if (state.opens) $("#rental-opening").textContent = `Rentals start ${nice(state.opens)}. Choose that date or later.`;
     const demo = new URLSearchParams(location.search).get("demo");
 
     if (demo) { // ?demo=1 shows what a booked cart looks like, for checking the page only
@@ -2309,9 +2385,9 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     }
 
-    state.from = toIso(toMs(today) + DAY);
+    state.from = state.opens || toIso(toMs(today) + DAY);
 
-    state.to = toIso(toMs(today) + 8 * DAY);
+    state.to = toIso(toMs(state.from) + 7 * DAY);
 
     // A link can carry dates and a cart, so the QR sticker on each cart opens with that cart chosen:
 
@@ -2321,7 +2397,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     const isDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v || "") && !Number.isNaN(toMs(v));
 
-    if (isDate(asked.get("from")) && toMs(asked.get("from")) >= toMs(today)) {
+    if (isDate(asked.get("from")) && toMs(asked.get("from")) >= toMs(state.opens || today)) {
 
       state.from = asked.get("from");
 
@@ -2339,7 +2415,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     const from = $("#from"), to = $("#to");
 
-    from.min = today; from.value = state.from;
+    from.min = state.opens || today; from.value = state.from;
 
     to.min = toIso(toMs(state.from) + DAY); to.value = state.to;
 
@@ -2397,8 +2473,20 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
 
 
+    $("#view-basket").addEventListener("click", openBasket);
+    $("#clear-basket").addEventListener("click", clearBasket);
+    $("#dates-next").addEventListener("click", () => {
+      // The fragment link scrolls normally; focus moves only after an intentional click.
+      $("#carts-title").focus({ preventScroll: true });
+    });
     $("#cards").addEventListener("click", (e) => {
-
+      const view = e.target.closest("[data-view-reservation]");
+      if (view) {
+        const card = view.closest(".cart-card");
+        const launcher = $("#booqable-launcher");
+        if (card && card.classList.contains("is-mine") && !card.classList.contains("is-held") && !card.classList.contains("is-out") && launcher) launcher.click();
+        return;
+      }
       const b = e.target.closest("[data-choose]");
 
       if (!b) return;
