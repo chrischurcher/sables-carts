@@ -2014,10 +2014,14 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     });
     try {
       for (let step = 0; step < 6 && inMyCart().length; step++) {
-        await waitFor(() => Boolean($("#booqable-sidebar .bq-remove-product")));
+        await waitFor(() => {
+          const controls = [...document.querySelectorAll("#booqable-sidebar .bq-remove-product")];
+          return controls.length === inMyCart().length && controls.length > 0 && controls.every(control => !control.disabled);
+        });
         const before = inMyCart().join("|");
         $("#booqable-sidebar .bq-remove-product").click();
-        await waitFor(() => inMyCart().join("|") !== before);
+        await waitFor(() => inMyCart().join("|") !== before &&
+          document.querySelectorAll("#booqable-sidebar .bq-remove-product").length === inMyCart().length);
       }
       if (inMyCart().length) throw new Error("Basket not empty");
       feedback.textContent = "Basket cleared. No booking was cancelled.";
