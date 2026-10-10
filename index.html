@@ -1074,11 +1074,101 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
   .engine-usd-guide { margin-top:.35rem; }
   .rates th, .rates td { vertical-align:top; }
   @media (max-width:560px) { .peso-amount { font-size:.78rem; white-space:normal; } .usd-guide { font-size:.72rem; } }
+
+/* Fleet-first polish, October 2026. Keep native booking controls in their original DOM. */
+.fleet-first .top { padding-block: 1.1rem; border-bottom: 1px solid var(--rule); }
+.fleet-first .fleet-intro { padding-block: 1.4rem 1.2rem; }
+.fleet-first .fleet-intro h1 { font-size: clamp(2.1rem,5vw,3.6rem); max-width: 24ch; line-height:1.08; letter-spacing:-.025em; }
+.fleet-first .fleet-intro p { margin-top:.65rem; color:var(--mute); font-size:1.1rem; }
+.fleet-first .dates { margin-top:0; padding-bottom:1.5rem; }
+.fleet-first #dates-form { padding:1rem 1.2rem; border-radius:12px; box-shadow:none; border:1px solid var(--paper-rule); }
+.fleet-first #dates-form::before { display:none; }
+.fleet-first #dates-title { font-family:var(--body); font-weight:800; font-size:1.3rem; }
+.fleet-first #dates-form .when { margin-top:.65rem; }
+.fleet-first #dates-form .rental-opening { font-size:.85rem; }
+.fleet-first #basket-tools { border-top:1px solid var(--paper-rule); padding:.55rem 0 0; margin:.55rem 0 0; }
+.fleet-first #basket-tools:has(#view-basket:disabled) .basket-buttons { display:none; }
+.fleet-first #basket-tools p { font-size:.88rem; margin:0; }
+.fleet-first #booq-dates { margin-top:0; }
+.fleet-first .booqable-datepicker .bq-date-picker-button-wrapper { margin-top:0!important; background:var(--brass-light)!important; box-shadow:none!important; border-radius:9px!important; }
+.fleet-first .booqable-datepicker .bq-date-picker-button-wrapper:not(.bq-date-picker-button-wrapper-with-data):hover { box-shadow:none!important; transform:none; }
+.fleet-first #basket-tools .btn { min-height:44px; padding:.45rem .8rem; }
+.fleet-first .shop { padding-top:.2rem; }
+.fleet-first .shop-grid { display:block; }
+.fleet-first .fleet-heading { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:.5rem 1rem; }
+.fleet-first .fleet-heading a { color:var(--mute); text-underline-offset:4px; font-size:.9rem; }
+.fleet-first .cards { gap:1.25rem; margin-top:1rem; }
+.fleet-first .cart-card { display:flex; flex-direction:column; grid-row:auto; grid-template-columns:none; grid-template-rows:none; border-radius:14px; background:#0D0C09; }
+.fleet-first .cart-card .media { width:100%; flex:none; align-self:auto; border-right:0; border-bottom:1px solid var(--rule); overflow:hidden; }
+.fleet-first .cart-card .media img { object-fit:cover; transition:transform .5s ease; }
+.fleet-first .cart-card .info { flex:1; padding:1rem 1rem .5rem; }
+.fleet-first .cart-card .info h3 { font-size:1.55rem; line-height:1.15; }
+.fleet-first .blurb { font-size:.96rem; line-height:1.45; margin-top:.55rem; }
+.fleet-first .specs { font-size:.77rem; letter-spacing:.015em; text-transform:none; line-height:1.8; margin-top:.75rem; }
+.fleet-first .specs span { margin-right:.8em; white-space:normal; }
+.fleet-first .cart-card .act { margin-top:auto; padding:.5rem 1rem 1rem; display:block; border-top:0; }
+.fleet-first .btn { background:var(--brass-light); border-radius:9px; box-shadow:none; transition:background .15s ease,transform .15s ease; }
+.fleet-first .btn:hover { background:#F2DEA3; box-shadow:none; transform:translateY(-1px); }
+.fleet-first .btn:active { transform:none; box-shadow:none; }
+.fleet-first .btn.is-quiet { background:var(--coal); color:var(--brass-light); }
+.fleet-first .btn[disabled] { background:#1B1812; color:#8C8370; transform:none; }
+.fleet-first .booqable-product-button .bq-button { border-radius:9px!important; background:var(--brass-light)!important; box-shadow:none!important; }
+.fleet-first .booqable-product-button .bq-button:hover { background:#F2DEA3!important; }
+.fleet-first .service-strip { display:grid; gap:1.2rem; margin-top:1.8rem; padding-block:1.5rem; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.fleet-first .service-strip > div { display:flex; gap:.85rem; align-items:center; }
+.fleet-first .service-strip svg { width:38px; height:38px; color:var(--brass-light); flex:none; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.fleet-first .service-strip span { font-size:.95rem; font-weight:700; }
+.fleet-first .service-strip small { display:block; color:var(--mute); font-weight:400; font-size:.86rem; margin-top:.1rem; }
+.fleet-first .sect { padding-block:2.5rem; }
+.fleet-first .rental-details h2 { margin-bottom:1.1rem; }
+.fleet-first .deposit-grid { display:grid; gap:1rem; }
+.fleet-first .deposit-note { margin:0; padding:1.25rem; border-color:var(--rule); background:var(--coal); }
+.fleet-first .deposit-note strong { font-size:1.1rem; }
+.fleet-first .deposit-note p { font-size:.98rem; line-height:1.6; }
+.fleet-first .deposit-grid > .note, .fleet-first .deposit-grid > .season-note { margin-top:0; max-width:70ch; }
+.fleet-first .boss figure { width:200px; height:200px; box-shadow:none; padding:5px; }
+.fleet-first .boss .ask .btn { background:var(--black); color:var(--brass-light); }
+.fleet-first .boss .ask .btn:hover { background:var(--coal); }
+.fleet-first .booking { margin-top:1.6rem; position:static; }
+@media(min-width:48rem) {
+  .fleet-first .cards { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; }
+  .fleet-first .service-strip { grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem; }
+  .fleet-first .deposit-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .fleet-first .deposit-grid > .note, .fleet-first .deposit-grid > .season-note { grid-column:1/-1; }
+  .fleet-first #dates-form { display:grid; grid-template-columns:12rem minmax(0,1fr); gap:.45rem 1.25rem; align-items:center; }
+  .fleet-first #dates-title { grid-row:1; grid-column:1; }
+  .fleet-first #date-fields, .fleet-first .when-box { grid-row:1; grid-column:2; }
+  .fleet-first #date-fields { margin-top:0; }
+  .fleet-first #dates-form .when { margin-top:0; }
+  .fleet-first .when dl { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .fleet-first .when dl div { display:block; }
+  .fleet-first .when dl div + div { border-top:0; }
+  .fleet-first .when dd { text-align:left; }
+  .fleet-first .when .change { text-align:right; padding-top:.2rem; }
+  .fleet-first #length { grid-row:2; grid-column:1; margin-top:0; font-size:.88rem; }
+  .fleet-first #rental-opening { grid-row:2; grid-column:2; margin-top:0; }
+  .fleet-first #dates-next, .fleet-first #basket-tools { grid-column:1/-1; }
+  .fleet-first #dates-next { margin-top:.45rem; padding:.55rem .8rem; min-height:44px; }
+  .fleet-first #basket-tools { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.5rem; }
+  .fleet-first #basket-feedback:empty { display:none; }
+}
+.fleet-first.no-engine .when-box { display:none; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) { .fleet-first .cart-card:hover .media img { transform:scale(1.025); } }
+@media(prefers-reduced-motion:no-preference) { .fleet-first .cards { animation:fleet-arrive .65s ease-out; } }
+@keyframes fleet-arrive { from { opacity:.2; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  .fleet-first .cards, .fleet-first .cart-card .media img, .fleet-first .btn { animation:none!important; transition:none!important; }
+  .fleet-first .btn:hover { transform:none; }
+  .fleet-first .booqable-datepicker .bq-date-picker-button-wrapper:hover, .fleet-first .booqable-datepicker .bq-date-picker-button-wrapper:active { transform:none!important; transition:none!important; }
+}
+@media(max-width:360px) { .fleet-first .brand span { font-size:1.35rem; } .fleet-first .brand svg { width:40px; height:40px; } }
+
   </style>
 
 </head>
 
-<body>
+<body class="fleet-first">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 
@@ -1140,11 +1230,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
 </svg>
 
-<div class="stage">
-
-  <div class="stage-black">
-
-    <header class="wrap top">
+<header class="wrap top">
 
       <a class="brand" href="#top" id="top">
 
@@ -1157,36 +1243,14 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
       <a class="talk" id="talk" href="#" target="_blank" rel="noopener" aria-label="Ask a question on WhatsApp">WhatsApp</a>
 
     </header>
+<section class="wrap fleet-intro" aria-labelledby="welcome-title">
+  <h1 id="welcome-title">See Puerto Aventuras by golf cart.</h1>
+  <p>Free delivery and pickup anywhere inside the gates.</p>
+</section>
+<section class="wrap dates" aria-labelledby="dates-title">
+<form class="ticket on-paper tagged" id="dates-form" novalidate>
 
-    <section class="wrap hero">
-
-      <h1>Golf carts, delivered to your door.</h1>
-
-      <p>Free delivery anywhere inside Puerto Aventuras.</p>
-
-    </section>
-
-    <figure class="shot">
-
-      <img src="assets/sable-in-the-cart.jpg" srcset="assets/sable-in-the-cart-760.jpg 760w, assets/sable-in-the-cart.jpg 1164w" sizes="(min-width: 60rem) 58vw, 100vw"
-
-           width="1164" height="1140" fetchpriority="high" id="shot"
-
-           alt="Sable the Doberman sitting in a golf cart on a shaded lane in Puerto Aventuras, tongue out">
-
-    </figure>
-
-  </div>
-
-  <div class="stage-brass on-brass">
-
-    <section class="wrap dates" aria-labelledby="dates-title">
-
-      <svg class="seal" aria-hidden="true"><use href="#tag"/></svg>
-
-      <form class="ticket on-paper tagged" id="dates-form" novalidate>
-
-        <h2 id="dates-title">When do you need it?</h2>
+        <h2 id="dates-title">Your rental dates</h2>
 
         <div class="fields" id="date-fields">
 
@@ -1237,13 +1301,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
         <div class="basket-tools hide" id="basket-tools"><p id="basket-count" aria-live="polite">Your basket is empty.</p><div class="basket-buttons"><button class="btn" id="view-basket" type="button" disabled>View basket</button><button class="btn" id="clear-basket" type="button" disabled>Clear basket</button></div><p class="fine" id="basket-feedback" aria-live="polite"></p></div>
 
       </form>
-
-    </section>
-
-  </div>
-
-</div>
-
+</section>
 <main>
 
   <section class="wrap shop" aria-labelledby="carts-title">
@@ -1252,15 +1310,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
       <div>
 
-        <h2 id="carts-title" tabindex="-1">Carts for your dates</h2>
-
-        <div class="deposit-note" id="security-deposit-notice"><strong>MXN7,191.20 (about US$400) refundable security deposit per cart</strong><p>Required at delivery: <b>cash or a temporary hold on your card</b>. Separate from the 20% booking deposit and rental balance. Two carts: MXN14,382.40 (about US$800).</p><p>After a clear return check, we return your cash or request release of the full card hold. We give you a receipt or confirmation; your bank controls when a card hold disappears.</p><p lang="es-MX"><b>Depósito de garantía reembolsable: MXN7,191.20 (aprox. USD400) por carrito.</b> Se entrega al recibir el carrito: efectivo o retención temporal en tarjeta. Es distinto del anticipo de reserva del 20% y del saldo de renta. Dos carritos: MXN14,382.40 (aprox. USD800). Tras una revisión sin incidencias, devolvemos el efectivo o solicitamos liberar toda la retención y le damos recibo o confirmación. Su banco determina cuándo deja de aparecer la retención.</p></div>
-
-        <div class="deposit-note" id="booking-deposit-notice"><strong>20% non-refundable booking deposit</strong><p lang="es-MX">Anticipo de reserva del 20% no reembolsable.</p><a href="terms.html">Read the full agreement / Lea el contrato completo</a></div>
-
-        <p class="note">Prices and payments are in Mexican pesos (MXN). Approximate US dollar amounts are shown as a guide, using MXN17.9780 per US$1 (7 October 2026). Your bank’s conversion may differ.</p><p class="note" lang="es-MX">Precios y pagos en pesos mexicanos (MXN). Los importes aproximados en USD son orientativos: MXN17.9780 por USD1 (7 de octubre de 2026). El tipo de cambio de su banco puede variar.</p>
-
-        <aside class="season-note" aria-label="Seasonal rental prices"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="6" width="26" height="23" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v7m14-7v7M3 13h26M10 20l4 4 8-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Holiday rates · December 1 – January 7</strong><p>Online booking calculates your rental total for the selected dates, including days outside the holiday period.</p><small lang="es-MX">Tarifas de temporada alta: del 1 de diciembre de 2026 al 7 de enero de 2027. El total se calcula según sus fechas.</small></div></aside>
+        <div class="fleet-heading"><h2 id="carts-title" tabindex="-1">Choose your cart</h2><a href="#rental-details">Rental details &amp; terms</a></div>
 
         <p class="notice hide" id="none-free" role="status"></p>
 
@@ -1330,6 +1380,12 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
   </section>
 
+<div class="wrap service-strip" aria-label="Rental benefits">
+  <div><svg viewBox="0 0 48 36" aria-hidden="true" focusable="false"><path d="M4 5h31M9 5v17h28l-5-12H19v12M5 22h34M15 10h-5M6 16H2"/><circle cx="13" cy="28" r="4"/><circle cx="32" cy="28" r="4"/></svg><span>Free delivery &amp; pickup<small>Anywhere inside the gates</small></span></div>
+  <div><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="6" y="10" width="28" height="22" rx="3"/><path d="M14 6v8M26 6v8M6 18h28M13 25l5 4 9-8"/></svg><span>Book your dates online<small>Choose from 2 and 4 seats</small></span></div>
+  <div><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M33 18c0 8-6 14-14 14-3 0-5-1-7-2l-7 3 2-8c-1-2-2-4-2-7C5 10 11 4 19 4s14 6 14 14Z"/><path d="M14 13c-1 4 4 10 8 10l3-3-4-2-2 2-3-4 1-2-3-3Z"/></svg><span>Always responsive on WhatsApp<small>Ask Chris about your stay</small></span></div>
+</div>
+
   <section class="wrap sect" aria-labelledby="how-title">
 
     <h2 id="how-title">How it works</h2>
@@ -1355,6 +1411,22 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     </ol>
 
   </section>
+
+<div class="split">
+  <section class="wrap sect rental-details" id="rental-details" aria-labelledby="rental-details-title">
+    <h2 id="rental-details-title">A few things before you book</h2>
+    <div class="deposit-grid">
+        <div class="deposit-note" id="security-deposit-notice"><strong>MXN7,191.20 (about US$400) refundable security deposit per cart</strong><p>Required at delivery: <b>cash or a temporary hold on your card</b>. Separate from the 20% booking deposit and rental balance. Two carts: MXN14,382.40 (about US$800).</p><p>After a clear return check, we return your cash or request release of the full card hold. We give you a receipt or confirmation; your bank controls when a card hold disappears.</p><p lang="es-MX"><b>Depósito de garantía reembolsable: MXN7,191.20 (aprox. USD400) por carrito.</b> Se entrega al recibir el carrito: efectivo o retención temporal en tarjeta. Es distinto del anticipo de reserva del 20% y del saldo de renta. Dos carritos: MXN14,382.40 (aprox. USD800). Tras una revisión sin incidencias, devolvemos el efectivo o solicitamos liberar toda la retención y le damos recibo o confirmación. Su banco determina cuándo deja de aparecer la retención.</p></div>
+
+        <div class="deposit-note" id="booking-deposit-notice"><strong>20% non-refundable booking deposit</strong><p lang="es-MX">Anticipo de reserva del 20% no reembolsable.</p><a href="terms.html">Read the full agreement / Lea el contrato completo</a></div>
+
+        <p class="note">Prices and payments are in Mexican pesos (MXN). Approximate US dollar amounts are shown as a guide, using MXN17.9780 per US$1 (7 October 2026). Your bank’s conversion may differ.</p><p class="note" lang="es-MX">Precios y pagos en pesos mexicanos (MXN). Los importes aproximados en USD son orientativos: MXN17.9780 por USD1 (7 de octubre de 2026). El tipo de cambio de su banco puede variar.</p>
+
+        <aside class="season-note" aria-label="Seasonal rental prices"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="6" width="26" height="23" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v7m14-7v7M3 13h26M10 20l4 4 8-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Holiday rates · December 1 – January 7</strong><p>Online booking calculates your rental total for the selected dates, including days outside the holiday period.</p><small lang="es-MX">Tarifas de temporada alta: del 1 de diciembre de 2026 al 7 de enero de 2027. El total se calcula según sus fechas.</small></div></aside>
+
+    </div>
+  </section>
+</div>
 
   <div class="split">
 
@@ -1430,7 +1502,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
         <a class="btn" id="talk-boss" href="#" target="_blank" rel="noopener">Message Chris on WhatsApp</a>
 
-        <small>Questions, long stays, a cart for tonight.</small>
+        <small>Always responsive on WhatsApp. Questions and longer stays welcome.</small>
 
       </div>
 
@@ -1446,7 +1518,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     <span class="name foil">Sable's Carts</span>
 
-    <span>Golf cart rental, Puerto Aventuras, Quintana Roo</span>
+    <span>Golf cart rentals inside Puerto Aventuras, Quintana Roo</span>
 
     <span><a id="talk-foot" href="#" target="_blank" rel="noopener">WhatsApp us</a></span>
 
@@ -1530,7 +1602,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
     carts: [
 
-      { id: "denago", name: "The Denago", the: "the Denago", blurb: "Denago Nomad XL, 2026. The black one. Our newest and nicest.",
+      { id: "denago", name: "The Denago", the: "the Denago", blurb: "Our premium four-seater. A 2026 Denago Nomad XL with sound bar and evening lights.",
 
         look: "denago", day: 1618.02, week: 9708.12, month: 26967, extraDay: 719.12, festiveDay: 2157.36, festiveWeek: 12944.16, photo: "assets/denago-nomad-xl.jpg",
 
@@ -1538,13 +1610,13 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
       // "parts" are the pieces of the name that must each stay on one line, so "four-seater" never splits.
 
-      { id: "club4", name: "Club Car four-seater", parts: ["Club Car", "four-seater"], the: "the four-seater", blurb: "Club Car Tempo, 2022. Room for the family and the beach bags.",
+      { id: "club4", name: "Club Car four-seater", parts: ["Club Car", "four-seater"], the: "the four-seater", blurb: "Bring the family. A four-seat Club Car Tempo with room for your everyday plans.",
 
         look: "club4", day: 1078.68, week: 6472.08, month: 18876.9, extraDay: 569.36, festiveDay: 1348.35, festiveWeek: 8090.1, photo: "assets/club-car-four-seater.jpg",
 
         specs: ["Seats 4", "Electric", "New batteries", "LED lights", "Mirrors"], booked: [] },
 
-      { id: "club2", name: "Club Car two-seater", parts: ["Club Car", "two-seater"], the: "the two-seater", blurb: "Club Car Tempo, 2022. Just right for two and the groceries.",
+      { id: "club2", name: "Club Car two-seater", parts: ["Club Car", "two-seater"], the: "the two-seater", blurb: "Just the two of you. A Club Car Tempo for marina trips and everyday errands.",
 
         look: "club2", day: 809.01, week: 4854.06, month: 14382.4, extraDay: 449.45, festiveDay: 1078.68, festiveWeek: 6472.08, photo: "assets/club-car-two-seater.jpg",
 
@@ -1831,7 +1903,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
       const media = c.photo
 
-        ? `<img src="${esc(c.photo)}" alt="${esc(c.name)}" width="1200" height="900" loading="lazy">`
+        ? `<img src="${esc(c.photo)}" alt="${esc(c.name)}" width="1200" height="900" loading="eager" decoding="async">`
 
         : cartSvg(c.look) + `<span class="soon">Photo on its way</span>`;
 
