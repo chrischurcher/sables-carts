@@ -12,13 +12,14 @@
 
 <title>Sable's Carts | Golf cart rental in Puerto Aventuras</title>
 
-<meta name="description" content="Golf carts delivered free to your door anywhere inside Puerto Aventuras. Pick your dates, see what's free and the price, and reserve in two minutes.">
+<meta name="description" content="Golf carts delivered free to your door anywhere inside Puerto Aventuras. Pick your dates, see what's free and the price, and book online. Minimum rental: 2 days.">
 
 <meta name="theme-color" content="#000000">
 
 <!-- Kept out of search engines until Chris says "open for business" (1 Oct 2026). Remove this one line then. -->
 
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://sablescarts.com/">
 
 <!-- What WhatsApp and other apps show when the link is shared. -->
 
@@ -1181,6 +1182,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 .cart-card.is-minimum-block .act::after { content:"Choose at least 2 days / Elija al menos 2 días"; display:block; color:var(--brass-light); font-size:.95rem; }
   </style>
 
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://sablescarts.com/#business", "name": "Sable’s Carts", "url": "https://sablescarts.com/", "logo": "https://sablescarts.com/assets/sables-carts-tag-512.png", "telephone": "+525538955620", "description": "Golf cart rentals with free delivery and pickup inside the gates of Puerto Aventuras, Mexico. Two- and four-seat carts. Minimum rental 2 days."}</script>
 </head>
 
 <body class="fleet-first">
@@ -1260,7 +1262,8 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
     </header>
 <section class="wrap fleet-intro" aria-labelledby="welcome-title">
   <h1 id="welcome-title">See Puerto Aventuras by golf cart.</h1>
-  <p>Free delivery and pickup anywhere inside the gates.</p>
+  <p>Free delivery and pickup anywhere inside the gates.</p>
+<p class="fine"><strong>Make yourself at home in PA.</strong> Introductory daily, weekly and monthly offers through 30 November 2026. <a href="#intro-offer">See offer prices</a>.</p>
 </section>
 <section class="wrap dates" aria-labelledby="dates-title">
 <form class="ticket on-paper tagged" id="dates-form" novalidate>
@@ -1445,13 +1448,30 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
   <div class="split">
 
-    <section class="wrap sect cols" aria-labelledby="rates-title">
+    <section class="wrap sect" id="intro-offer" aria-labelledby="intro-offer-title">
+<h2 id="intro-offer-title">Your Puerto Aventuras intro offer</h2>
+<p>Free delivery and collection anywhere inside the gates. Choose your dates above to see availability and your full rental price.</p>
+<table class="rates"><thead><tr><th scope="col">Four-seat cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody>
+<tr><th scope="row">Club Car four-seater</th><td>MXN900<small class="usd-guide">≈ US$50.06</small></td><td>MXN5,400<small class="usd-guide">≈ US$300.37</small></td></tr>
+<tr><th scope="row">The Denago</th><td>MXN1,350<small class="usd-guide">≈ US$75.09</small></td><td>MXN8,100<small class="usd-guide">≈ US$450.55</small></td></tr>
+</tbody></table>
+<h3>Staying a little longer?</h3>
+<p>Settle in with a cart of your own. Introductory prices for a 30-day rental entirely within the offer dates:</p>
+<table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">30 days</th></tr></thead><tbody>
+<tr><th scope="row">Club Car two-seater</th><td>MXN10,800<small class="usd-guide">≈ US$600.73</small></td></tr>
+<tr><th scope="row">Club Car four-seater</th><td>MXN14,400<small class="usd-guide">≈ US$800.98</small></td></tr>
+<tr><th scope="row">The Denago</th><td>MXN18,000<small class="usd-guide">≈ US$1,001.22</small></td></tr>
+</tbody></table>
+<p class="fine">Intro offers apply to eligible rental days from 14 October through 30 November 2026. Daily and weekly offers above apply to rentals of 2–29 days; monthly offers apply from 30 days. Minimum 48 hours. Higher festive prices apply from 1 December 2026 through 7 January 2027, including the festive part of a longer rental. Choose your dates for the full quote. Prices are charged in Mexican pesos; US dollars are approximate guides.</p>
+<p class="fine" lang="es-MX">Ofertas de introducción para los días de renta elegibles del 14 de octubre al 30 de noviembre de 2026. Las ofertas diarias y semanales anteriores aplican a rentas de 2 a 29 días; las mensuales, a partir de 30 días. Mínimo 48 horas. Del 1 de diciembre de 2026 al 7 de enero de 2027 se aplican tarifas de temporada alta, también a los días festivos dentro de una renta más larga. Selecciona tus fechas para ver el total. Cobro en pesos mexicanos; dólares estadounidenses aproximados.</p>
+</section>
+<section class="wrap sect cols" aria-labelledby="rates-title">
 
       <h2 id="rates-title">Prices in pesos · US dollar guide</h2>
 
       <div class="rate-seasons">
 
-        <div><h3>Standard rates / Tarifas regulares</h3><table class="rates"><thead><tr><th scope="col">Cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th><th scope="col">30 days</th></tr></thead><tbody id="rates-body"></tbody></table></div>
+        <div><h3>Standard rates outside the intro offer / Tarifas fuera de la oferta</h3><table class="rates"><thead><tr><th scope="col">Cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th><th scope="col">30 days</th></tr></thead><tbody id="rates-body"></tbody></table></div>
 
         <div><h3 class="season-label">December 1, 2026 – January 7, 2027</h3><p class="fine" lang="es-MX">Temporada alta: 1 de diciembre de 2026 al 7 de enero de 2027, inclusive.</p><table class="rates"><thead><tr><th scope="col">Cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody id="festive-rates-body"></tbody></table><p class="fine">These rates apply during the holiday period. Choose dates above for your complete rental price, including longer stays and rentals crossing seasons.</p></div>
 
@@ -1730,7 +1750,7 @@ body:not(.has-cart) #booqable-launcher { display: none !important; }
 
   function quote(cart, days) {
 
-    if (!liveEngine && festiveOverlap(state.from, state.to)) return { total: null, rate: "Date-specific quote", saving: 0 };
+    if (!liveEngine && (festiveOverlap(state.from, state.to) || (state.from < "2026-12-01" && state.to > "2026-10-14"))) return { total: null, rate: "Date-specific quote", saving: 0 };
 
     let total, rate;
 
