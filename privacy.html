@@ -1,26 +1,285 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy notice | Sable’s Carts</title><style>
-/* Black and brass header, cream paper for reading. Matches index.html. */
-:root { --black: #000000; --paper: #F6EFDD; --ink: #15120D; --brass: #C9A24B; --foil-text: linear-gradient(100deg, #D2AE5C 0%, #F4E4AC 38%, #DDBE72 68%, #C39C47 100%); }
-* { box-sizing: border-box; }
-html { background: var(--paper); }
-body { margin: 0; font-family: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 1.0625rem; line-height: 1.55; color: var(--ink); background: var(--paper); }
-h1, h2 { font-family: "Gloock", "Times New Roman", serif; font-weight: 400; line-height: 1.06; margin: 0; }
-a { color: inherit; text-underline-offset: 3px; }
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
-.wrap { width: min(100% - 2rem, 44rem); margin-inline: auto; }
-.band { background: radial-gradient(90% 120% at 15% 0%, #1A1409 0%, #000 62%); color: var(--paper); padding-block: 1rem 2.2rem; border-bottom: 1px solid var(--brass); }
-.band :focus-visible { outline-color: #EBD591; }
-.brand { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; }
-.brand img { width: 46px; height: 46px; }
-.brand span { font-family: "Petit Formal Script", "Snell Roundhand", cursive; font-size: 1.62rem; line-height: 1.25; padding: 0 .1em .12em 0; color: var(--brass); background: var(--foil-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-h1 { font-size: clamp(2.3rem, 9vw, 3.6rem); margin-top: 1.7rem; }
-.band p { margin: .8rem 0 0; color: #B9AE94; }
-main { padding-block: 1.6rem 3rem; }
-h2 { font-size: 1.7rem; margin-top: 2.4rem; scroll-margin-top: 1rem; }
-ol { padding-left: 1.4rem; margin: 1rem 0 0; display: grid; gap: .85rem; }
-li::marker { font-weight: 800; }
-.back { display: inline-block; margin-top: 2.2rem; font-weight: 700; }
-</style></head><body><main><h1>Privacy notice / Aviso de privacidad</h1><p>SC-PRIV-2026-10-15-R4 · 15 October / octubre 2026</p><p><a href="index.html">Back to website / Volver al sitio</a> · <a href="terms.html">Rental agreement / Contrato</a></p><h2>Aviso de privacidad integral — español</h2>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy notice | Sable’s Carts</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Petit+Formal+Script&display=swap" rel="stylesheet"><link rel="icon" href="assets/sables-carts-tag.svg" type="image/svg+xml"><style>
+/* Legal pages: the brass band on black at the top, cream paper for reading. Matches index.html (October 2026 polish). */
+:root { --black: #000; --coal: #13100B; --rule: #3A3020; --rule-soft: #2A2316; --paper: #F6EFDD; --paper-2: #FFFDF6; --paper-rule: #D9CBA3; --ink: #15120D; --mute: #B9AE94; --brass: #C9A24B; --brass-light: #EBD591; --brass-deep: #8A6A2B; --brass-edge: #5E4718; --foil-text: linear-gradient(100deg, #D2AE5C 0%, #F4E4AC 38%, #DDBE72 68%, #C39C47 100%); --plate: linear-gradient(180deg, #F0DC9C 0%, #DDBD6C 46%, #CBA44E 54%, #D9B865 100%); --display: "Gloock", "Times New Roman", serif; --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif; --script: "Petit Formal Script", "Snell Roundhand", cursive; }
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--paper); scroll-behavior: smooth; scroll-padding-top: 1rem; }
+body { margin: 0; font-family: var(--body); font-size: 1.0625rem; line-height: 1.6; color: var(--ink); background: var(--paper); }
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+.band :focus-visible { outline-color: var(--brass-light); }
+.wrap { width: min(100% - 2rem, 50rem); margin-inline: auto; }
+.band { background: radial-gradient(70% 90% at 15% 0%, #1E1709 0%, #000 65%); color: var(--paper); border-bottom: 1px solid var(--brass); }
+.band .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
+.brand { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; }
+.brand svg { width: 44px; height: 44px; }
+.brand span { font-family: var(--script); font-size: 1.62rem; line-height: 1.25; padding: 0 .1em .12em 0; color: var(--brass); background: var(--foil-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
+.back { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .4rem .95rem; border: 1px solid var(--brass-deep); border-radius: 999px; color: var(--brass-light); font-weight: 700; font-size: .95rem; text-decoration: none; white-space: nowrap; }
+.back:hover { background: rgba(201, 162, 75, .12); border-color: var(--brass); }
+.back svg { width: 16px; height: 16px; }
+@media (max-width: 480px) { .back span { display: none; } .back { padding: .4rem .7rem; } .brand span { font-size: 1.4rem; } }
+main { padding-block: 2.2rem 3.5rem; }
+.eyebrow { display: inline-flex; align-items: center; gap: .7rem; font-size: .76rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--brass-deep); margin-bottom: .6rem; }
+.eyebrow::before { content: ""; width: 1.8rem; height: 1px; background: var(--brass-deep); }
+h1, h2 { font-family: var(--display); font-weight: 400; line-height: 1.06; margin: 0; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); letter-spacing: -.015em; }
+main > h1 + p { margin: .6rem 0 0; color: #6B6250; font-size: .95rem; }
+/* The row of jump links under the title. */
+.toolbar { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0 0; font-size: 0; } /* the dots between the links stay in the text, out of sight */
+.toolbar a { display: inline-flex; align-items: center; min-height: 40px; padding: .35rem .9rem; border: 1px solid var(--paper-rule); border-radius: 999px; background: var(--paper-2); text-decoration: none; font-weight: 700; font-size: .92rem; color: var(--ink); }
+.toolbar a:hover { border-color: var(--brass-deep); background: #FFF6D6; }
+.intro { margin: 1.3rem 0 0; padding: 1rem 1.1rem; border-left: 3px solid var(--brass); background: var(--paper-2); border-radius: 0 12px 12px 0; }
+section, main > h2 { margin-top: 2.8rem; scroll-margin-top: 1rem; }
+h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); padding-bottom: .6rem; border-bottom: 1px solid var(--paper-rule); }
+section > p, main > p.lead { margin: 1rem 0 0; }
+ol { list-style: none; counter-reset: clause; padding: 0; margin: 1.2rem 0 0; display: grid; gap: .8rem; }
+ol > li { counter-increment: clause; position: relative; padding: 1rem 1.1rem 1rem 3.3rem; background: var(--paper-2); border: 1px solid var(--paper-rule); border-radius: 14px; }
+ol > li::before { content: counter(clause); position: absolute; left: 1rem; top: 1rem; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-size: 1rem; line-height: 1; color: var(--black); background: var(--plate); box-shadow: 0 0 0 1px var(--brass-edge); }
+ol > li p { margin: 0; }
+ol > li p + p { margin-top: .6rem; }
+ol > li strong { color: var(--brass-deep); }
+li::marker { content: none; }
+p { overflow-wrap: anywhere; }
+.foot { border-top: 1px solid var(--paper-rule); padding-block: 1.6rem 2.4rem; color: #6B6250; font-size: .9rem; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between; align-items: center; }
+.foot a { font-weight: 700; color: var(--ink); }
+@media (max-width: 480px) { ol > li { padding-left: 2.9rem; } ol > li::before { left: .75rem; } }
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+
+
+
+
+
+
+
+  <defs>
+
+
+
+
+
+
+
+    <linearGradient id="foil" x1="0" y1="0" x2="1" y2="1">
+
+
+
+
+
+
+
+      <stop offset="0" stop-color="#9A7631"/><stop offset=".3" stop-color="#D9B866"/><stop offset=".48" stop-color="#F3E2A6"/><stop offset=".68" stop-color="#C9A24B"/><stop offset="1" stop-color="#8F6E2E"/>
+
+
+
+
+
+
+
+    </linearGradient>
+
+
+
+
+
+
+
+    <clipPath id="sc-clip"><circle cx="200" cy="200" r="184"/></clipPath>
+
+
+
+
+
+
+
+    <!-- Sable as she is (redrawn from Chris's photos, 1 Oct 2026): natural ears that fold over, and the tan
+
+
+
+
+
+
+
+         of her muzzle running back to her cheek. -->
+
+
+
+
+
+
+
+    <path id="sc-head" d="M217 117 C225.3 119.7 237.0 123.0 244.0 127.0 C251.0 131.0 249.3 137.2 259.0 141.0 C268.7 144.8 287.2 147.2 302.0 150.0 C316.8 152.8 337.3 155.3 348.0 158.0 C358.7 160.7 362.0 162.3 366.0 166.0 C370.0 169.7 372.3 175.0 372.0 180.0 C371.7 185.0 367.3 192.0 364.0 196.0 C360.7 200.0 355.7 199.0 352.0 204.0 C348.3 209.0 343.7 222.3 342.0 226.0 C335.0 227.5 313.0 232.0 300.0 235.0 C287.0 238.0 272.8 238.2 264.0 244.0 C255.2 249.8 251.0 258.7 247.0 270.0 C243.0 281.3 240.5 297.7 240.0 312.0 C239.5 326.3 241.7 341.3 244.0 356.0 C246.3 370.7 252.3 392.7 254.0 400.0 C222.0 400.0 94.0 400.0 62.0 400.0 C64.0 387.0 69.0 348.0 74.0 322.0 C79.0 296.0 87.3 268.0 92.0 244.0 C96.7 220.0 99.0 195.3 102.0 178.0 C105.0 160.7 105.7 149.8 110.0 140.0 C113 131 116 122 122 113 C129 101 142 92 158 91 C174 90 188 97 200 106 C206 110 211 114 217 117 Z"/>
+
+
+
+
+
+
+
+    <path id="sc-muzzle" d="M362 195 C359 198 355 200 352 204 C348.3 209 343.7 222.3 342 226 C335 227.5 312.3 232.2 300 235 C287.7 237.8 273.3 241.7 266 243 C258 236 254 222 258 210 C262 198 276 190 292 186 C312 181 336 180 350 184 C356 186 360 190 362 195 Z"/>
+
+
+
+
+
+
+
+    <path id="sc-brow" d="M238.0 131.0 C239.0 129.3 245.7 129.0 248.0 130.0 C250.3 131.0 253.0 135.3 252.0 137.0 C251.0 138.7 244.3 141.0 242.0 140.0 C239.7 139.0 237.0 132.7 238.0 131.0 Z"/>
+
+
+
+
+
+
+
+    <path id="sc-eye" d="M221.0 155.0 C223.2 153.7 229.5 147.0 234.0 147.0 C238.5 147.0 245.7 153.7 248.0 155.0 C245.7 156.0 238.5 161.0 234.0 161.0 C229.5 161.0 223.2 156.0 221.0 155.0 Z"/>
+
+
+
+
+
+
+
+    <path id="sc-collar" d="M88 262 Q 166 296 246 280 L 241 304 Q 164 322 81 290 Z"/>
+
+
+
+
+
+
+
+    <path id="sc-earline" d="M202 108 C210 142 200 196 180 222 C175 229 168 228 163 221 C146 198 124 156 121 114"/>
+
+
+
+
+
+
+
+    <!-- The mark: Sable on her own brass tag. Works on black and on brass. The black line round her
+
+
+
+
+
+
+
+         head closes her jaw where the tan of her muzzle meets the brass of the tag. -->
+
+
+
+
+
+
+
+    <symbol id="tag" viewBox="0 0 400 400">
+
+
+
+
+
+
+
+      <circle cx="200" cy="200" r="184" fill="url(#foil)"/>
+
+
+
+
+
+
+
+      <g clip-path="url(#sc-clip)">
+
+
+
+
+
+
+
+        <use href="#sc-head" fill="#000"/>
+
+
+
+
+
+
+
+        <use href="#sc-muzzle" fill="url(#foil)"/><use href="#sc-brow" fill="url(#foil)"/><use href="#sc-eye" fill="url(#foil)"/>
+
+
+
+
+
+
+
+        <use href="#sc-head" fill="none" stroke="#000" stroke-width="5" stroke-linejoin="round"/>
+
+
+
+
+
+
+
+        <use href="#sc-collar" fill="url(#foil)"/>
+
+
+
+
+
+
+
+        <circle cx="232" cy="330" r="17" fill="url(#foil)"/><circle cx="232" cy="330" r="9" fill="#000"/>
+
+
+
+
+
+
+
+        <use href="#sc-earline" fill="none" stroke="url(#foil)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+
+
+
+
+
+      </g>
+
+
+
+
+
+
+
+      <circle cx="200" cy="200" r="188" fill="none" stroke="#000" stroke-width="7"/>
+
+
+
+
+
+
+
+    </symbol>
+
+
+
+
+
+
+
+  </defs>
+
+
+
+
+
+
+
+</svg>
+<div class="band"><div class="wrap"><a class="brand" href="index.html" aria-label="Sable's Carts home"><svg role="img" aria-label="Sable's Carts"><use href="#tag"/></svg><span>Sable's Carts</span></a><a class="back" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Back to the website</span></a></div></div>
+<main class="wrap"><p class="eyebrow">Privacy notice · SC-PRIV-2026-10-15-R4</p><h1>Privacy notice / Aviso de privacidad</h1><p>SC-PRIV-2026-10-15-R4 · 15 October / octubre 2026</p><p class="toolbar"><a href="index.html">Back to website / Volver al sitio</a> · <a href="terms.html">Rental agreement / Contrato</a></p><h2>Aviso de privacidad integral — español</h2>
 <ol>
 <li>
 <p><strong>Responsable y contacto.</strong> Sable's Carts es responsable del tratamiento descrito. Contacto de privacidad: chrischurcher2@gmail.com. El WhatsApp de consultas comerciales es +52 55 3895 5620.</p>
@@ -79,4 +338,6 @@ li::marker { font-weight: 800; }
 <h2 lang="es">Analítica del sitio y medición de publicidad</h2>
 <p lang="es">Usamos Google Analytics 4 en el sitio y el proceso de reserva de Booqable para conocer visitas, fuentes de tráfico y qué publicidad genera rentas completadas. Puede incluir información del navegador y dispositivo, ubicación aproximada, páginas y pasos de reserva visitados, identificadores de campaña, carritos elegidos, referencia de reserva, moneda e importe de renta. Google utiliza cookies e identificadores similares para esta medición. El importe de compra reportado corresponde a la renta, no solo al anticipo del 20%.</p>
 <p lang="es">No enviamos intencionalmente su nombre, correo, teléfono, dirección de entrega ni datos de tarjeta a Google Analytics. La publicidad personalizada está desactivada en nuestro enlace entre Analytics y Google Ads. Medir una reserva no le suscribe a mensajes promocionales. Google puede tratar datos de medición fuera de México conforme a su <a href="https://policies.google.com/privacy">política de privacidad</a>. Puede gestionar las cookies en su navegador y utilizar el <a href="https://tools.google.com/dlpage/gaoptout">complemento de inhabilitación de Google Analytics</a>. Para dudas o solicitudes, contacte al correo de privacidad indicado arriba.</p>
-</main></body></html>
+</main>
+<footer class="foot"><div class="wrap"><span>© 2026 Sable's Carts · Puerto Aventuras, Quintana Roo, Mexico</span><span><a href="index.html">Website</a> · <a href="terms.html">Rental agreement</a> · <a href="privacy.html">Privacy notice</a> · <a href="rental-agreement.pdf">PDF</a></span></div></footer>
+</body></html>
