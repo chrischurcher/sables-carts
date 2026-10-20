@@ -607,9 +607,9 @@ body.is-engine #booqable-launcher { display: none !important; }
   .foot { padding-bottom: 2.6rem; }
 }
 @media (max-width: 360px) { .brand span { font-size: 1.35rem; } .brand svg { width: 40px; height: 40px; } }
-</style>
+.language-switch{display:flex;gap:.2rem;align-items:center;flex-shrink:0;font-size:.85rem}.language-switch a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.35rem .6rem;border:1px solid var(--brass-deep);border-radius:8px;text-decoration:none;color:var(--brass-light)}.language-switch a[aria-current="page"]{background:var(--brass);color:#15120D;font-weight:800}.language-switch a:focus-visible{outline:3px solid var(--brass-light);outline-offset:3px}@media(max-width:600px){.top{flex-wrap:wrap;gap:.5rem;padding-block:.45rem}.top .brand{margin-right:auto}.top .talk{padding:.35rem .55rem}.top .brand span{font-size:1.25rem}.language-switch a{padding:.3rem .45rem;font-size:.78rem}:root{--head-h:114px}.language-switch{order:3;width:100%;justify-content:flex-end}.top .nav{display:none}}</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://sablescarts.com/#business", "name": "Sable’s Carts", "url": "https://sablescarts.com/", "logo": "https://sablescarts.com/assets/sables-carts-tag-512.png", "telephone": "+525538955620", "description": "Golf cart rentals with free delivery and pickup inside the gates of Puerto Aventuras, Mexico. Two- and four-seat carts. Minimum rental 2 days."}</script>
-</head>
+<link rel="alternate" hreflang="en" href="https://sablescarts.com/"><link rel="alternate" hreflang="es-MX" href="https://sablescarts.com/es.html"><link rel="alternate" hreflang="x-default" href="https://sablescarts.com/"><script src="assets/language.js" defer></script></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 
@@ -850,7 +850,7 @@ body.is-engine #booqable-launcher { display: none !important; }
       <svg role="img" aria-label="Sable's Carts"><use href="#tag"/></svg>
       <span class="foil">Sable's Carts</span>
     </a>
-    <nav class="nav" aria-label="Page sections">
+    <nav class="language-switch" aria-label="Language / Idioma" translate="no"><a href="index.html" hreflang="en" lang="en" aria-current="page">English</a><a href="es.html" hreflang="es-MX" lang="es">Español</a></nav><nav class="nav" aria-label="Page sections">
       <a href="#carts-title">Carts</a>
       <a href="#how-title">How it works</a>
       <a href="#intro-offer">Prices</a>
@@ -3752,7 +3752,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      if (text && text.nodeType === 3 && text.nodeValue.trim() === "Add to cart") text.nodeValue = `Reserve ${cartById(card.dataset.cart).the}`;
+      if (text && text.nodeType === 3 && text.nodeValue.trim().startsWith("Add to cart")) text.nodeValue = `Reserve ${cartById(card.dataset.cart).the}`;
 
 
 
@@ -3776,7 +3776,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      card.classList.toggle("is-from", Boolean(span) && span.textContent.trim() === "from");
+      card.classList.toggle("is-from", Boolean(span) && span.textContent.trim().startsWith("from"));
 
 
 
@@ -3896,7 +3896,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    if (label && label.nodeType === 3 && label.nodeValue.trim() === "Select a rental period") label.nodeValue = "Choose your dates and times";
+    if (label && label.nodeType === 3 && label.nodeValue.trim().startsWith("Select a rental period")) label.nodeValue = "Choose your dates and times";
 
 
 
@@ -3928,7 +3928,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    const told = ((document.querySelector("#cards .bq-duration") || {}).textContent || "").trim().match(/^(\d+)\s+days?$/);
+    const told = ((document.querySelector("#cards .bq-duration") || {}).textContent || "").trim().match(/^(\d+)\s+(?:days?|días?)(?:\s*\/\s*días?)?$/i);
 
 
 
