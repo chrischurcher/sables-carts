@@ -1525,6 +1525,8 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
       keepOneBack: true,
+      // Existing Booqable owner downtime already keeps this cart back; do not hide another.
+      ownerUseBlocks: [{cartId: "club2", from: "2026-10-30", until: "2026-11-02"}],
 
 
 
@@ -3568,6 +3570,15 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
+  function ownerCartIsKeptBack(period, cards, seen) {
+    if (!period) return false;
+    return (CONFIG.booqable.ownerUseBlocks || []).some(block => {
+      const index = cards.findIndex(card => card.dataset.cart === block.cartId);
+      return index >= 0 && seen[index] === "out" &&
+        period.from.at < toMs(block.until) && period.to.at > toMs(block.from);
+    });
+  }
+
   function dressEngine() {
 
 
@@ -3680,7 +3691,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    const hold = CONFIG.booqable.keepOneBack && known && gone >= cards.length - 1;
+    const hold = CONFIG.booqable.keepOneBack && known && !ownerCartIsKeptBack(d, cards, seen) && gone >= cards.length - 1;
 
 
 
