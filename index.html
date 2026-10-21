@@ -264,7 +264,7 @@ input, select { font: inherit; width: 100%; min-height: 52px; padding: .7rem .8r
 .selection-limit-note { display: none; margin-top: .9rem; color: var(--mute); }
 .is-held:not(.is-out):not(.is-opening-block) .selection-limit-note { display: block; }
 .is-held:not(.is-out):not(.is-opening-block) .out-note { display: none; }
-.is-held:not(.is-out):not(.is-opening-block) .booqable-product-button .bq-status.bq-available::after { content: "Choose up to two carts"; }
+.is-held:not(.is-out):not(.is-opening-block) .booqable-product-button .bq-status.bq-available::after { content: "Unavailable for these dates"; }
 .cart-card.is-minimum-block .bq-control { display: none !important; }
 .cart-card.is-minimum-block .act::after { content: "Choose at least 2 days / Elija al menos 2 días"; display: block; margin-top: .6rem; color: var(--brass-light); font-size: .95rem; }
 /* =============================================================================== your booking (a paper ticket, WhatsApp version only) */
@@ -510,15 +510,15 @@ dialog .btn { margin-top: 1.2rem; }
 .booqable-product-button .bq-status.bq-available::before, .booqable-product-button .bq-status.bq-unavailable::before { content: ""; width: .65rem; height: .65rem; margin-right: .5rem; border-radius: 50%; color: inherit !important; background: currentColor !important; flex: none; }
 .booqable-product-button .bq-status.bq-available::after, .booqable-product-button .bq-status.bq-unavailable::after { font-size: 1.0625rem; color: inherit !important; background: none !important; }
 .booqable-product-button .bq-status.bq-available { color: var(--free) !important; }
-.booqable-product-button .bq-status.bq-available::after { content: "Free on your dates"; }
+.booqable-product-button .bq-status.bq-available::after { content: "Available for your dates"; }
 .booqable-product-button .bq-status.bq-unavailable, .is-held .booqable-product-button .bq-status.bq-available { color: var(--busy) !important; }
-.booqable-product-button .bq-status.bq-unavailable::after, .is-held .booqable-product-button .bq-status.bq-available::after { content: "Not available on those dates"; }
+.booqable-product-button .bq-status.bq-unavailable::after, .is-held .booqable-product-button .bq-status.bq-available::after { content: "Unavailable for these dates"; }
 .out-note { display: none; margin-top: .9rem; color: var(--mute); }
 .out-note a { color: var(--brass-light); font-weight: 700; text-underline-offset: 3px; }
 .is-out .bq-control, .is-held .bq-control, .is-mine .bq-control { display: none !important; }
 .is-held bq-product-availability-calendar { display: none !important; }
 .is-out .out-note, .is-held .out-note { display: block; }
-.is-mine .booqable-product-button .bq-status.bq-available::after { content: "In your basket — not booked yet"; }
+.is-mine .booqable-product-button .bq-status.bq-available::after { content: "In your basket"; }
 #booqable-sidebar .bq-quantity-toggle, .booqable-sidebar .bq-quantity-toggle, #booqable-sidebar .bq-quantity, .booqable-sidebar .bq-quantity { display: none !important; }
 #booqable-sidebar, #booqable-sidebar *:not(i) { font-family: var(--body) !important; }
 #booqable-sidebar .bq-sidebar-head, #booqable-sidebar .bq-sidebar-head *, #booqable-sidebar .bq-sidebar-head *::before { color: var(--black) !important; }
@@ -607,7 +607,20 @@ body.is-engine #booqable-launcher { display: none !important; }
   .foot { padding-bottom: 2.6rem; }
 }
 @media (max-width: 360px) { .brand span { font-size: 1.35rem; } .brand svg { width: 40px; height: 40px; } }
-.language-switch{display:flex;gap:.2rem;align-items:center;flex-shrink:0;font-size:.85rem}.language-switch a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.35rem .6rem;border:1px solid var(--brass-deep);border-radius:8px;text-decoration:none;color:var(--brass-light)}.language-switch a[aria-current="page"]{background:var(--brass);color:#15120D;font-weight:800}.language-switch a:focus-visible{outline:3px solid var(--brass-light);outline-offset:3px}@media(max-width:600px){.top{flex-wrap:wrap;gap:.5rem;padding-block:.45rem}.top .brand{margin-right:auto}.top .talk{padding:.35rem .55rem}.top .brand span{font-size:1.25rem}.language-switch a{padding:.3rem .45rem;font-size:.78rem}:root{--head-h:114px}.language-switch{order:3;width:100%;justify-content:flex-end}.top .nav{display:none}}</style>
+.language-switch{display:flex;gap:.2rem;align-items:center;flex-shrink:0;font-size:.85rem}.language-switch a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.35rem .6rem;border:1px solid var(--brass-deep);border-radius:8px;text-decoration:none;color:var(--brass-light)}.language-switch a[aria-current="page"]{background:var(--brass);color:#15120D;font-weight:800}.language-switch a:focus-visible{outline:3px solid var(--brass-light);outline-offset:3px}@media(max-width:600px){.top{flex-wrap:wrap;gap:.5rem;padding-block:.45rem}.top .brand{margin-right:auto}.top .talk{padding:.35rem .55rem}.top .brand span{font-size:1.25rem}.language-switch a{padding:.3rem .45rem;font-size:.78rem}:root{--head-h:114px}.language-switch{order:3;width:100%;justify-content:flex-end}.top .nav{display:none}}
+/* A quiet, compact booking journey. */
+:root{--head-h:78px}.hero{padding:2rem 0 1.5rem}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 160px;grid-template-areas:'copy shot';gap:2rem;align-items:center}.hero-copy{align-self:center}.hero h1{font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.08;max-width:20ch}.hero .lede{font-size:1.08rem;line-height:1.5;max-width:55ch;margin-top:.8rem}.hero .shot{grid-area:shot;border-radius:50%;width:160px;height:160px;margin:0;box-shadow:none;aspect-ratio:1}.hero .shot img{height:100%;object-fit:cover;object-position:65% 62%}.hero-offer{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .9rem;font-size:.92rem;margin-top:.9rem;color:var(--mute)}.hero-offer strong{font-weight:700;color:var(--cream)}.hero-offer strong span{display:inline-block;color:var(--brass-light);margin-left:.45rem}.hero-offer a{color:var(--brass-light);text-underline-offset:3px}.hero-copy>*{animation:none!important}
+.top{gap:1.1rem}.language-switch{order:4}.language-switch a{border-color:var(--rule-soft);font-size:.8rem;padding:.35rem .5rem}.top .nav{gap:1rem}.top .talk{margin-left:auto}.dates{padding-bottom:1.25rem}.ticket{padding:1.25rem;border-radius:14px;box-shadow:none}.ticket.tagged::before,.ticket.tagged::after{display:none}.ticket-title h2,.fleet-heading h2{font-size:clamp(1.5rem,3vw,2.1rem)}.eyebrow{letter-spacing:.08em;font-size:.75rem}.dates-next{background:transparent;border:0;box-shadow:none;color:var(--ink);font-size:.95rem;justify-content:flex-start;padding:.3rem 0;min-height:36px}.dates-next svg{width:22px;height:22px;animation:none!important}.dates-next.is-guiding{animation:none!important}.guided-actions .bq-button{animation:none!important}.basket-tools{border-top:1px solid rgba(0,0,0,.15);padding-top:.8rem}.basket-tools .basket-buttons{gap:.75rem}.basket-tools .btn{min-height:44px;padding:.5rem .8rem;box-shadow:none}.basket-tools #clear-basket{background:transparent;color:var(--ink);border:0;text-decoration:underline}.basket-tools p{font-size:.95rem}.basket-tools.hide{display:none!important}.shop{padding-top:.5rem;padding-bottom:.5rem}.fleet-heading{margin-bottom:1rem}.fleet-heading a{font-size:.9rem}.cart-card{box-shadow:none;border-radius:14px}.cart-card .media{aspect-ratio:4/3}.cart-card .info{padding:1.1rem 1.1rem .5rem}.cart-card h3{font-size:1.65rem}.cart-card .blurb{font-size:.96rem;line-height:1.5}.cart-card .specs{gap:.35rem;margin-top:.7rem}.cart-card .specs span{font-size:.75rem;padding:.25rem .5rem;background:transparent}.cart-card .act{padding:1rem 1.1rem 1.2rem}.cart-card .bq-button,.btn{box-shadow:none!important;border-radius:9px!important}.cart-card .bq-button:hover,.btn:hover{box-shadow:none!important;transform:none}.cart-card .bq-price{font-size:1.6rem!important}.cart-card .booqable-product-button bq-product-availability-calendar{display:none!important}.cart-card .booqable-product-button .bq-actions{gap:.5rem!important}.is-held .selection-limit-note,.out-note{display:none!important}.cart-card .media img{transition:none}.cart-card:hover .media img{transform:none}.is-mine:not(.is-out):not(.is-held) .mine-action{display:flex}.how-compact{padding-top:2.25rem;padding-bottom:2rem}.how-compact>h2{font-size:1.6rem;margin-bottom:1rem}.steps{margin-top:0}.steps li{padding:.9rem 0;border:0;border-top:1px solid var(--rule-soft);border-radius:0;background:none;box-shadow:none;gap:.5rem}.steps li::before{font-size:.8rem;width:1.75rem;height:1.75rem;box-shadow:none}.steps h3{font-size:1.12rem}.steps p{font-size:.94rem}.steps li:hover{transform:none;box-shadow:none}
+.sect{padding-block:2.4rem}.sect h2{font-size:clamp(1.8rem,3vw,2.3rem)}.rental-details{border-top:1px solid var(--rule-soft)}.deposit-grid{gap:1.2rem;margin-top:1.2rem}.deposit-note{background:transparent;border:1px solid var(--rule-soft);border-radius:10px;padding:1.1rem;box-shadow:none}.deposit-note strong{font-size:1.1rem}.deposit-note p{font-size:.95rem;line-height:1.6}.doc-links{gap:1rem;margin-top:1.1rem}.fine{line-height:1.55}.section-heading p{color:var(--mute);margin:.5rem 0 1rem}.rates{margin:.8rem 0;width:100%;table-layout:fixed}.rates th,.rates td{padding:.8rem .6rem}.rates td{font-size:1.05rem}.rates th:first-child{width:42%}.rates td .usd-guide{font-size:.85rem}.seasonal-details{margin-top:1.25rem;border-top:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft);padding:.7rem 0}.seasonal-details>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:space-between;color:var(--brass-light);font-weight:700;list-style:none}.seasonal-details>summary::after{content:'+';font-size:1.4rem}.seasonal-details[open]>summary::after{content:'−'}.rate-seasons{margin-top:1rem;gap:1rem}.rate-card{border:0;padding:.5rem 0;box-shadow:none;background:transparent}.rate-card h3{font-size:1.3rem}.rate-card .fine{font-size:.85rem}.cols{border-top:1px solid var(--rule-soft)}.cols .sect-head{position:static}.cols .sect-head p{color:var(--mute);margin-top:.6rem}.faq{margin-top:0}.faq summary{font-size:1rem}.faq p{font-size:.95rem}.contact-compact{border-top:1px solid var(--rule-soft);display:flex;justify-content:space-between;gap:1.5rem;align-items:center}.contact-compact h2{font-size:1.6rem}.contact-compact p{font-size:1rem;margin-top:.5rem}.contact-compact .ask{justify-items:start;text-align:left}.contact-compact .ask .btn{background:var(--plate);color:var(--black)}.foot{padding-block:2rem}.foot .name{font-size:1.7rem}.foot .tag{font-size:.88rem}.foot .legal{font-size:.8rem}.foot h3{letter-spacing:.06em}.foot-grid{gap:1.3rem}.perks{display:none}
+@media(min-width:48rem){#dates-form{grid-template-columns:12rem minmax(0,1fr);gap:.3rem 1.2rem}.steps{grid-template-columns:repeat(3,minmax(0,1fr))}.steps li{grid-template-columns:auto 1fr}.steps li::before{grid-row:1/3}.steps h3,.steps p{grid-column:2}.how-compact .steps{gap:1.5rem}.cols{grid-template-columns:14rem minmax(0,1fr)}.deposit-grid{grid-template-columns:1fr 1.3fr}}
+@media(max-width:850px){.top .nav{display:none}.top{gap:.7rem}}
+@media(max-width:600px){:root{--head-h:112px}.top{padding-block:.5rem}.top .brand span{font-size:1.2rem}.top .brand svg{width:38px;height:38px}.top .talk{font-size:.85rem;padding:.4rem .6rem}.language-switch{order:3;width:100%;justify-content:flex-end}.language-switch a{min-height:36px}.hero{padding:1.35rem 0 1.1rem}.hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:'copy';gap:0}.hero .shot{display:none}.hero h1{font-size:2.1rem;max-width:20ch}.hero .lede{font-size:1rem}.hero-offer{font-size:.88rem}.hero-offer strong span{margin-left:.3rem}.ticket{padding:1rem}.ticket-title{margin-bottom:.3rem}.minimum-rental-notice{font-size:.85rem}.dates-next{font-size:.9rem}.when dd{font-size:1rem}.when dt{font-size:.85rem}.when .change{font-size:.85rem}.length{font-size:.9rem}.fleet-heading{align-items:center;gap:.7rem}.fleet-heading a{font-size:.8rem;max-width:7rem;text-align:right}.cards{gap:1.2rem}.cart-card h3{font-size:1.6rem}.sect{padding-block:1.8rem}.steps{gap:.7rem}.deposit-grid{gap:.8rem}.rates th,.rates td{padding:.7rem .3rem}.rates th{font-size:.8rem}.rates td{font-size:.92rem}.rates th:first-child{width:40%}.rates .usd-guide{font-size:.78rem}.rate-seasons{display:block}.rate-card+.rate-card{margin-top:1.5rem}.cols{display:block}.cols .sect-head{margin-bottom:1rem}.contact-compact{display:block}.contact-compact .ask{margin-top:1rem}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}.foot .tag{max-width:none}.foot .name{font-size:1.5rem}.foot .legal{margin-top:1.2rem}.hide{display:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+.ticket-title .eyebrow,.fleet-heading .eyebrow,#length{display:none!important}.ticket-title{margin:0}.dates-next{margin-top:.5rem!important}.how-compact .steps li{list-style:none}.hero{margin-bottom:0}.contact-compact [hidden],#road[hidden]{display:none!important}
+@media(max-width:600px){.when dl{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.when dl div{display:block}.when dl div+div{border:0}.when dd{text-align:left;font-size:.92rem;line-height:1.4;margin-top:.2rem}.when dt{font-size:.8rem}.when .change{text-align:right;margin-top:.35rem}.when{padding:.75rem!important}.ticket-title h2{font-size:1.4rem}.minimum-rental-notice{margin:.3rem 0!important}.hero{padding-bottom:.5rem}.dates-next{min-height:30px}.ticket{padding:.9rem}.booqable-datepicker .bq-date-picker-button-wrapper{margin-top:.5rem!important}.hero-offer{margin-bottom:0}}
+
+</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://sablescarts.com/#business", "name": "Sable’s Carts", "url": "https://sablescarts.com/", "logo": "https://sablescarts.com/assets/sables-carts-tag-512.png", "telephone": "+525538955620", "description": "Golf cart rentals with free delivery and pickup inside the gates of Puerto Aventuras, Mexico. Two- and four-seat carts. Minimum rental 2 days."}</script>
 <link rel="alternate" hreflang="en" href="https://sablescarts.com/"><link rel="alternate" hreflang="es-MX" href="https://sablescarts.com/es.html"><link rel="alternate" hreflang="x-default" href="https://sablescarts.com/"><script src="assets/language.js" defer></script></head>
 <body>
@@ -859,35 +872,11 @@ body.is-engine #booqable-launcher { display: none !important; }
     <a class="talk" id="talk" href="#" target="_blank" rel="noopener" aria-label="Ask a question on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11.6c0 4.6-3.8 8.3-8.4 8.3-1.5 0-2.9-.4-4.1-1.1L3 20l1.3-4.3A8.2 8.2 0 0 1 3.2 11.6C3.2 7 7 3.3 11.6 3.3S20 7 20 11.6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.6 8.6c-.5 1.9 2 5.1 4.2 5.5l1.4-1.4-1.9-1-.9.9-1.5-2 .6-1-1.5-1.5Z" fill="currentColor"/></svg>WhatsApp</a>
   </header>
 </div>
-<section class="wrap hero" aria-labelledby="welcome-title">
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow">Puerto Aventuras · Quintana Roo</p>
-      <h1 id="welcome-title">See Puerto Aventuras <em>by golf cart.</em></h1>
-      <p class="lede">Free delivery and pickup anywhere inside the gates.</p>
-      <div class="hero-cta">
-        <a class="btn is-auto" href="#dates-form">Choose your dates</a>
-        <a class="btn is-auto is-ghost" id="talk-hero" href="#" target="_blank" rel="noopener">Ask Chris on WhatsApp</a>
-      </div>
-    </div>
-    <figure class="shot">
-      <img src="assets/sable-in-the-cart.jpg" srcset="assets/sable-in-the-cart-760.jpg 760w, assets/sable-in-the-cart.jpg 1164w" sizes="(min-width: 60rem) 44vw, 100vw" alt="Sable the Doberman riding in a golf cart in Puerto Aventuras" width="1164" height="1140" fetchpriority="high" id="shot">
-      <figcaption class="shot-badge"><svg aria-hidden="true" focusable="false"><use href="#tag"/></svg>Sable, the owner</figcaption>
-    </figure>
-    <div class="hero-more">
-      <ul class="chips" aria-label="At a glance">
-        <li class="chip"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h11v9H4zM15 10h4l2 3v3h-6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="17.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>Free delivery &amp; pickup</li>
-        <li class="chip"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 11h14M6 11V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4M4 17h16v-4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>2 and 4 seats</li>
-        <li class="chip"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 15l2.3 2.3L15.5 12.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reserve online</li>
-      </ul>
-      <p class="offer-line"><strong>Make yourself at home in PA.</strong> Introductory rates from MXN449.45 (about US$25) a day through 30 November 2026, excluding Halloween. <a href="#intro-offer">See offer prices</a>.</p>
-    </div>
-  </div>
-</section>
+<section class="wrap hero" aria-labelledby="welcome-title"><div class="hero-grid"><div class="hero-copy"><h1 id="welcome-title">Golf cart rentals in Puerto Aventuras</h1><p class="lede">Free delivery and collection inside the gates. Choose a two- or four-seater and book your dates online.</p><p class="hero-offer">From <strong>MXN449.45 <span>≈ US$25 / day</span></strong><a href="#intro-offer">Introductory prices</a></p></div><figure class="shot"><img src="assets/sable-in-the-cart-760.jpg" alt="Sable enjoying a ride in Puerto Aventuras" width="760" height="744" fetchpriority="high" id="shot"></figure></div></section>
 <section class="wrap dates" aria-labelledby="dates-title">
   <form class="ticket on-paper tagged" id="dates-form" novalidate>
-    <div class="ticket-title"><p class="eyebrow">Step one</p><h2 id="dates-title">Your rental dates</h2></div>
-    <p id="minimum-rental-notice" class="minimum-rental-notice">Minimum rental: <strong>2 days (48 hours)</strong><br><small lang="es-MX">Renta mínima: 2 días (48 horas).</small></p>
+    <div class="ticket-title"><h2 id="dates-title">Your rental dates</h2></div>
+    <p id="minimum-rental-notice" class="minimum-rental-notice">Minimum rental: <strong>2 days (48 hours)</strong></p>
     <div class="fields" id="date-fields">
       <div>
         <label for="from">Delivered on</label>
@@ -910,17 +899,17 @@ body.is-engine #booqable-launcher { display: none !important; }
     </div>
     <p class="length" id="length" aria-live="polite"></p>
     <p class="fine rental-opening" id="rental-opening"></p>
-    <a class="dates-next hide" id="dates-next" href="#carts-title"><span>Dates selected. Choose your cart below<small lang="es-MX">Fechas listas. Elija su carrito abajo</small></span><svg viewBox="0 0 28 36" aria-hidden="true" focusable="false"><path d="M14 3v27M4 21l10 10 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <div class="basket-tools hide" id="basket-tools"><p id="basket-count" aria-live="polite">Your basket is empty.</p><div class="basket-buttons"><button class="btn" id="view-basket" type="button" disabled>View basket</button><button class="btn" id="clear-basket" type="button" disabled>Clear basket</button></div><p class="fine" id="basket-feedback" aria-live="polite"></p></div>
+    <a class="dates-next hide" id="dates-next" href="#carts-title"><span>Choose an available cart below</span><svg viewBox="0 0 28 36" aria-hidden="true" focusable="false"><path d="M14 3v27M4 21l10 10 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="basket-tools hide" id="basket-tools"><p id="basket-count" aria-live="polite">Your basket is empty.</p><div class="basket-buttons"><button class="btn" id="view-basket" type="button" disabled>Continue to booking</button><button class="btn" id="clear-basket" type="button" disabled>Clear basket</button></div><p class="fine" id="basket-feedback" aria-live="polite"></p></div>
   </form>
 </section>
 <main>
   <section class="wrap shop" aria-labelledby="carts-title">
     <div class="shop-grid">
       <div>
-        <div class="fleet-heading"><div><p class="eyebrow">Step two · The fleet</p><h2 id="carts-title" tabindex="-1">Choose your cart</h2></div><a href="#rental-details">Rental details &amp; terms</a></div>
+        <div class="fleet-heading"><div><h2 id="carts-title" tabindex="-1">Choose your cart</h2></div><a href="#rental-details">Before you book</a></div>
         <p class="notice hide" id="none-free" role="status"></p>
-        <div class="cards" id="cards" data-reveal="stagger"></div>
+        <div class="cards" id="cards"></div>
       </div>
       <section class="booking on-paper tagged" id="booking" aria-labelledby="booking-title" aria-live="polite">
         <h2 id="booking-title">Your booking</h2>
@@ -930,15 +919,15 @@ body.is-engine #booqable-launcher { display: none !important; }
           <p class="fine" id="hold"></p>
           <div class="who">
             <div>
-              <label for="name">Your name</label>
+              <label for="name">Full name</label>
               <input type="text" id="name" autocomplete="name">
             </div>
             <div>
-              <label for="place">Where should we bring it?</label>
+              <label for="place">Full delivery address</label>
               <input type="text" id="place" placeholder="Building, street or villa in Puerto Aventuras" autocomplete="street-address">
             </div>
             <div>
-              <label for="when">Best time for delivery</label>
+              <label for="when">Preferred delivery time</label>
               <select id="when">
                 <option>Late morning, 11 to 1</option>
                 <option>Afternoon, 1 to 5</option>
@@ -948,95 +937,19 @@ body.is-engine #booqable-launcher { display: none !important; }
           </div>
           <p class="problem hide" id="problem" role="alert"></p>
           <button class="btn" type="button" id="send">Send booking request on WhatsApp</button>
-          <p class="fine">We confirm on WhatsApp. Your 20% non-refundable booking deposit counts towards rent. Pay the balance at delivery in cash or with our approved card terminal. Read the full agreement before booking. A WhatsApp enquiry is not acceptance; we arrange your online acceptance before confirming the rental. Read the <button class="linkish" type="button" data-open-terms>rental terms</button>.</p>
+          <p class="fine">We confirm availability and your rental total on WhatsApp. Read the <button class="linkish" type="button" data-open-terms>rental terms</button>.</p>
         </div>
       </section>
     </div>
-    <div class="perks" aria-label="Rental benefits" data-reveal="rise">
-      <div><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M5 12h20v14H5zM25 17h7l4 5v4h-11"/><circle cx="12" cy="28" r="3"/><circle cx="29" cy="28" r="3"/><path d="M2 20h3M2 16h5"/></svg></span><span>Free delivery &amp; pickup<small>Anywhere inside the gates</small></span></div>
-      <div><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="6" y="10" width="28" height="22" rx="3"/><path d="M14 6v8M26 6v8M6 18h28M13 25l5 4 9-8"/></svg></span><span>Book your dates online<small>Choose from 2 and 4 seats</small></span></div>
-      <div><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M33 18c0 8-6 14-14 14-3 0-5-1-7-2l-7 3 2-8c-1-2-2-4-2-7C5 10 11 4 19 4s14 6 14 14Z"/><path d="M14 13c-1 4 4 10 8 10l3-3-4-2-2 2-3-4 1-2-3-3Z"/></svg></span><span>Always responsive on WhatsApp<small>Ask Chris about your stay</small></span></div>
-    </div>
   </section>
-  <section class="wrap sect" aria-labelledby="how-title">
-    <div class="sect-head"><p class="eyebrow">Step by step</p><h2 id="how-title">How it works</h2></div>
-    <div class="road" id="road" aria-hidden="true">
-      <span class="stop"></span><span class="stop"></span><span class="stop"></span>
-      <div class="cart" id="road-cart"></div>
-      <svg class="door" viewBox="0 0 44 88"><path d="M4 88 V26 Q4 4 22 4 Q40 4 40 26 V88" fill="#13100B" stroke="#D9B866" stroke-width="2.5"/><path d="M10 88 V28 Q10 11 22 11 Q34 11 34 28 V88" fill="none" stroke="#D9B866" stroke-width="1.5" opacity=".7"/><circle cx="29" cy="55" r="2.4" fill="#D9B866"/></svg>
-    </div>
-    <ol class="steps" data-reveal="stagger">
-      <li><h3>Pick your dates and your cart</h3><p>You see what's free and what it costs straight away.</p></li>
-      <li id="step-two"><h3>We confirm on WhatsApp</h3><p>Your 20% non-refundable booking deposit counts towards rent. Your booking confirmation is separate from your payment receipt. Read and accept the full rental agreement and risk acknowledgement online before payment.</p></li>
-      <li><h3>We bring it to your door</h3><p>Pay the remaining rental balance at delivery in cash or with our approved card terminal. The separate MXN7,191.20 security deposit per cart (about US$400) (cash or temporary card hold at delivery) is arranged near handover. We collect the cart when you are done.</p></li>
-    </ol>
-  </section>
-  <div class="split">
-    <section class="wrap sect rental-details" id="rental-details" aria-labelledby="rental-details-title">
-      <div class="sect-head"><p class="eyebrow">Before you book</p><h2 id="rental-details-title">A few things before you book</h2></div>
-      <div class="deposit-grid" data-reveal="stagger">
-        <div class="deposit-note" id="security-deposit-notice"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 9.5 4-1.3 7-5 7-9.5V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><strong>MXN7,191.20 (about US$400) refundable security deposit per cart</strong><p>Required at delivery: <b>cash or a temporary hold on your card</b>. Separate from the 20% booking deposit and rental balance. Two carts: MXN14,382.40 (about US$800).</p><p>After a clear return check, we return your cash or request release of the full card hold. We give you a receipt or confirmation; your bank controls when a card hold disappears.</p><p lang="es-MX"><b>Depósito de garantía reembolsable: MXN7,191.20 (aprox. USD400) por carrito.</b> Se entrega al recibir el carrito: efectivo o retención temporal en tarjeta. Es distinto del anticipo de reserva del 20% y del saldo de renta. Dos carritos: MXN14,382.40 (aprox. USD800). Tras una revisión sin incidencias, devolvemos el efectivo o solicitamos liberar toda la retención y le damos recibo o confirmación. Su banco determina cuándo deja de aparecer la retención.</p></div>
-        <div class="stack"><div class="deposit-note" id="booking-deposit-notice"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><path d="M10 6v12" stroke-dasharray="2 2"/></svg></span><strong>20% non-refundable booking deposit</strong><p lang="es-MX">Anticipo de reserva del 20% no reembolsable.</p><a href="terms.html">Read the full agreement / Lea el contrato completo</a></div>
-        <aside class="season-note" aria-label="Seasonal rental prices"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="6" width="26" height="23" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v7m14-7v7M3 13h26M10 20l4 4 8-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Seasonal prices · clear before you book</strong><p>Online booking calculates your rental total for the selected dates, including days outside the holiday period.</p><small lang="es-MX">Temporada alta desde el 1 de diciembre. Halloween y Navidad/Año Nuevo tienen tarifas propias. El total se calcula según sus fechas.</small></div></aside></div>
-        <div class="note-pair"><p class="note">Prices and payments are in Mexican pesos (MXN). Approximate US dollar amounts are shown as a guide, using MXN17.9780 per US$1 (7 October 2026). Your bank’s conversion may differ.</p><p class="note" lang="es-MX">Precios y pagos en pesos mexicanos (MXN). Los importes aproximados en USD son orientativos: MXN17.9780 por USD1 (7 de octubre de 2026). El tipo de cambio de su banco puede variar.</p></div>
-      </div>
-    </section>
-  </div>
-  <div class="split">
-    <section class="wrap sect" id="intro-offer" aria-labelledby="intro-offer-title">
-      <div class="offer-panel" data-reveal="rise">
-        <span class="ribbon">Intro offer</span><p class="eyebrow">Through 30 November · Halloween excluded</p>
-        <h2 id="intro-offer-title">A cart for your plans. A price for your budget.</h2>
-        <p>Two seats or four, easy everyday rides or the premium Denago. Free delivery and collection anywhere inside the Puerto Aventuras gates.</p>
-        <table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody><tr><th scope="row">Club Car two-seater</th><td>MXN449.45<small class="usd-guide">≈ US$25</small></td><td>MXN2,696.70<small class="usd-guide">≈ US$150</small></td></tr><tr><th scope="row">Club Car four-seater</th><td>MXN629.23<small class="usd-guide">≈ US$35</small></td><td>MXN3,775.38<small class="usd-guide">≈ US$210</small></td></tr><tr><th scope="row">The Denago</th><td>MXN988.79<small class="usd-guide">≈ US$55</small></td><td>MXN5,932.74<small class="usd-guide">≈ US$330</small></td></tr></tbody></table>
-        <h3>Staying a little longer?</h3><p>Weekly and monthly discounts are calculated automatically. Choose your dates above for your complete price, including any seasonal days.</p>
-        <div class="note-pair"><p class="fine">Intro rates apply to rental time from 20 October through 30 November 2026, excluding 30 October–1 November. Minimum rental: 48 hours. Higher rates apply during Halloween, high season and Christmas/New Year as shown below. Rental periods crossing seasons are priced for the time in each season. Prices and payments are in Mexican pesos; US dollars are approximate guides. Existing confirmed bookings keep their agreed price.</p><p class="fine" lang="es-MX">Tarifas de introducción del 20 de octubre al 30 de noviembre de 2026, excepto del 30 de octubre al 1 de noviembre. Renta mínima: 48 horas. Halloween, temporada alta y Navidad/Año Nuevo tienen las tarifas indicadas abajo. Las rentas que cruzan temporadas se calculan según el tiempo en cada una. Cobro en pesos mexicanos; dólares estadounidenses aproximados. Las reservas confirmadas conservan su precio acordado.</p></div>
-      </div>
-    </section>
-    <section class="wrap sect" aria-labelledby="rates-title">
-      <div class="sect-head"><p class="eyebrow">Plan ahead</p><h2 id="rates-title">Clear seasonal prices</h2></div>
-      <div class="rate-seasons" data-reveal="stagger">
-        <div class="rate-card"><h3>Halloween &amp; high season</h3><p class="fine">30 October–1 November 2026 · 1–17 December 2026 · 8 January–31 March 2027</p><p class="fine" lang="es-MX">Halloween y temporada alta. Las fechas anteriores son inclusivas.</p><table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody><tr><th scope="row">Club Car two-seater</th><td>MXN539.34<small class="usd-guide">≈ US$30</small></td><td>MXN3,236.04<small class="usd-guide">≈ US$180</small></td></tr><tr><th scope="row">Club Car four-seater</th><td>MXN701.14<small class="usd-guide">≈ US$39</small></td><td>MXN4,206.85<small class="usd-guide">≈ US$234</small></td></tr><tr><th scope="row">The Denago</th><td>MXN1,060.70<small class="usd-guide">≈ US$59</small></td><td>MXN6,364.22<small class="usd-guide">≈ US$354</small></td></tr></tbody></table></div>
-        <div class="rate-card"><h3 class="season-label">Christmas &amp; New Year</h3><p class="fine">18 December 2026–7 January 2027, inclusive.</p><p class="fine" lang="es-MX">Navidad y Año Nuevo: del 18 de diciembre al 7 de enero, inclusive.</p><table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody><tr><th scope="row">Club Car two-seater</th><td>MXN719.12<small class="usd-guide">≈ US$40</small></td><td>MXN4,314.72<small class="usd-guide">≈ US$240</small></td></tr><tr><th scope="row">Club Car four-seater</th><td>MXN880.92<small class="usd-guide">≈ US$49</small></td><td>MXN5,285.53<small class="usd-guide">≈ US$294</small></td></tr><tr><th scope="row">The Denago</th><td>MXN1,348.35<small class="usd-guide">≈ US$75</small></td><td>MXN8,090.10<small class="usd-guide">≈ US$450</small></td></tr></tbody></table></div>
-      </div><p class="fine">Daily rates are per 24 hours, with a 48-hour minimum. Longer rentals receive automatic discounts. The date picker shows your final peso quote, including stays across seasons and dates after 31 March.</p><p class="note" id="rates-note"></p>
-    </section>
-  </div>
-  <div class="split">
-    <section class="wrap sect" id="handover-return" aria-labelledby="handover-title">
-      <div class="sect-head"><p class="eyebrow">At your door</p><h2 id="handover-title">Easy handover. Clear return.</h2></div>
-      <div class="handover-languages" data-reveal="stagger"><div lang="en"><h3>English</h3><ol><li><strong>Agree online.</strong> Read the agreement, risk acknowledgement, privacy notice and rental details, then tick the acceptance box before paying. Keep your confirmation and agreement copy. No extra paper signature at delivery.</li><li><strong>Check together.</strong> We note the cart, key, charger, accessories and existing marks. Add any comments. Ordinary wear and recorded existing damage are not charged.</li><li><strong>Return and deposit.</strong> Return at the agreed place and time for a brief check. If there is no new attributable damage or missing item, we return the full cash deposit of MXN7,191.20 per cart (about US$400) or request release of the full card hold at that check and give you a receipt or confirmation. Your bank controls when a card hold disappears. Any issue needs evidence and an itemised amount; unused security is returned or released without unjustified delay.</li></ol></div><div lang="es-MX"><h3>Español</h3><ol><li><strong>Acepte en línea.</strong> Lea el contrato, reconocimiento de riesgos, aviso de privacidad y datos de renta; después marque la casilla de aceptación antes de pagar. Conserve la confirmación y copia del contrato. Sin otra firma en papel a la entrega.</li><li><strong>Revisamos juntos.</strong> Anotamos carrito, llave, cargador, accesorios y marcas existentes. Añada sus observaciones. No cobramos desgaste normal ni daños ya registrados.</li><li><strong>Devolución y garantía.</strong> Devuelva en el lugar y hora acordados para una revisión breve. Sin daño nuevo atribuible ni accesorios faltantes, devolvemos todo el depósito en efectivo de MXN7,191.20 (aprox. USD400) por carrito o solicitamos liberar toda la retención en tarjeta en esa revisión y le damos recibo o confirmación. Su banco determina cuándo deja de aparecer la retención. Una incidencia requiere evidencia e importe desglosado; devolvemos o liberamos la parte no utilizada sin demora injustificada.</li></ol></div></div>
-      <p class="doc-links"><a href="terms.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l5 5v13H6zM14 3v5h5M9 13h7M9 17h7"/></svg>Read full agreement / Lea el contrato completo</a><a href="privacy.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 9.5 4-1.3 7-5 7-9.5V6l-7-3Z"/></svg>Privacy notice / Aviso de privacidad</a><a href="rental-agreement.pdf"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download your copy / Descargar su copia</a></p>
-      <p class="fine">20% non-refundable booking deposit. It counts towards rent. It is separate from the cash deposit or card hold. / Anticipo de reserva del 20% no reembolsable. Se abona a la renta. Es distinto del depósito de garantía en efectivo o la retención en tarjeta.</p>
-    </section>
-    <section class="wrap sect cols" aria-labelledby="faq-title">
-      <div class="sect-head"><p class="eyebrow">Questions</p><h2 id="faq-title">Good to know</h2><p class="lead">Short answers to what renters usually ask. Anything else, message Chris.</p></div>
-      <div class="faq" data-reveal="rise">
-        <details><summary>Is delivery really free?</summary><p>Yes. Delivery and pick-up are free anywhere inside the Puerto Aventuras gates.</p></details>
-        <details><summary>When do you deliver?</summary><p id="faq-hours"></p></details>
-        <details><summary>How does the security deposit work?</summary><p id="faq-deposit"></p></details>
-        <details><summary>Who can drive?</summary><p>Only named, approved drivers meeting the age, licence and insurance requirements disclosed before booking. No driving after drinking.</p></details>
-        <details><summary>Where can I take it?</summary><p>Anywhere inside the gates. Not on Highway 307 and not on the beach. The speed limit inside is 30 km/h, and lights go on at night.</p></details>
-        <details><summary>Does it need charging?</summary><p>It's electric. Plug it in overnight and it's ready in the morning. Keep the charger locked to the cart or indoors.</p></details>
-        <details><summary>What if something goes wrong?</summary><p>Message Chris on WhatsApp. He fixes it or swaps the cart.</p></details>
-        <details><summary>Can I cancel?</summary><p>The 20% booking deposit is non-refundable.</p></details>
-        <details><summary>Staying a month or longer?</summary><p>The monthly price applies automatically, and it's the best rate we have. Pick your dates above and you'll see it.</p></details>
-      </div>
-    </section>
-  </div>
-  <div class="on-brass">
-    <section class="wrap sect boss" aria-labelledby="boss-title" data-reveal="rise">
-      <span id="boss-picture"><svg role="img" aria-label="Sable the Doberman"><use href="#tag"/></svg></span>
-      <div>
-        <h2 id="boss-title">Sable runs the place</h2>
-        <p>Sable is the owner, the supervisor and the overseer. Chris only checks the carts, charges them and brings them to your door.</p>
-        <p class="said hide" id="said"></p>
-      </div>
-      <div class="ask">
-        <a class="btn" id="talk-boss" href="#" target="_blank" rel="noopener">Message Chris on WhatsApp</a>
-        <small>Always responsive on WhatsApp. Questions and longer stays welcome.</small>
-      </div>
-    </section>
-  </div>
+<section class="wrap sect how-compact" aria-labelledby="how-title"><h2 id="how-title">Your cart, in three steps</h2><div id="road" hidden><span id="road-cart"></span></div><ol class="steps"><li><h3>Choose your dates</h3><p>See available carts and your rental total.</p></li><li id="step-two"><h3>Book online</h3><p>Enter your details, accept the rental agreement and pay the 20% booking deposit.</p></li><li><h3>We deliver</h3><p>We bring the cart to your address and show you how it works.</p></li></ol></section>
+<section class="wrap sect rental-details" id="rental-details" aria-labelledby="rental-details-title"><h2 id="rental-details-title">Before you book</h2><div class="deposit-grid"><div class="deposit-note" id="booking-deposit-notice"><strong>20% to book</strong><p>Your booking deposit is non-refundable and goes towards your rental. Pay the remaining 80% at delivery, by cash or card.</p></div><div class="deposit-note" id="security-deposit-notice"><strong>Refundable security deposit</strong><p><b>MXN7,191.20 (about US$400) per cart</b> at delivery, in cash or as a temporary card hold. This is separate from your rental.</p><p>After a clear return check, we return your cash or request release of the hold. Your bank controls when the hold disappears.</p></div></div><p class="doc-links"><a href="terms.html">Rental agreement</a><a href="privacy.html">Privacy notice</a></p><p class="fine" id="rates-note"></p></section>
+<section class="wrap sect" id="intro-offer" aria-labelledby="intro-offer-title"><div class="section-heading"><h2 id="intro-offer-title">Introductory prices</h2><p>Daily and weekly rates through 30 November 2026. Higher Halloween rates apply.</p></div><table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody><tr><th scope="row">Club Car two-seater</th><td>MXN449.45<small class="usd-guide">≈ US$25</small></td><td>MXN2,696.70<small class="usd-guide">≈ US$150</small></td></tr><tr><th scope="row">Club Car four-seater</th><td>MXN629.23<small class="usd-guide">≈ US$35</small></td><td>MXN3,775.38<small class="usd-guide">≈ US$210</small></td></tr><tr><th scope="row">The Denago</th><td>MXN988.79<small class="usd-guide">≈ US$55</small></td><td>MXN5,932.74<small class="usd-guide">≈ US$330</small></td></tr></tbody></table><p class="fine">Minimum rental: 48 hours. Weekly and monthly discounts are calculated when you choose your dates.</p><details class="seasonal-details"><summary id="rates-title">Halloween, winter and Christmas prices</summary><div class="rate-seasons">
+        <div class="rate-card"><h3>Halloween &amp; high season</h3><p class="fine">30 October–1 November 2026 · 1–17 December 2026 · 8 January–31 March 2027</p><table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody><tr><th scope="row">Club Car two-seater</th><td>MXN539.34<small class="usd-guide">≈ US$30</small></td><td>MXN3,236.04<small class="usd-guide">≈ US$180</small></td></tr><tr><th scope="row">Club Car four-seater</th><td>MXN701.14<small class="usd-guide">≈ US$39</small></td><td>MXN4,206.85<small class="usd-guide">≈ US$234</small></td></tr><tr><th scope="row">The Denago</th><td>MXN1,060.70<small class="usd-guide">≈ US$59</small></td><td>MXN6,364.22<small class="usd-guide">≈ US$354</small></td></tr></tbody></table></div>
+        <div class="rate-card"><h3 class="season-label">Christmas &amp; New Year</h3><p class="fine">18 December 2026–7 January 2027, inclusive.</p><table class="rates"><thead><tr><th scope="col">Your cart</th><th scope="col">Daily rate</th><th scope="col">7 days</th></tr></thead><tbody><tr><th scope="row">Club Car two-seater</th><td>MXN719.12<small class="usd-guide">≈ US$40</small></td><td>MXN4,314.72<small class="usd-guide">≈ US$240</small></td></tr><tr><th scope="row">Club Car four-seater</th><td>MXN880.92<small class="usd-guide">≈ US$49</small></td><td>MXN5,285.53<small class="usd-guide">≈ US$294</small></td></tr><tr><th scope="row">The Denago</th><td>MXN1,348.35<small class="usd-guide">≈ US$75</small></td><td>MXN8,090.10<small class="usd-guide">≈ US$450</small></td></tr></tbody></table></div>
+      </div><p class="fine">Your selected dates determine the final rental total, including stays across seasons.</p></details></section>
+<section class="wrap sect cols" aria-labelledby="faq-title"><div class="sect-head"><h2 id="faq-title">Good to know</h2><p>Questions? Ask us on WhatsApp.</p></div><div class="faq"><details><summary>Where can I drive?</summary><p>Inside Puerto Aventuras on permitted roads. Keep off Highway 307, the beach and sand. Follow posted speed limits.</p></details><details><summary>When can you deliver?</summary><p id="faq-hours"></p></details><details><summary>Who can drive?</summary><p>Only drivers approved for your booking. The rental agreement explains the licence, age and safety requirements.</p></details><details><summary>Does the cart need charging?</summary><p>Yes. Charge it overnight using the supplied charger. We show you how at delivery.</p></details><details><summary>How is my security deposit returned?</summary><p id="faq-deposit"></p></details><details><summary>Can I cancel?</summary><p>The 20% booking deposit is non-refundable. See the rental agreement for the full cancellation terms.</p></details><details><summary>What if I need help during my rental?</summary><p>Message Chris on WhatsApp and we will help arrange the next step.</p></details></div></section>
+<section class="wrap sect boss contact-compact" aria-labelledby="boss-title"><span id="boss-picture" hidden></span><div><h2 id="boss-title">Need a hand?</h2><p>Ask Chris about carts, delivery or a longer stay.</p><p class="said hide" id="said"></p></div><div class="ask"><a class="btn" id="talk-boss" href="#" target="_blank" rel="noopener">Message on WhatsApp</a><small>Always responsive on WhatsApp.</small></div></section>
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -1284,7 +1197,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      { id: "denago", name: "The Denago", the: "the Denago", blurb: "Our premium four-seater. A 2026 Denago Nomad XL with sound bar and evening lights.",
+      { id: "denago", name: "The Denago", the: "the Denago", blurb: "Our premium four-seater, with a sound bar and evening lights.",
 
 
 
@@ -1300,7 +1213,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-        specs: ["Seats 4", "Lifted", "Lithium battery", "Sound bar", "Multicolor underglow", "Digital screen"], booked: [] },
+        specs: ["Seats 4", "Lithium battery", "Sound bar"], booked: [] },
 
 
 
@@ -1316,7 +1229,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      { id: "club4", name: "Club Car four-seater", parts: ["Club Car", "four-seater"], the: "the four-seater", blurb: "Bring the family. A four-seat Club Car Tempo with room for your everyday plans.",
+      { id: "club4", name: "Club Car four-seater", parts: ["Club Car", "four-seater"], the: "the four-seater", blurb: "An electric four-seater for family trips and everyday exploring.",
 
 
 
@@ -1332,7 +1245,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-        specs: ["Seats 4", "Electric", "New batteries", "LED lights", "Mirrors"], booked: [] },
+        specs: ["Seats 4", "Electric", "LED lights"], booked: [] },
 
 
 
@@ -1340,7 +1253,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      { id: "club2", name: "Club Car two-seater", parts: ["Club Car", "two-seater"], the: "the two-seater", blurb: "Just the two of you. A Club Car Tempo for marina trips and everyday errands.",
+      { id: "club2", name: "Club Car two-seater", parts: ["Club Car", "two-seater"], the: "the two-seater", blurb: "A compact electric two-seater for getting around PA.",
 
 
 
@@ -1356,7 +1269,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-        specs: ["Seats 2", "Electric", "New batteries", "Roof and windshield"], booked: [["2026-10-30", "2026-11-01"]] }
+        specs: ["Seats 2", "Electric", "Roof and windshield"], booked: [["2026-10-30", "2026-11-01"]] }
 
 
 
@@ -2530,7 +2443,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-        : `<p class="state is-free">Free on your dates</p>`;
+        : `<p class="state is-free">Available for your dates</p>`;
 
 
 
@@ -2554,7 +2467,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div><p class="booq-wait">Checking the calendar</p><button class="btn mine-action" type="button" data-view-reservation aria-label="View your basket with ${esc(c.name)}">View your basket</button><p class="selection-limit-note">One cart is kept back. Remove a selected cart to choose this one.</p>
+        ? `<div class="booq booqable-product-button" data-id="${esc(CONFIG.booqable.productIds[c.id] || "")}"></div><p class="booq-wait">Checking the calendar</p><button class="btn mine-action" type="button" data-view-reservation aria-label="View your basket with ${esc(c.name)}">Continue to booking</button>
 
 
 
@@ -2906,86 +2819,15 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    $("#rates-note").textContent = "Prices and payments are in Mexican pesos (MXN). Approximate US dollar amounts are shown as a guide, using MXN17.9780 per US$1 (7 October 2026). Your bank’s conversion may differ. Your 20% non-refundable booking deposit counts toward rent; pay the remaining balance at delivery in cash or with the approved chip-and-PIN/contactless terminal. The MXN7,191.20 security deposit per cart (about US$400) is separate: cash or a temporary card hold at delivery. The MXN amount is the amount payable.";
-
-
-
-
-
-
-
-    $("#faq-deposit").textContent = "The refundable security deposit is MXN7,191.20 per cart (about US$400), separate from rent, provided at delivery in cash or as a temporary card hold. We give you a receipt for cash or confirm the card authorisation. We check together at delivery and note existing marks. Ordinary wear and recorded existing damage are not charged. If the return check finds no new attributable damage or missing item, we return your full cash deposit or request release of the full card hold at that check, and give you a receipt or confirmation. Your bank controls when a card hold disappears. Any issue needs evidence and an itemised amount; unused security is returned or released without unjustified delay. For a card hold, we disclose the actual expiry and any agreed longer-rental process before you authorise.";
-
-
-
-
-
-
-
-    $("#faq-hours").textContent = `Every day between ${CONFIG.deliveryHours}. You choose the time when you book, for delivery and for pick-up.`;
-
-
-
-
-
-
-
+    $("#rates-note").textContent = "Prices and payments are in MXN. USD figures are approximate, using MXN17.978 per US$1; your bank’s exchange rate may differ.";
+    $("#faq-deposit").textContent = "We check the cart together at return. If there is no new damage or missing item, we return the cash deposit or request release of the full card hold. Your bank determines when the hold disappears. Full details are in the rental agreement.";
+    $("#faq-hours").textContent = `Every day between ${CONFIG.deliveryHours}. Choose your delivery and collection times when booking.`;
     $("#terms-list").innerHTML = [
-
-
-
-
-
-
-
-      "Read and accept the full agreement and risk acknowledgement online before paying. Only named, approved drivers meeting the disclosed age, licence and insurance requirements may drive. Nobody drives after drinking.",
-
-
-
-
-
-
-
-      "Use only permitted Puerto Aventuras routes shown on your supplied map. Never Highway 307, beach, sand or prohibited areas.",
-
-
-
-
-
-
-
-      "Follow posted speed limits and the cart's safety instructions. Everyone stays seated within approved capacity; use equipment actually fitted as instructed.",
-
-
-
-
-
-
-
-      "Follow the cart's charging and care instructions. We record initial condition at delivery and inspect on return. You answer only for supported costs for which you are legally responsible.",
-
-
-
-
-
-
-
-      "Prices and payments are in Mexican pesos (MXN). Approximate US dollar amounts are shown as a guide, using MXN17.9780 per US$1 (7 October 2026). Your bank’s conversion may differ. Pay a 20% non-refundable booking deposit, credited toward rent. Pay the remaining balance at delivery in cash or with the approved chip-and-PIN/contactless terminal. A separate MXN7,191.20 security deposit per cart (about US$400) is required at delivery, in cash or as a temporary card hold. Cash receives a receipt; card-hold expiry and release are disclosed before authorisation.",
-
-
-
-
-
-
-
-      "The 20% booking deposit is non-refundable. Read the full agreement before booking."
-
-
-
-
-
-
-
+      "Minimum rental: 2 days (48 hours).",
+      "Pay a 20% non-refundable booking deposit. Pay the remaining rent at delivery.",
+      "A separate refundable security deposit of MXN7,191.20 (about US$400) per cart is required at delivery, in cash or as a temporary card hold.",
+      "Use permitted roads inside Puerto Aventuras. Follow the driving, charging and care instructions.",
+      "Read and accept the complete rental agreement before payment."
     ].map((t) => `<li>${esc(t)}</li>`).join("");
 
 
@@ -3490,7 +3332,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      feedback.textContent = "Basket cleared. No booking was cancelled.";
+      feedback.textContent = "Basket cleared.";
 
 
 
@@ -3851,7 +3693,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    $("#basket-tools").classList.remove("hide");
+    $("#basket-tools").classList.toggle("hide", names.length === 0);
 
 
 
@@ -3867,7 +3709,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    const basketLabel = count ? `${count} ${count === 1 ? "cart" : "carts"} in your basket — not booked yet.` : "Your basket is empty.";
+    const basketLabel = count ? `${count} ${count === 1 ? "cart" : "carts"} in your basket` : "Your basket is empty.";
 
 
 
@@ -4427,7 +4269,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-    $("#step-two").innerHTML = "<h3>Reserve it online</h3><p>Read and accept the rental agreement and risk acknowledgement before paying. Your 20% non-refundable booking deposit counts towards rent. No extra paper signature at delivery. Your booking confirmation is separate from your payment receipt.</p>";
+    $("#step-two").innerHTML = "<h3>Book online</h3><p>Enter your details, accept the rental agreement and pay the 20% booking deposit.</p>";
 
 
 
@@ -4891,7 +4733,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
-      `${n} ${n === 1 ? "day" : "days"}: ${q.total === null ? "Please confirm availability and the exact seasonal rental quote in Mexican pesos (MXN), with a guide in US dollars before payment" : money(q.total) + " rental total payable in Mexican pesos (MXN)"}; 20% non-refundable booking deposit credited to rent; remaining rent at delivery; separate ${money(CONFIG.securityPerCartMXN)} security deposit per cart (cash or temporary card hold at delivery)`,
+      `${n} days. Please confirm availability and the rental total.`,
 
 
 
