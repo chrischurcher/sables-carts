@@ -5470,6 +5470,7 @@ body.is-engine #booqable-launcher { display: none !important; }
 
 
 
+  if (new URLSearchParams(location.search).has("coupon")) window.sablesPrivateOfferContext = {getPeriod: engineDates};
   start();
 
 
@@ -5515,5 +5516,6 @@ body.is-engine #booqable-launcher { display: none !important; }
   window.addEventListener("beforeprint", () => blocks.slice().forEach(show));
 })();
 </script>
+<script src="assets/private-offer.js?v=20261027"></script>
 </body>
 </html>
