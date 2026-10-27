@@ -45,6 +45,7 @@
     return values.every(Boolean) ? {from: values[0], to: values[1]} : null;
   }
   function init(context) {
+    if (document.getElementById('private-offer-status')) return;
     const offer = parseOffer(root.location.search);
     if (!offer) {
       if (root.location.search.includes('coupon=') && /^\/checkouts\//.test(root.location.pathname)) {
