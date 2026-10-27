@@ -100,7 +100,10 @@
     const help = document.createElement('a');
     help.href = 'https://wa.me/525538955620?text=' + encodeURIComponent(es ? 'Hola Chris, necesito ayuda con mi oferta privada.' : 'Hi Chris, I need help with my private booking offer.');
     help.textContent = copy.help; help.hidden = true;
-    note.append(words, retry, help); host.append(note);
+    note.append(words, retry, help);
+    // The datepicker owns its children and replaces them when its native script mounts.
+    if (checkout) host.append(note);
+    else host.after(note);
     let submitting = false, attempted = false, failed = false, began = 0;
     function checkoutCart() {
       const items = visible('.checkout-cart-line__product-title').map(e => {
