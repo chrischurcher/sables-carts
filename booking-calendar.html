@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>Sables Carts Booking Calendar — Private owner connection</title>
+  <style>
+    :root{color-scheme:light dark;--paper:light-dark(#faf9f5,#171916);--ink:light-dark(#242820,#f0eee6);--muted:light-dark(#50584a,#c4c9bd);--line:light-dark(#d6d9d0,#454b40);--link:light-dark(#465e24,#c5dba0)}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}main{max-width:780px;margin:auto;padding:48px 24px 64px}h1{font-size:2rem;line-height:1.2}h2{font-size:1.25rem;margin-top:2rem}p,li{max-width:68ch}a{color:var(--link);text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:12px 24px;padding-bottom:24px;border-bottom:1px solid var(--line)}small{color:var(--muted)}@media(max-width:400px){main{padding:28px 18px}}
+  </style>
+</head>
+<body>
+<main>
+  <nav aria-label="Information"><a href="https://sablescarts.com/">Sable’s Carts</a><a href="#privacy">Privacy policy</a><a href="#terms">Terms of use</a></nav>
+  <h1>Sables Carts Booking Calendar</h1>
+  <p>A private connection for the business owner. It copies confirmed golf-cart bookings from Booqable into the owner’s main Google Calendar and checks for changes approximately every five minutes.</p>
+  <p>Customers do not need to sign in to this connection. To rent a cart, use the <a href="https://sablescarts.com/">Sable’s Carts booking website</a>.</p>
+  <h2 id="privacy">Privacy policy</h2>
+  <p><strong>Google data and permissions.</strong> The owner authorises access to events in Google calendars they own. The script is configured to use the owner’s main calendar. It searches for its own booking entries and the two existing booking copies it was set up to maintain. It creates or updates those booking entries; it does not edit unrelated personal appointments.</p>
+  <p><strong>Booking information.</strong> The connection reads Booqable booking references, customer names, cart names, rental dates and booking status. Calendar entries contain those details and a link to the booking. It does not copy payment-card details, telephone numbers or delivery addresses into event descriptions.</p>
+  <p><strong>Storage and sharing.</strong> Google Apps Script runs the connection and stores its private settings and booking-to-event references. Google Calendar stores the diary entries. The Booqable access key is stored in private Script Properties, outside public website and source code. Calendar event data is not sent to Booqable, Google Analytics, advertising systems or data brokers. It is not sold or used for advertising or model training. The connection’s use of information received from Google APIs follows the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements.</p>
+  <p><strong>Retention and control.</strong> Booking events remain in the owner’s diary until the owner removes them. A cancelled rental is marked cancelled and free in the diary rather than deleted. The owner can stop the connection by disabling its scheduled trigger and revoking its Google Account access. Disconnecting does not remove existing diary entries; the owner controls their removal.</p>
+  <p><strong>Contact.</strong> Questions about this connection can be sent through the business <a href="https://wa.me/525538955620">WhatsApp contact</a>. Customer rental information is also covered by the <a href="https://sablescarts.com/privacy.html">rental website’s privacy notice</a>.</p>
+  <h2 id="terms">Terms of use</h2>
+  <p>This connection is intended for the Sable’s Carts owner’s rental diary. Booqable remains the source of booking information: make rental-date changes there so the diary can be updated. Changes made only in Google Calendar are not sent back to Booqable.</p>
+  <p>Updates depend on Google and Booqable being available and the owner keeping the required access enabled. The connection does not take payments, change rental prices or send invitations to customers. Customer bookings remain subject to the <a href="https://sablescarts.com/terms.html">rental agreement</a>.</p>
+  <p><small>Updated 28 October 2026.</small></p>
+</main>
+</body>
+</html>
